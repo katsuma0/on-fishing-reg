@@ -12,15 +12,17 @@ Output: index.html  (GitHub Pages serves index.html automatically)
 """
 import json
 import datetime
+import re
 
 CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.72"
+VERSION = "v0.73"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
+    ("v0.73", "Site Journal themes here too, dark map included"),
     ("v0.71", "Fish ID, every species drawn and explained"),
     ("v0.70", "Blue by default, it is water after all"),
     ("v0.69", "One app with Site Journal, parks on the map"),
@@ -47,6 +49,12 @@ park_pins = json.dumps(json.load(open("parks_pins.json", encoding="utf-8")),
                        ensure_ascii=False, separators=(",", ":"))
 fish_id = json.dumps(json.load(open("fish_id.json", encoding="utf-8")),
                      ensure_ascii=False, separators=(",", ":"))
+# theme definitions come straight out of Site Journal so the two apps never drift
+_sj = open("/Users/katsuma/Projects/site-journal/index.html", encoding="utf-8").read()
+_m = re.search(r"var PARK_THEMES=(\[.*?\n\]);", _sj, re.S)
+if not _m:
+    raise SystemExit("Could not extract PARK_THEMES from Site Journal's index.html")
+sj_themes = _m.group(1)
 build_date = datetime.date.today().isoformat()
 
 HTML = r"""<!DOCTYPE html>
@@ -65,7 +73,16 @@ HTML = r"""<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script>/* shared themes: on katsuma0.github.io both apps read Site Journal's theme */
-(function(){try{var v=JSON.parse(localStorage.getItem('site-journal-theme-vars')||'null');if(v&&v.vars){var d=document.documentElement;for(var k in v.vars)d.style.setProperty(k,v.vars[k]);var mc=document.querySelector('meta[name=theme-color]');if(mc&&v.tc)mc.setAttribute('content',v.tc);}}catch(e){}})();</script>
+(function(){try{var v=JSON.parse(localStorage.getItem('site-journal-theme-vars')||'null');if(v&&v.vars){var d=document.documentElement;for(var k in v.vars)d.style.setProperty(k,v.vars[k]);var mc=document.querySelector('meta[name=theme-color]');if(mc&&v.tc)mc.setAttribute('content',v.tc);}}catch(e){}})();
+/* inside Site Journal's pull-down map with no theme set, wear Ontario Parks green */
+(function(){try{
+  if(!/embed=parks/.test(location.hash||''))return;
+  if(localStorage.getItem('site-journal-theme-vars'))return;
+  var v={'--paper':'#F1F6F1','--card':'#FFFFFF','--ink':'#0F1F17','--forest':'#00753A','--forest-2':'#18A05A',
+    '--forest-press':'#005C2C','--green-tint':'#E7F3EB','--green-tint-2':'#D6EBDC','--moss':'#40564B',
+    '--mist':'#E4EDE4','--mist-2':'#C7D7C9','--line':'#D3E0D4'};
+  var d=document.documentElement; for(var k in v)d.style.setProperty(k,v[k]);
+}catch(e){}})();</script>
 <style>
   :root{
     /* water blue by default; a Site Journal theme overrides these when one is set */
@@ -127,7 +144,7 @@ HTML = r"""<!DOCTYPE html>
   .sub{color:var(--moss);font-size:13.5px;margin-top:5px;line-height:1.4}
   .sub a{color:var(--forest);text-underline-offset:2px}
   .seclabel{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--forest);margin:22px 2px 12px;display:flex;align-items:center;gap:var(--gap-m)}
+    color:var(--moss);margin:22px 2px 12px;display:flex;align-items:center;gap:var(--gap-m)}
   .seclabel::after{content:"";flex:1;height:1px;background:var(--line)}
   .zhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 2px}
   .zhead h2{font-size:20px;font-weight:800;letter-spacing:-.01em;color:var(--forest);margin:0}
@@ -200,11 +217,11 @@ HTML = r"""<!DOCTYPE html>
   .srow .col{flex:1;min-width:0}
   .srow .nm{font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--forest)}
   .srow[data-st="closed"] .nm{color:#B0574A}
-  .srow[data-st="open"] .nm{color:#00753A}
+  .srow[data-st="open"] .nm{color:var(--forest)}
   .srow .mt{font-size:13px;color:var(--moss);margin-top:3px;line-height:1.45}
   .pill{flex:none;font-weight:800;font-size:12.5px;border:1px solid var(--line);border-radius:99px;
     padding:8px 13px;color:var(--forest);min-width:62px;text-align:center}
-  .pill.open{background:#00753A;border-color:#00753A;color:#FFFFFF}
+  .pill.open{background:var(--forest);border-color:var(--forest);color:#FFFFFF}
   .pill.closed{background:#B0574A;border-color:#B0574A;color:#FFFFFF}
   .pill.unknown{background:var(--mist);border-color:transparent;color:var(--moss)}
 
@@ -225,18 +242,23 @@ HTML = r"""<!DOCTYPE html>
   .loading{position:absolute;top:14px;left:64px;z-index:1000;background:var(--card);
     border:1px solid var(--line);border-radius:99px;padding:9px 14px;font-size:12.5px;
     font-weight:700;color:var(--moss);box-shadow:var(--shadow-sm)}
+  /* map toggles: the words stay put, the colour says on or off */
   #togglezones,#toggleparks,#togglelabels{position:absolute;right:14px;z-index:1000;background:var(--card);
-    border:1px solid var(--line);border-radius:99px;padding:10px 14px;font-size:12.5px;
+    border:1px solid var(--line);border-radius:99px;padding:10px 16px;font-size:12.5px;
     font-weight:700;color:var(--moss);cursor:pointer;box-shadow:var(--shadow-sm);
     transition:background .12s,transform .14s}
-  #togglezones{top:14px}
-  #toggleparks{top:60px}
-  #togglelabels{top:106px}
-  #togglezones.off,#toggleparks.off,#togglelabels.off{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+  #togglezones{top:calc(14px + env(safe-area-inset-top))}
+  #toggleparks{top:calc(60px + env(safe-area-inset-top))}
+  #togglelabels{top:calc(106px + env(safe-area-inset-top))}
+  #togglezones.on,#toggleparks.on,#togglelabels.on{background:var(--forest);border-color:var(--forest);color:#FFFFFF}
   #togglezones:active,#toggleparks:active,#togglelabels:active{transform:scale(.97)}
   a.fchip{text-decoration:none}
-  .parkpin{filter:drop-shadow(0 2px 3px rgba(15,31,23,.35))}
   .leaflet-popup-content-wrapper{border-radius:12px;font-family:inherit}
+  .parklabel{background:none;border:none;box-shadow:none;padding:0;margin-top:-4px;
+    font-weight:800;font-size:11px;color:var(--ink);white-space:nowrap;
+    text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;display:none}
+  .parklabel::before{display:none}
+  #map.zoomclose .parklabel{display:block}
   /* embed mode: map only, driven from Site Journal's pull-down */
   body.embed #panel{display:none}
   body.embed #mapwrap{position:fixed;inset:0;width:100%;height:100dvh}
@@ -258,6 +280,12 @@ HTML = r"""<!DOCTYPE html>
   .leaflet-zonefill-pane canvas{mix-blend-mode:multiply}
   /* richer blue water on the base map */
   .leaflet-tile-pane{filter:saturate(1.85) contrast(1.05)}
+  /* dark theme: dark tiles, zone colours glow instead of multiply, halos flip */
+  body.darkmap .leaflet-tile-pane{filter:none}
+  body.darkmap .leaflet-zonefill-pane canvas{mix-blend-mode:screen;opacity:.5}
+  body.darkmap .plabel,body.darkmap .alabel{color:#B9C6BD;text-shadow:0 0 3px #10171A,0 0 3px #10171A}
+  body.darkmap .clabel{color:#E8EFEA;text-shadow:0 0 3px #10171A,0 0 3px #10171A,0 0 3px #10171A}
+  body.darkmap .parklabel{color:#E8EFEA;text-shadow:0 0 3px #10171A,0 0 3px #10171A,0 0 3px #10171A}
   .leaflet-container{font-family:inherit}
 
   /* sheet --------------------------------------------------------------- */
@@ -284,6 +312,11 @@ HTML = r"""<!DOCTYPE html>
   .aboutbody p{margin:1em 0}
   .closing{font-size:12px;font-weight:600;color:var(--moss);text-align:center;margin-top:12px}
   /* fish id */
+  .frow{display:block;width:100%;text-align:left;appearance:none;font-family:inherit;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);border-radius:var(--r-sm);
+    padding:12px 14px;margin-bottom:var(--gap-m);font-weight:700;font-size:15px;color:var(--ink);
+    transition:transform .14s}
+  .frow:active{transform:scale(.985)}
   .fgallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
   .fcard{appearance:none;font-family:inherit;cursor:pointer;text-align:left;
     border:1px solid var(--line);background:var(--card);border-radius:var(--r-sm);padding:10px;
@@ -305,6 +338,12 @@ HTML = r"""<!DOCTYPE html>
     color:var(--ink);text-decoration:none}
   .xapp:active{transform:scale(.98)}
   .xapp .xgo{font-size:12px;font-weight:800;color:var(--forest)}
+  .themerow{display:flex;flex-direction:column;gap:10px}
+  .trow{display:flex;align-items:center;justify-content:space-between;appearance:none;font-family:inherit;
+    cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:12px;
+    padding:14px 16px;font-weight:700;font-size:14.5px;color:var(--ink);transition:transform .14s}
+  .trow:active{transform:scale(.98)}
+  .trow .tk{font-size:12px;font-weight:800;color:var(--forest)}
 
   footer{width:100%;max-width:720px;margin:auto auto 0;flex:0 0 auto;
     padding:28px 18px calc(20px + env(safe-area-inset-bottom));color:var(--moss);
@@ -335,6 +374,8 @@ HTML = r"""<!DOCTYPE html>
   </div>
   <div class="kind" style="margin:24px 0 12px">Ontario Parks</div>
   <a class="xapp" href="https://katsuma0.github.io/sitejournal-app/">Site Journal<span class="xgo">Open</span></a>
+  <div class="kind" style="margin:24px 0 12px">Themes</div>
+  <div class="themerow" id="themeRow"></div>
   <div class="closing">Regulations from the 2026 summary · Zone boundaries from the Government of
     Ontario · Fish plates by Sherman F. Denton (1896) and the U.S. Fish and Wildlife Service
     · Data prepared __BUILD_DATE__</div>
@@ -344,9 +385,9 @@ HTML = r"""<!DOCTYPE html>
   <div id="mapwrap">
     <div id="map"></div>
     <div class="loading" id="loading">Loading zones</div>
-    <button id="togglezones">Hide zones</button>
-    <button id="toggleparks">Show parks</button>
-    <button id="togglelabels">Hide labels</button>
+    <button id="togglezones">Zones</button>
+    <button id="toggleparks">Parks</button>
+    <button id="togglelabels">Labels</button>
   </div>
   <div id="panel">
     <div class="pullwrap" id="pullwrap"><div class="pullbar"></div></div>
@@ -373,8 +414,10 @@ HTML = r"""<!DOCTYPE html>
       </div>
       <div id="detail"></div>
       <div id="fishhome">
-        <div class="seclabel">Fish ID</div>
-        <div class="fgallery" id="fgallery"></div>
+        <div class="seclabel">Ontario game fish</div>
+        <div id="fishlist"></div>
+        <details class="blk"><summary>Gallery</summary>
+          <div class="body"><div class="fgallery" id="fgallery"></div></div></details>
       </div>
     </div>
     <footer>
@@ -388,7 +431,11 @@ HTML = r"""<!DOCTYPE html>
 <script>
 const REG = __REG_JSON__;
 const FISH_ID = __FISH_ID__;
+const SJ_THEMES = __SJ_THEMES__;
 const EMBED = /embed=parks/.test(location.hash||'');
+/* the one dark theme darkens the map too */
+const THEME_DARK=(function(){ try{ const v=JSON.parse(localStorage.getItem('site-journal-theme-vars')||'null'); return !!(v&&v.dark); }catch(e){ return false; } })();
+if(THEME_DARK) document.body.classList.add('darkmap');
 const SERVICE = "__SERVICE__";
 const ZONE_FIELD = "FISHERIES_MANAGEMENT_ZONE_ID";
 
@@ -601,17 +648,20 @@ const zoneFeatures=[];
 
 /* ---------------- map ---------------- */
 const map=L.map('map',{minZoom:4,maxZoom:16,zoomControl:false}).setView([50.2,-85.5],5);
-L.control.zoom({position:'topleft'}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',
-  {attribution:'&copy; OpenStreetMap, &copy; CARTO',subdomains:'abcd'}).addTo(map);
+const TILESET=THEME_DARK?'dark_nolabels':'voyager_nolabels';
+const LABELSET=THEME_DARK?'dark_only_labels':'voyager_only_labels';
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/'+TILESET+'/{z}/{x}/{y}{r}.png',
+  {attribution:'&copy; OpenStreetMap, &copy; CARTO',subdomains:'abcd',
+   updateWhenIdle:true,updateWhenZooming:false,keepBuffer:4}).addTo(map);
 
 // Detailed labels (towns, lakes, rivers) appear only when zoomed in close.
 // Below that, hand placed labels keep the map calm.
 map.createPane('onlabels');
 map.getPane('onlabels').style.zIndex=450;
 map.getPane('onlabels').style.pointerEvents='none';
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
-  {pane:'onlabels',subdomains:'abcd',minZoom:8}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/'+LABELSET+'/{z}/{x}/{y}{r}.png',
+  {pane:'onlabels',subdomains:'abcd',minZoom:8,
+   updateWhenIdle:true,updateWhenZooming:false,keepBuffer:2}).addTo(map);
 
 map.createPane('marks');
 map.getPane('marks').style.zIndex=460;
@@ -751,8 +801,7 @@ let overlayOn=!EMBED;   /* inside Site Journal's map the parks lead, zones wait 
 const toggleBtn=document.getElementById('togglezones');
 function setOverlay(on){
   overlayOn=on;
-  toggleBtn.textContent=on?'Hide zones':'Show zones';
-  toggleBtn.classList.toggle('off',!on);
+  toggleBtn.classList.toggle('on',on);
   [fmz,fmzLine].forEach(l=>{ if(!l) return;
     if(on){ if(!map.hasLayer(l)) l.addTo(map); } else if(map.hasLayer(l)) map.removeLayer(l); });
 }
@@ -768,17 +817,21 @@ if(IN_APP){ const xa=document.querySelector('#about .xapp'); if(xa) xa.href='../
 const SJ_PARK_IDS={}; PARK_PINS.forEach(p=>{ SJ_PARK_IDS[parkBase(p.name)]=p.id; });
 map.createPane('parks');
 map.getPane('parks').style.zIndex=455;
-const parkIcon=L.divIcon({className:'parkpin',iconSize:[26,34],iconAnchor:[13,32],
-  html:'<svg width="26" height="34" viewBox="0 0 26 34">'
-    +'<path d="M13 1C6.4 1 1 6.4 1 13c0 8.9 12 20 12 20s12-11.1 12-20C25 6.4 19.6 1 13 1z" fill="#00753A" stroke="#FFFFFF" stroke-width="1.6"/>'
+const parkIcon=L.divIcon({className:'parkpin',iconSize:[20,26],iconAnchor:[10,24],
+  html:'<svg width="20" height="26" viewBox="0 0 26 34">'
+    +'<path d="M13 1C6.4 1 1 6.4 1 13c0 8.9 12 20 12 20s12-11.1 12-20C25 6.4 19.6 1 13 1z" style="fill:var(--forest)" stroke="#FFFFFF" stroke-width="1.8"/>'
     +'<path d="M13 5.5 18 13h-2.6l3.4 5.5H7.2L10.6 13H8z" fill="#FFFFFF"/>'
     +'<rect x="12.1" y="18.5" width="1.8" height="3.2" fill="#FFFFFF"/></svg>'});
 const parksLayer=L.layerGroup();
 PARK_PINS.forEach(p=>{
   const m=L.marker([p.lat,p.lng],{pane:'parks',icon:parkIcon,title:p.name});
+  m.bindTooltip(p.name,{permanent:true,direction:'bottom',offset:[0,0],className:'parklabel',pane:'parks'});
   m.on('click',()=>openParkPin(p));
   parksLayer.addLayer(m);
 });
+/* park names appear once you are reasonably close */
+function updateParkLabels(){ document.getElementById('map').classList.toggle('zoomclose',map.getZoom()>=8); }
+map.on('zoomend',updateParkLabels); updateParkLabels();
 function openParkPin(p){
   const el=document.createElement('div');
   const nm=document.createElement('div'); nm.textContent=p.name;
@@ -790,14 +843,13 @@ function openParkPin(p){
     a.href='#'; a.onclick=e=>{ e.preventDefault(); parent.postMessage({type:'sj-open-park',id:p.id},'*'); };
   }
   el.appendChild(nm); el.appendChild(a);
-  L.popup({closeButton:false,offset:[0,-30]}).setLatLng([p.lat,p.lng]).setContent(el).openOn(map);
+  L.popup({closeButton:false,offset:[0,-24]}).setLatLng([p.lat,p.lng]).setContent(el).openOn(map);
 }
 const parksBtn=document.getElementById('toggleparks');
 let parksOn = EMBED ? true : localStorage.getItem('onfr-parks')==='on';
 function setParks(on){
   parksOn=on;
-  parksBtn.textContent=on?'Hide parks':'Show parks';
-  parksBtn.classList.toggle('off',!on);
+  parksBtn.classList.toggle('on',on);
   if(on){ if(!map.hasLayer(parksLayer)) parksLayer.addTo(map); }
   else if(map.hasLayer(parksLayer)) map.removeLayer(parksLayer);
   if(!EMBED){ try{ localStorage.setItem('onfr-parks',on?'on':'off'); }catch(e){} }
@@ -810,8 +862,7 @@ const labelsBtn=document.getElementById('togglelabels');
 let labelsOn = localStorage.getItem('onfr-labels')!=='off';
 function setLabels(on){
   labelsOn=on;
-  labelsBtn.textContent=on?'Hide labels':'Show labels';
-  labelsBtn.classList.toggle('off',!on);
+  labelsBtn.classList.toggle('on',on);
   ['onlabels','marks'].forEach(pn=>{ const p=map.getPane(pn); if(p) p.style.display=on?'':'none'; });
   try{ localStorage.setItem('onfr-labels',on?'on':'off'); }catch(e){}
 }
@@ -969,7 +1020,7 @@ function selectZone(z, fromWater){
 
 function speciesRow(r, st, ss){
   const soon = ss && ss.soon ? `<div class="mt">${ss.soon.type==='closing'?'Closes':'Opens'} in ${ss.soon.days} days</div>` : '';
-  return `<div class="srow" data-st="${st}"><div class="col">
+  return `<div class="srow" data-st="${st}" data-sp="${esc(r.species)}"><div class="col">
       <div class="nm">${esc(r.species)}</div>
       <div class="mt">${esc(r.season)}</div>
       <div class="mt">${esc(r.limits)}</div>${soon}
@@ -992,6 +1043,7 @@ function renderPanel(z){
   if(chips.length) html+=`<div class="filters">${chips.join('')}</div>`;
   html+=`<div class="seclabel">Zone ${z} · Species and limits</div>
     <div id="splist">${sp.map(r=>{const ss=seasonStatus(r.season); return speciesRow(r, ss.status, ss);}).join('')}</div>`;
+  /* wired below once the html is in the page: tapping a species opens its fish page */
 
   if(wb.length){
     html+=`<details class="blk"><summary>Waterbody exceptions <span class="rcount">${wb.length}</span></summary>
@@ -1010,6 +1062,9 @@ function renderPanel(z){
   if(be) be.onclick=()=>renderExplore(exploreSpecies);
   const bw=document.getElementById('backwater');
   if(bw) bw.onclick=()=>renderWater(lastWater);
+  detailEl.querySelectorAll('#splist .srow[data-sp]').forEach(row=>{
+    row.onclick=()=>openFish(row.dataset.sp);
+  });
 }
 
 /* ---------------- waterbody search ---------------- */
@@ -1293,6 +1348,11 @@ function openFishCard(f){
   if(cands.length){ searchEl.value=f.name; gsearch.classList.add('has'); showDetail(); homeSections(false); openFish(cands[0]); }
 }
 (function(){
+  const l=document.getElementById('fishlist');
+  if(l){
+    l.innerHTML=FISH_ID.map((f,i)=>`<button class="frow" data-i="${i}">${esc(f.name)}</button>`).join('');
+    l.querySelectorAll('.frow').forEach(el=>el.onclick=()=>openFishCard(FISH_ID[Number(el.dataset.i)]));
+  }
   const g=document.getElementById('fgallery'); if(!g) return;
   g.innerHTML=FISH_ID.map((f,i)=>`<button class="fcard" data-i="${i}">
       <img loading="lazy" src="fish/${f.img}.jpg" alt="${esc(f.name)}"><span>${esc(f.name)}</span></button>`).join('');
@@ -1328,7 +1388,50 @@ function renderExplore(name){
 const backdrop=document.getElementById('backdrop');
 const aboutEl=document.getElementById('about'), versionsEl=document.getElementById('versions');
 function closeModals(){ aboutEl.classList.remove('on'); versionsEl.classList.remove('on'); backdrop.classList.remove('on'); }
-function openModal(el){ closeModals(); el.classList.add('on'); backdrop.classList.add('on'); el.scrollTop=0; }
+function openModal(el){ closeModals(); el.classList.add('on'); backdrop.classList.add('on'); el.scrollTop=0;
+  if(el===aboutEl&&typeof renderThemeRow==='function') renderThemeRow(); }
+
+/* ---------------- themes, borrowed whole from Site Journal ----------------
+   The palette math below is ported from Site Journal so an unlocked theme
+   looks identical in both apps. Unlocks live in shared storage. */
+function mixhex(a,b,t){ var A=parseInt(a.slice(1),16),B=parseInt(b.slice(1),16);
+  var r=Math.round(((A>>16)&255)*(1-t)+((B>>16)&255)*t), g=Math.round(((A>>8)&255)*(1-t)+((B>>8)&255)*t), c=Math.round((A&255)*(1-t)+(B&255)*t);
+  return '#'+((1<<24)|(r<<16)|(g<<8)|c).toString(16).slice(1).toUpperCase(); }
+function buildVars(t){ var P=t.paper,I=t.ink,F=t.primary,dark=!!t.dark;
+  var amber=mixhex(dark?'#F5CE4A':'#F2C728', F, .15);
+  var v={'--paper':P,'--card':dark?mixhex(P,'#FFFFFF',.05):'#FFFFFF','--ink':I,
+    '--forest':F,'--forest-2':mixhex(F,'#FFFFFF',.16),'--forest-press':mixhex(F,'#000000',.22),
+    '--green-tint':mixhex(F,P,dark?.86:.88),'--green-tint-2':mixhex(F,P,dark?.74:.78),
+    '--moss':mixhex(I,P,dark?.35:.30),
+    '--mist':mixhex(I,P,.90),'--mist-2':mixhex(I,P,.78),'--line':mixhex(I,P,.85),
+    '--amber':amber,'--amber-soft':mixhex(amber,P,.82)};
+  if(dark){ v['--shadow-sm']='0 1px 2px rgba(0,0,0,.40)'; v['--shadow']='0 4px 16px rgba(0,0,0,.45)'; v['--shadow-btn']='0 3px 12px rgba(0,0,0,.5)'; }
+  else { v['--shadow-sm']='0 1px 2px rgba(15,31,23,.06)'; v['--shadow']='0 2px 12px rgba(15,31,23,.08)'; v['--shadow-btn']='0 3px 10px rgba(0,0,0,.22)'; }
+  return v; }
+function sjThemeState(){
+  try{ return {cur:localStorage.getItem('site-journal-theme')||'forest',
+    unlocks:JSON.parse(localStorage.getItem('site-journal-unlocks')||'[]')}; }
+  catch(e){ return {cur:'forest',unlocks:[]}; } }
+function renderThemeRow(){
+  const el=document.getElementById('themeRow'); if(!el) return;
+  const st=sjThemeState();
+  const list=[{id:'forest',name:'Default'}].concat(SJ_THEMES.filter(t=>st.unlocks.indexOf(t.id)>=0));
+  el.innerHTML=list.map(t=>`<button class="trow" data-id="${t.id}">${esc(t.name)}${t.id===st.cur?'<span class="tk">On</span>':''}</button>`).join('')
+    +(list.length===1?'<div class="closing" style="margin-top:4px">Tap a park name in Site Journal to unlock its theme, and it works here too.</div>':'');
+  el.querySelectorAll('.trow').forEach(b=>{ b.onclick=()=>applySJTheme(b.dataset.id); });
+}
+function applySJTheme(id){
+  try{
+    if(id==='forest'){ localStorage.setItem('site-journal-theme','forest'); localStorage.removeItem('site-journal-theme-vars'); }
+    else{
+      const t=SJ_THEMES.find(x=>x.id===id); if(!t) return;
+      const v=buildVars(t), tc=t.dark?t.paper:mixhex(t.primary,'#000000',.35);
+      localStorage.setItem('site-journal-theme',id);
+      localStorage.setItem('site-journal-theme-vars',JSON.stringify({vars:v,tc:tc,dark:!!t.dark}));
+    }
+  }catch(e){}
+  location.reload();  /* tiles and blending follow the theme, a clean reload keeps it honest */
+}
 document.getElementById('verbtn').onclick=()=>openModal(versionsEl);
 const logo=document.getElementById('logobtn');
 logo.onclick=()=>openModal(aboutEl);
@@ -1352,6 +1455,7 @@ window.addEventListener('storage',e=>{
   if(e.key!=='site-journal-theme-vars') return;
   try{
     var v=JSON.parse(e.newValue||'null'), d=document.documentElement;
+    if((!!(v&&v.dark))!==THEME_DARK){ location.reload(); return; }  /* map tiles must swap */
     if(v&&v.vars){ for(var k in v.vars) d.style.setProperty(k,v.vars[k]); }
     else location.reload();   /* theme cleared back to default */
   }catch(_){}
@@ -1374,6 +1478,7 @@ html = (HTML.replace("__VERSION_ROWS__", version_rows)
             .replace("__REG_JSON__", reg_json)
             .replace("__PARK_PINS__", park_pins)
             .replace("__FISH_ID__", fish_id)
+            .replace("__SJ_THEMES__", sj_themes)
             .replace("__SERVICE__", SERVICE)
             .replace("__OFFICIAL__", OFFICIAL)
             .replace("__BUILD_DATE__", build_date)
