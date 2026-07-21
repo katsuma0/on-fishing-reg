@@ -17,10 +17,11 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.70"
+VERSION = "v0.71"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
+    ("v0.71", "Fish ID, every species drawn and explained"),
     ("v0.70", "Blue by default, it is water after all"),
     ("v0.69", "One app with Site Journal, parks on the map"),
     ("v0.54", "Search made fast, results paint in live"),
@@ -44,6 +45,8 @@ data = json.load(open(CLEAN, encoding="utf-8"))
 reg_json = json.dumps(data, ensure_ascii=False)
 park_pins = json.dumps(json.load(open("parks_pins.json", encoding="utf-8")),
                        ensure_ascii=False, separators=(",", ":"))
+fish_id = json.dumps(json.load(open("fish_id.json", encoding="utf-8")),
+                     ensure_ascii=False, separators=(",", ":"))
 build_date = datetime.date.today().isoformat()
 
 HTML = r"""<!DOCTYPE html>
@@ -96,13 +99,16 @@ HTML = r"""<!DOCTYPE html>
     #mapwrap{position:fixed;inset:0;z-index:0}
     /* the panel becomes a sheet over the map: expanded leaves a strip of map
        at the top, minimized leaves a grabbable strip at the bottom */
+    /* the page covers the map completely; pull down from the very top to reveal it */
     #panel{position:fixed;left:0;right:0;bottom:0;width:100%;max-width:none;min-width:0;
-      height:86dvh;z-index:20;border-left:none;background:var(--paper);
-      border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(19,32,25,.22);
+      height:100dvh;z-index:20;border-left:none;background:var(--paper);
       overflow-y:auto;overscroll-behavior:contain;
       transition:transform .34s cubic-bezier(.32,1.22,.38,1)}
-    #panel.min{transform:translateY(calc(100% - 92px))}
+    #panel.min,#panel.drag{border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(19,32,25,.22)}
+    #panel.min{transform:translateY(calc(100% - 108px));overflow:hidden}
     #panel.drag{transition:none}
+    #panel .pullwrap{display:none}
+    #panel.min .pullwrap,#panel.drag .pullwrap{display:block}
     .pullwrap{position:sticky;top:0;z-index:5;background:var(--paper);
       padding:9px 0 7px;border-radius:16px 16px 0 0;touch-action:none;cursor:grab}
     .pullbar{width:40px;height:4px;border-radius:99px;background:var(--mist-2);margin:0 auto}
@@ -193,12 +199,13 @@ HTML = r"""<!DOCTYPE html>
   button.srow:active{transform:scale(.985)}
   .srow .col{flex:1;min-width:0}
   .srow .nm{font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--forest)}
-  .srow[data-st="closed"] .nm{color:var(--danger)}
+  .srow[data-st="closed"] .nm{color:#B0574A}
+  .srow[data-st="open"] .nm{color:#00753A}
   .srow .mt{font-size:13px;color:var(--moss);margin-top:3px;line-height:1.45}
   .pill{flex:none;font-weight:800;font-size:12.5px;border:1px solid var(--line);border-radius:99px;
     padding:8px 13px;color:var(--forest);min-width:62px;text-align:center}
-  .pill.open{background:var(--green-tint);border-color:transparent;color:var(--forest)}
-  .pill.closed{background:#F6E8E5;border-color:transparent;color:var(--danger)}
+  .pill.open{background:#00753A;border-color:#00753A;color:#FFFFFF}
+  .pill.closed{background:#B0574A;border-color:#B0574A;color:#FFFFFF}
   .pill.unknown{background:var(--mist);border-color:transparent;color:var(--moss)}
 
   details.blk{border:1px solid var(--line);background:var(--card);border-radius:var(--r-sm);
@@ -276,6 +283,23 @@ HTML = r"""<!DOCTYPE html>
   .sheet a{color:var(--forest);text-underline-offset:2px}
   .aboutbody p{margin:1em 0}
   .closing{font-size:12px;font-weight:600;color:var(--moss);text-align:center;margin-top:12px}
+  /* fish id */
+  .fgallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+  .fcard{appearance:none;font-family:inherit;cursor:pointer;text-align:left;
+    border:1px solid var(--line);background:var(--card);border-radius:var(--r-sm);padding:10px;
+    display:flex;flex-direction:column;gap:8px;transition:transform .14s}
+  .fcard:active{transform:scale(.97)}
+  .fcard img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-xs);background:#FFFFFF}
+  .fcard span{font-weight:700;font-size:13.5px;color:var(--ink);line-height:1.3}
+  .idcard{border:1px solid var(--line);background:var(--card);border-radius:var(--r-sm);
+    overflow:hidden;margin-bottom:var(--gap-m)}
+  .idcard img{width:100%;max-height:230px;object-fit:contain;background:#FFFFFF;display:block}
+  .idcard .idbody{padding:12px 16px 14px}
+  .idname{font-weight:800;font-size:16px;letter-spacing:-.01em}
+  .idtell{margin:0 0 10px;padding-left:18px}
+  .idtell li{font-size:13.5px;color:var(--ink);line-height:1.45;margin:3px 0}
+  .idrow{font-size:13px;color:var(--moss);line-height:1.45;margin-top:4px}
+  .idrow b{color:var(--ink);font-weight:700}
   .xapp{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
     background:var(--card);border-radius:12px;padding:14px 16px;font-weight:700;font-size:14.5px;
     color:var(--ink);text-decoration:none}
@@ -312,7 +336,8 @@ HTML = r"""<!DOCTYPE html>
   <div class="kind" style="margin:24px 0 12px">Ontario Parks</div>
   <a class="xapp" href="https://katsuma0.github.io/sitejournal-app/">Site Journal<span class="xgo">Open</span></a>
   <div class="closing">Regulations from the 2026 summary · Zone boundaries from the Government of
-    Ontario · Data prepared __BUILD_DATE__</div>
+    Ontario · Fish plates by Sherman F. Denton (1896) and the U.S. Fish and Wildlife Service
+    · Data prepared __BUILD_DATE__</div>
 </div>
 
 <div id="app">
@@ -336,16 +361,21 @@ HTML = r"""<!DOCTYPE html>
           the <a href="__OFFICIAL__" target="_blank" rel="noopener">official summary</a> before you
           head out.</p>
       </header>
-      <div class="seclabel" style="margin-top:10px">Zones</div>
-      <div class="zonegrid" id="zones"></div>
-      <div class="seclabel">Search</div>
       <div class="gsearch" id="gsearch">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="search" inputmode="search" autocomplete="off" placeholder="Search waters, parks, or towns">
+        <input id="search" inputmode="search" autocomplete="off" placeholder="Search waters, towns, or fish">
         <button class="gclear" id="gclear" aria-label="Clear search">✕</button>
       </div>
       <div id="gresults" class="gresults" hidden></div>
+      <div id="mainhome">
+        <div class="seclabel" style="margin-top:10px">Zones</div>
+        <div class="zonegrid" id="zones"></div>
+      </div>
       <div id="detail"></div>
+      <div id="fishhome">
+        <div class="seclabel">Fish ID</div>
+        <div class="fgallery" id="fgallery"></div>
+      </div>
     </div>
     <footer>
       Not an official source. Always check the official summary before you fish.<br>
@@ -357,6 +387,8 @@ HTML = r"""<!DOCTYPE html>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const REG = __REG_JSON__;
+const FISH_ID = __FISH_ID__;
+const EMBED = /embed=parks/.test(location.hash||'');
 const SERVICE = "__SERVICE__";
 const ZONE_FIELD = "FISHERIES_MANAGEMENT_ZONE_ID";
 
@@ -668,6 +700,7 @@ fetch(BOUNDS_URL).then(r=>r.json()).then(gj=>{
   });
   fmz=L.geoJSON(gj,{renderer:fillRenderer, smoothFactor:1.4, style:styleFn}).addTo(map);
   fmzLine=L.geoJSON(gj,{renderer:lineRenderer, smoothFactor:1.4, style:lineStyle}).addTo(map);
+  if(!overlayOn){ map.removeLayer(fmz); map.removeLayer(fmzLine); }
   const l=document.getElementById('loading'); if(l) l.remove();
   if(selectedZone){ renderPanel(selectedZone); zoomToZone(selectedZone); }
 }).catch(()=>{
@@ -714,7 +747,7 @@ function zoneAt(lng,lat){
 }
 
 /* ---------------- zone overlay toggle ---------------- */
-let overlayOn=true;
+let overlayOn=!EMBED;   /* inside Site Journal's map the parks lead, zones wait for the toggle */
 const toggleBtn=document.getElementById('togglezones');
 function setOverlay(on){
   overlayOn=on;
@@ -724,12 +757,12 @@ function setOverlay(on){
     if(on){ if(!map.hasLayer(l)) l.addTo(map); } else if(map.hasLayer(l)) map.removeLayer(l); });
 }
 toggleBtn.onclick=()=>setOverlay(!overlayOn);
+setOverlay(overlayOn);
 
 /* ---------------- park pins (Site Journal's parks) ---------------- */
 const PARK_PINS=__PARK_PINS__;
 const SJ_URL='https://katsuma0.github.io/sitejournal-app/';
 const SJ_PARK_IDS={}; PARK_PINS.forEach(p=>{ SJ_PARK_IDS[parkBase(p.name)]=p.id; });
-const EMBED=/embed=parks/.test(location.hash||'');
 map.createPane('parks');
 map.getPane('parks').style.zIndex=455;
 const parkIcon=L.divIcon({className:'parkpin',iconSize:[26,34],iconAnchor:[13,32],
@@ -788,34 +821,46 @@ if(EMBED){
   setTimeout(()=>map.invalidateSize(),60);
 }
 
-/* ---------------- phone sheet ---------------- */
+/* ---------------- phone sheet: the page floats over the map ----------------
+   At rest the page covers the map completely. Pulling down from the very top
+   reveals the grabber and rounded corners, then slides the page to a strip at
+   the bottom showing just the title. Tap or pull the strip up to come back. */
 const panelEl=document.getElementById('panel');
 const pullwrap=document.getElementById('pullwrap');
-let sheetMin=false, dragY=null, dragBase=0, dragged=false;
-function setSheet(min){ sheetMin=min; panelEl.classList.toggle('min',min); }
-pullwrap.addEventListener('click',()=>{ if(dragged){ dragged=false; return; } setSheet(!sheetMin); });
-pullwrap.addEventListener('touchstart',e=>{
-  dragY=e.touches[0].clientY; dragged=false;
-  dragBase=sheetMin?(panelEl.getBoundingClientRect().height-92):0;
-  panelEl.classList.add('drag');
+let sheetMin=false, dragY=null, dragged=false;
+function setSheet(min){ sheetMin=min;
+  panelEl.classList.toggle('min',min);
+  panelEl.classList.remove('drag'); panelEl.style.transform='';
+  if(min) panelEl.scrollTop=0; }
+panelEl.addEventListener('touchstart',e=>{
+  dragged=false;
+  if(sheetMin){ dragY=e.touches[0].clientY; return; }
+  dragY=(panelEl.scrollTop<=0)?e.touches[0].clientY:null;
 },{passive:true});
-pullwrap.addEventListener('touchmove',e=>{
+panelEl.addEventListener('touchmove',e=>{
   if(dragY==null) return;
   const dy=e.touches[0].clientY-dragY;
-  if(Math.abs(dy)>10) dragged=true;
-  const max=panelEl.getBoundingClientRect().height-92;
-  const off=Math.max(0,Math.min(max,dragBase+dy));
-  panelEl.style.transform='translateY('+off+'px)';
-},{passive:true});
-pullwrap.addEventListener('touchend',e=>{
-  if(dragY==null) return;
-  panelEl.classList.remove('drag'); panelEl.style.transform='';
+  if(sheetMin){ if(dy<-60){ dragY=null; setSheet(false); } return; }
+  if(dy>8&&panelEl.scrollTop<=0){
+    dragged=true; e.preventDefault();
+    panelEl.classList.add('drag');
+    panelEl.style.transform='translateY('+Math.min(dy*0.6,150)+'px)';
+  } else if(dragged){ e.preventDefault();
+    panelEl.style.transform='translateY('+Math.max(0,Math.min(dy*0.6,150))+'px)'; }
+},{passive:false});
+panelEl.addEventListener('touchend',e=>{
+  if(dragY==null){ dragged=false; return; }
   const dy=e.changedTouches[0].clientY-dragY;
-  if(!sheetMin && dy>70) setSheet(true);
-  else if(sheetMin && dy<-70) setSheet(false);
-  else setSheet(sheetMin);
   dragY=null;
+  if(sheetMin) return;
+  panelEl.classList.remove('drag'); panelEl.style.transform='';
+  if(dragged&&dy>70) setSheet(true);
+  dragged=false;
 });
+panelEl.addEventListener('click',e=>{ if(sheetMin){ e.preventDefault(); e.stopPropagation(); setSheet(false); } },true);
+pullwrap.addEventListener('click',()=>{ if(sheetMin) setSheet(false); });
+/* desktop trackpads: scrolling up past the top opens the map too */
+panelEl.addEventListener('wheel',e=>{ if(!sheetMin&&panelEl.scrollTop<=0&&e.deltaY<-25&&window.innerWidth<=860) setSheet(true); },{passive:true});
 
 map.on('click', e=>{
   if(EMBED) return;                            // embedded map: pins do the talking
@@ -914,7 +959,9 @@ function selectZone(z, fromWater){
   renderPanel(z);
   zoomToZone(z);
   if(('#zone='+z)!==location.hash) history.replaceState(null,'','#zone='+z);
-  document.getElementById('panel').scrollTop=0;
+  const mh=document.getElementById('mainhome');
+  if(mh&&!mh.hidden){ detailEl.scrollIntoView({behavior:'smooth',block:'start'}); }
+  else document.getElementById('panel').scrollTop=0;
 }
 
 function speciesRow(r, st, ss){
@@ -940,7 +987,7 @@ function renderPanel(z){
   if(exploreSpecies) chips.push(`<button class="fchip" id="backexp">Back to ${esc(exploreSpecies)}</button>`);
   if(lastWater) chips.push(`<button class="fchip" id="backwater">Back to ${esc(lastWater.n)}</button>`);
   if(chips.length) html+=`<div class="filters">${chips.join('')}</div>`;
-  html+=`<div class="seclabel">Zone ${z}</div>
+  html+=`<div class="seclabel">Zone ${z} · Species and limits</div>
     <div id="splist">${sp.map(r=>{const ss=seasonStatus(r.season); return speciesRow(r, ss.status, ss);}).join('')}</div>`;
 
   if(wb.length){
@@ -984,9 +1031,10 @@ const gclear=document.getElementById('gclear');
 const rbox=document.getElementById('gresults');
 let searchSeq=0;
 let lastWater=null;
+function homeSections(on){ ['mainhome','fishhome'].forEach(id=>{ const e=document.getElementById(id); if(e) e.hidden=!on; }); }
 function showDetail(){ rbox.hidden=true; detailEl.hidden=false; }
-function showResults(){ rbox.hidden=false; detailEl.hidden=true; }
-function restoreList(){ rbox.hidden=true; rbox.innerHTML=''; detailEl.hidden=false;
+function showResults(){ rbox.hidden=false; detailEl.hidden=true; homeSections(false); }
+function restoreList(){ rbox.hidden=true; rbox.innerHTML=''; detailEl.hidden=false; homeSections(true);
   if(typeof clearPin==='function') clearPin();
   if(selectedZone) renderPanel(selectedZone); else showEmpty(); }
 
@@ -1216,6 +1264,37 @@ function renderWater(w){
 for(const z in REG) for(const r of REG[z].species_regulations||[]){
   (speciesMap[r.species]=speciesMap[r.species]||{})[z]={season:r.season,limits:r.limits};
 }
+/* ---------------- fish id ---------------- */
+function fishIdCards(regName){
+  const nl=(regName||'').toLowerCase();
+  const hits=FISH_ID.filter(f=>f.match.some(m=>nl.includes(m)));
+  if(!hits.length) return '';
+  return hits.map(f=>`<div class="idcard">
+      <img loading="lazy" src="fish/${f.img}.jpg" alt="${esc(f.name)}">
+      <div class="idbody">
+        <div class="idname">${esc(f.name)}</div>
+        <div class="seclabel grey" style="margin:10px 0 6px">How to tell</div>
+        <ul class="idtell">${f.tell.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+        <div class="idrow"><b>Eats:</b> ${esc(f.eat)}</div>
+        <div class="idrow"><b>Bites on:</b> ${esc(f.bite)}</div>
+      </div></div>`).join('');
+}
+function allRegSpecies(){
+  const names=new Set();
+  Object.values(REG).forEach(z=>(z.species_regulations||[]).forEach(r=>names.add(r.species)));
+  return [...names];
+}
+function openFishCard(f){
+  const cands=allRegSpecies().filter(n=>{ const nl=n.toLowerCase(); return f.match.some(m=>nl.includes(m)); })
+    .sort((a,b)=>a.length-b.length);
+  if(cands.length){ searchEl.value=f.name; gsearch.classList.add('has'); showDetail(); homeSections(false); openFish(cands[0]); }
+}
+(function(){
+  const g=document.getElementById('fgallery'); if(!g) return;
+  g.innerHTML=FISH_ID.map((f,i)=>`<button class="fcard" data-i="${i}">
+      <img loading="lazy" src="fish/${f.img}.jpg" alt="${esc(f.name)}"><span>${esc(f.name)}</span></button>`).join('');
+  g.querySelectorAll('.fcard').forEach(el=>el.onclick=()=>openFishCard(FISH_ID[Number(el.dataset.i)]));
+})();
 function openFish(name){
   exploreSpecies=name;
   if(typeof setOverlay==='function' && typeof overlayOn!=='undefined' && !overlayOn) setOverlay(true);
@@ -1230,8 +1309,9 @@ function renderExplore(name){
   const openN=present.filter(r=>r.st==='open').length;
   detailEl.innerHTML=`<div class="zhead"><h2>${esc(name)}</h2>
       <button class="fchip" id="exitexp">Clear</button></div>
-    <p class="meta">${openN} zones open now · in ${present.length} zones</p>
-    <div class="seclabel">By zone</div>`
+    <p class="meta">${openN} zones open now · in ${present.length} zones</p>`
+    + fishIdCards(name)
+    + `<div class="seclabel">By zone</div>`
     + present.map(r=>`<button class="srow" data-z="${r.z}"><div class="col">
         <div class="nm">Zone ${r.z}</div>
         <div class="mt">${esc(r.rec.season)}</div>
@@ -1290,6 +1370,7 @@ version_rows = "".join(
 html = (HTML.replace("__VERSION_ROWS__", version_rows)
             .replace("__REG_JSON__", reg_json)
             .replace("__PARK_PINS__", park_pins)
+            .replace("__FISH_ID__", fish_id)
             .replace("__SERVICE__", SERVICE)
             .replace("__OFFICIAL__", OFFICIAL)
             .replace("__BUILD_DATE__", build_date)
