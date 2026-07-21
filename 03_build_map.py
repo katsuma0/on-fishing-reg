@@ -17,7 +17,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.71"
+VERSION = "v0.72"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -761,7 +761,10 @@ setOverlay(overlayOn);
 
 /* ---------------- park pins (Site Journal's parks) ---------------- */
 const PARK_PINS=__PARK_PINS__;
-const SJ_URL='https://katsuma0.github.io/sitejournal-app/';
+/* bundled inside the Site Journal iOS app this page lives at fishing/, so home is one level up */
+const IN_APP=!!window.Capacitor||location.protocol==='capacitor:';
+const SJ_URL=IN_APP?'../index.html':'https://katsuma0.github.io/sitejournal-app/';
+if(IN_APP){ const xa=document.querySelector('#about .xapp'); if(xa) xa.href='../index.html'; }
 const SJ_PARK_IDS={}; PARK_PINS.forEach(p=>{ SJ_PARK_IDS[parkBase(p.name)]=p.id; });
 map.createPane('parks');
 map.getPane('parks').style.zIndex=455;
