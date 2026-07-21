@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Large source PDFs (~25 MB each) — keep locally; uncomment to exclude from repo.
+# mnr-2026-fishing-regulations-summary-en-2025-12-08.pdf
+# mnr-2025-fishing-regulations-summary-en-2024-12-09.pdf
+
+# OS noise
+.DS_Store

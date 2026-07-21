@@ -1,0 +1,3418 @@
+{
+  "1": {
+    "zone_number": 1,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "In Zone 1, only one barbless hook may be used and live fish may not be used as bait or possessed",
+      "The following species are not present in this Zone and are closed to fishing all year: Atlantic Salmon,"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-5 and C-2; not more than 1 greater than 40 cm"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "January 1 to April 30 and July 1 to December 31",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "open all year",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6; not more than 2 greater than 61 cm, of which not more than 1 greater than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "open all year",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": []
+  },
+  "2": {
+    "zone_number": 2,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Non-Canadian residents camping on Crown land must follow Conservation Fishing Licence limits.",
+      "Rainbow Smelt may not be used as bait or possessed for use as bait, except in the tributaries of",
+      "Live fish may not be used as bait or possessed for use as bait in all waters north of the 11th baseline at",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-4 and C-2; none between 70 cm to"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and no size limit rest of season and C-1; any"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to Labour Day",
+        "limits": "S-5 and C-2; not more than 1 greater than 30 cm"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "January 1 to April 30 and July 1 to December 31",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-2; not more than 1 greater than 56 cm from September 1 to September"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-2 and C-1; must be less than 35"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 91 cm and C-0"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Lake St. Joseph (51\u00b003'13\"N, 90\u00b049'37\"W)",
+        "rules": [
+          "Only one barbless hook may be used",
+          "Non-Canadian residents require a special tag which is available at no charge from the Lake"
+        ]
+      },
+      {
+        "waterbody": "No fishing - from March 1 to June 14",
+        "rules": [
+          "Esnagami River - from the northern boundary of"
+        ]
+      },
+      {
+        "waterbody": "Esnagami Township (50\u00b021'36\"N, 86\u00b046'45\"W) downstream (north) to the second set of rapids (50\u00b025'20\"N, 86\u00b040'45\"W)",
+        "rules": [
+          "Lake St. Joseph -refer to Waterbody Exceptions"
+        ]
+      }
+    ]
+  },
+  "3": {
+    "zone_number": 3,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "The following species are not present in this Zone and are closed to fishing all year: Atlantic Salmon,",
+      "FMZ 3 is part of the Northeast Bait Management Zone (BMZ). Live or dead baitfish or leeches may not"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to September 15",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "January 1 to April 15 and July 1 to December 31",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6; not more than 2 greater th"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": []
+  },
+  "4": {
+    "zone_number": 4,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Non-Canadian residents camping on Crown land must follow Conservation Fishing Licence limits.",
+      "Rainbow Smelt may not be used as bait or possessed for use as bait.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and to December 31, S-4 and C-2; no size limit waters from July 1 to November 30"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 102 cm, and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to Labour Day",
+        "limits": "S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-15 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-2; not more than 1 greater than 56 cm, and C-1; no size limit"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year 32",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 --- PAGE 35 ---"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Big Vermilion Lake (50\u00b002'00\"N, 92\u00b013'00\"W)",
+        "rules": [
+          "Only artificial lures may be used",
+          "Only one line may be used when angling through the ice",
+          "Lake Trout - none between 45-60 cm, not more than 1 greater than 60 cm"
+        ]
+      },
+      {
+        "waterbody": "Cedar Lake (50\u00b010'08\"N, 93\u00b007'11\"W)",
+        "rules": [
+          "Muskellunge - S-1; must be greater than 137 cm and C-0"
+        ]
+      },
+      {
+        "waterbody": "Cedar Lake - Louise Rapids and Nelson Lake",
+        "rules": [
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "Hooch Lake (49\u00b057'57\"N, 92\u00b019'20\"W), Muskie (Maskinonge) Lake (49\u00b056'58\"N, 92\u00b017'41\"W) and all connecting waters - Echo, Lomond, Pickerel and Vermilion Townships",
+        "rules": [
+          "Only artificial lures and one barbless hook may be used",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "December 1 to December 31",
+        "rules": [
+          "Muskellunge - S-0 and C-0",
+          "Northern Pike - S-0 and C-0",
+          "Smallmouth Bass - S-0 and C-0"
+        ]
+      },
+      {
+        "waterbody": "Zone 4 and Wenasaga River, from the first rapids upstream from Lac Seul approximately 3 km downstream to the last group of islands",
+        "rules": [
+          "No person may possess any live fish taken by angling other than baitfish",
+          "Muskellunge - S-0 and C-0",
+          "Walleye and Sauger combined - S-4 and C-2; none between 46-53 cm, not more than 1 greater than 53 cm"
+        ]
+      },
+      {
+        "waterbody": "Rice River",
+        "rules": [
+          "No person may possess any live fish taken by angling other than baitfish",
+          "Northern Pike - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "December 31",
+        "rules": [
+          "Walleye and Sauger combined - S-4 and C-2; none between 46-53 cm, not more than 1 greater than 53 cm"
+        ]
+      },
+      {
+        "waterbody": "Minnitaki Lake - Red Pine Bay",
+        "rules": [
+          "All species - S-0 and C-0; from third Saturday in May to June 14"
+        ]
+      },
+      {
+        "waterbody": "Minnitaki Lake (49\u00b058'19\"N, 91\u00b057'29\"W)",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to"
+        ]
+      },
+      {
+        "waterbody": "June 14 in the following areas:",
+        "rules": [
+          "Grassy Bay and English River - between"
+        ]
+      },
+      {
+        "waterbody": "English Falls downstream to include all of Grassy Bay of Minnitaki Lake",
+        "rules": [
+          "Twin Bay and the Rice River - including"
+        ]
+      },
+      {
+        "waterbody": "Gullrock System",
+        "rules": [
+          "Only artificial lures and one single-pointed barbless hook may be used while angling for Lake Trout",
+          "Lake Trout - S-0 and C-0"
+        ]
+      },
+      {
+        "waterbody": "Red Lake (51\u00b003'21\"N, 93\u00b057'12\"W) - Fairlie Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to"
+        ]
+      },
+      {
+        "waterbody": "June 14 in the following areas:",
+        "rules": [
+          "Red Lake and Chukuni River - McDonough and Bateman Townships, from Little"
+        ]
+      },
+      {
+        "waterbody": "Vermilion Lake south to Red Lake, including part of Hoyles Bay",
+        "rules": [
+          "Red Lake and Golden Creek - Bateman"
+        ]
+      },
+      {
+        "waterbody": "Township, from the Pine Ridge Road, south to Red Lake, including part of East Bay",
+        "rules": [
+          "Red Lake and Parker Creek - Fairlie"
+        ]
+      },
+      {
+        "waterbody": "Township, from Parker Lake to Red Lake, including an unnamed bay",
+        "rules": [
+          "Red Lake and Ranger Lake - Ranger Creek and part of North Bay of Gullrock Lake"
+        ]
+      },
+      {
+        "waterbody": "Ontario border",
+        "rules": [
+          "Regulations for all Non-Canadian anglers:",
+          "Lake Trout - S-1 and C-1",
+          "Lake Whitefish - S-6 and C-6",
+          "Largemouth and Smallmouth Bass combined - S-1 and C-1; must be less than 35 cm from January 1 to June 30 and December 1 to December 31",
+          "Muskellunge - S-0 and C-0"
+        ]
+      },
+      {
+        "waterbody": "--- PAGE 37 ---",
+        "rules": [
+          "Northern Pike - S-2 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm",
+          "Walleye and Sauger combined - S-2 and"
+        ]
+      },
+      {
+        "waterbody": "C-2; not more than 1 greater than 46 cm",
+        "rules": [
+          "Yellow Perch - S-25 and C-25"
+        ]
+      },
+      {
+        "waterbody": "Zone 4",
+        "rules": [
+          "Nelson Lake - Kenora District, from a line between the western shoreline at approximately 50\u00b013'09\"N, 93\u00b009'44\"W and the eastern shoreline at 50\u00b013'05\"N, 93\u00b009'26\"W upstream including the north part of Nelson Lake and the creek and"
+        ]
+      },
+      {
+        "waterbody": "Richmond Lake",
+        "rules": [
+          "Ord River - Kenora District, from 50\u00b015'22\"N,"
+        ]
+      }
+    ]
+  },
+  "5": {
+    "zone_number": 5,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Rainbow Smelt may not be used as bait or possessed for use as bait.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and \u2022 Daily catch and retain limit: S-1 and C-1, no size limit \u2022 Possession limit: S-2, not more than 1 greater than 56 cm from September 1 to September 30, and C-1, no size limit"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-10 and C-5"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 38",
+        "limits": "Ontario and Canadian residents \u2022 S-2; not more than 1 greater than 56"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-4 and C-2; must be less than 35 cm from January 1 to June 30"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 102 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-4 and C-2; none greater than 75 cm cm"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2 --- PAGE 41 ---"
+      },
+      {
+        "species": "Fishing Regulations Summary 2026",
+        "season": "Not specified",
+        "limits": "Non-Canadian residents \u2022 Daily catch and retain limit: S-2 and C-2; not more than 1 greater than 46 cm \u2022 Possession limit: S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "Ontario and Canadian residents \u2022 S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 \u2022 Meggisi Lake (49\u00b017'04\"N, 92\u00b034'55\"W) \u2022 Pipestone Lake - Pipestone Chain (49\u00b004'60\"N, 93\u00b033'00\"W) \u2022 Schistose Lake (49\u00b009'17\"N, 93\u00b036'18\"W) \u2022 Slender Lake (49\u00b001'60\"N, 93\u00b041'56\"W) \u2022 Weld Lake (49\u00b001'39\"N, 93\u00b040'17\"W)"
+      },
+      {
+        "species": "Zone 5",
+        "season": "Not specified",
+        "limits": "S-1; must be greater than 137 cm, and C-0 \u2022 Rowan Lake (49\u00b019'00\"N, 93\u00b033'00\"W)"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Dinorwic Lake (49\u00b037'40\"N, 92\u00b033'25\"W) - including Minnehaha Lake (49\u00b031'27\"N, 92\u00b038'45\"W), Rock Lake (49\u00b032'37\"N, 92\u00b035'51\"W) and Turtlepond Lake (49\u00b032'43\"N, 92\u00b036'46\"W)",
+        "rules": [
+          "Crappie - S-15 and C-10",
+          "Largemouth and Smallmouth Bass combined -"
+        ]
+      },
+      {
+        "waterbody": "July 1 to November 30",
+        "rules": [
+          "Muskellunge - S-1; must be greater than 137 cm, and C-0"
+        ]
+      }
+    ]
+  },
+  "6": {
+    "zone_number": 6,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Non-Canadian residents camping on Crown land must follow Conservation Fishing Licence limits.",
+      "Rainbow Smelt may not be used as bait or possessed for use as bait.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "open all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Waterbody",
+        "season": "Not specified",
+        "limits": "S-4 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-5 and C-2; total daily catch and possession Limits: S-1; must be greater than 91 cm, and C-0 limit for all trout and salmon species"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0 combine"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "Not specified",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-4 and C-2; not more than 1 greater than or equal to 70 cm"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "fourth Saturday in April to Labour Day Season: open all year",
+        "limits": "S-5 and C-2; not more than 1 greater than 30 cm"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-15 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "S-2; not more than 1 greater than 56 cm Yellow Perch"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31 46 --- PAGE 49 ---",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Arrow River",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Only barbless hooks may be used",
+          "Brown Trout - S-0 and C-0",
+          "Brown Trout - open from fourth Saturday in"
+        ]
+      },
+      {
+        "waterbody": "April to September 30",
+        "rules": [
+          "NEW* Arrow River - between the dam on Arrow"
+        ]
+      },
+      {
+        "waterbody": "Lake (Hardwick Township) and the upstream side of the bridge at Highway 593 (48\u00b006'11\"N, 89\u00b053'08'W)",
+        "rules": [
+          "Only artificial flies may be used",
+          "NEW* Arrow River - between the upstream side of the bridge at Highway 593 (48\u00b006'11\"N, 89\u00b053'08\"W) and its confluence with the Pigeon"
+        ]
+      },
+      {
+        "waterbody": "River in Devon Township",
+        "rules": [
+          "Only artificial lures may be used"
+        ]
+      },
+      {
+        "waterbody": "Purdom Township",
+        "rules": [
+          "Dead Rainbow Smelt may be used as bait or possessed for use as bait",
+          "Brook Trout - S-1; must be greater than 56 cm, and C-0",
+          "Lake Trout - open from February 15 to"
+        ]
+      },
+      {
+        "waterbody": "September 30",
+        "rules": [
+          "Northern Pike - S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm",
+          "NEW* Lac des Mille Lacs (48\u00b052'36\"N, 90\u00b030'46\"W), including Casino Lake (48\u00b056'02\"N, 90\u00b042'57\"W), Cushing Lake (48\u00b056'10\"N, 90\u00b030'11\"W), Panache Lake (48\u00b054'39\"N, 90\u00b026'34\"W), Pike Lake (48\u00b053'34\"N, 90\u00b030'36\"W) and all connecting waters between these lakes \u2013",
+          "Northern Pike - open from January 1 to April 14 and second Saturday in May to December 31",
+          "Walleye - S-4 and C-2; must be greater than 33 cm, not more than 1 greater than 46 cm"
+        ]
+      },
+      {
+        "waterbody": "Lake Helen (49\u00b004'20\"N, 88\u00b016'17\"W)",
+        "rules": [
+          "Dead Rainbow Smelt may be used as bait or possessed for use as bait",
+          "Brook Trout - S-1; must be greater than 56 cm, and C-0",
+          "Northern Pike - S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm",
+          "Walleye and Sauger - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Lake Nipigon and its tributaries downstream from the first falls, rapids, dams or lakes or the entire stream if there are no falls, rapids, dams or lakes, also including:",
+        "rules": [
+          "Waters on the islands of Lake Nipigon - including Forgan Lake, Bonner Lake,"
+        ]
+      },
+      {
+        "waterbody": "Little Bonner Lake and Jackpot Lake (Madeline Lake)",
+        "rules": [
+          "Gull River - downstream from the"
+        ]
+      },
+      {
+        "waterbody": "Highway 527 bridge",
+        "rules": [
+          "Kabitotikwia River - downstream from the"
+        ]
+      },
+      {
+        "waterbody": "Highway 527 bridge",
+        "rules": [
+          "Poshkokagan River - downstream from and including the rapids (49\u00b025'45\"N, 89\u00b004'55\"W) located 13 km upstream from the Black Sturgeon Road bridge",
+          "Wabinosh River - downstream from"
+        ]
+      },
+      {
+        "waterbody": "Wabinosh Lake",
+        "rules": [
+          "Little Jackfish River - downstream from the centre line of the CN railway bridge",
+          "Dead Rainbow Smelt may be used as bait or possessed for use as bait",
+          "Only artificial lures may be used when angling through the ice",
+          "Only one barbless hook may be used",
+          "No person shall use stringers, impounding devices or live holding boxes",
+          "A person may hold fish, other than Brook Trout or Lake Trout, in a livewell",
+          "No possession of live Lake Trout or Brook"
+        ]
+      },
+      {
+        "waterbody": "Trout permitted",
+        "rules": [
+          "Brook Trout - open from fourth Saturday in"
+        ]
+      },
+      {
+        "waterbody": "April to September 15",
+        "rules": [
+          "Brook Trout - S-1; must be greater than 56 cm, and C-0",
+          "Lake Trout - open from"
+        ]
+      },
+      {
+        "waterbody": "March 1 to September 30",
+        "rules": [
+          "Lake Trout - S-2 and C-1; not more than 1 greater than 70 cm",
+          "Northern Pike - open from January 1 to April 14 and third Saturday in May to December 31",
+          "Northern Pike - S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm",
+          "Walleye and Sauger - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Lake Nipigon - Ombabika Bay (50\u00b015'N, 88\u00b015'W) and Wabinosh Bay (50\u00b002'N, 88\u00b050'W) and the tributaries of the bays up to the first barrier including the Little Jackfish River downstream from the centre line of the CN railway bridge and Wabinosh River downstream of Wabinosh Lake",
+        "rules": [
+          "Walleye and Sauger combined - S-2 and C-2; not more than 1 greater than 46 cm"
+        ]
+      },
+      {
+        "waterbody": "Lake Nipigon - West Bay, the waters lying north and west of the north tip of Boles Island",
+        "rules": [
+          "Fish Sanctuary - closed all year",
+          "NEW* Little Savanne River from the upstream side of the bridge at Railbed Road (49\u00b005'57\"N, 90\u00b018'16\"W) to its confluence with the Savanne"
+        ]
+      },
+      {
+        "waterbody": "River (48\u00b056'53\"N, 90\u00b015'26\"W)",
+        "rules": [
+          "Walleye - S-4 and C-2; must be greater than 33 cm, not more than 1 greater than 46 cm",
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "McIntyre River",
+        "rules": [
+          "Rainbow Trout - S-1; must be greater than 69 cm, and C-0"
+        ]
+      },
+      {
+        "waterbody": "McIntyre River - from the footbridge to the dam on the University property in the City of Thunder Bay",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Nipigon River",
+        "rules": [
+          "Dead Rainbow Smelt may be used as bait or possessed for use as bait",
+          "Northern Pike - S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm"
+        ]
+      },
+      {
+        "waterbody": "Zone 9 north of a line drawn from Simpson Island (48\u00b049'48\"N, 87\u00b040'40\"W) across the bay to the mainland at 48\u00b051'21\"N, 87\u00b038'47\"W",
+        "rules": [
+          "Walleye and Sauger - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Nipigon River",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "Tuesday after Labour Day to December 31 in the following areas:",
+        "rules": [
+          "Nipigon River - Backpool below the"
+        ]
+      },
+      {
+        "waterbody": "Alexander Dam east of a line drawn south from the Alexander Dam Log Chute to the northernmost tip of the point of land on the east shore of the Nipigon River",
+        "rules": [
+          "Nipigon River - Gapen\u2019s Pool (49\u00b001'N, 88\u00b015'W) that part of the Nipigon River lying east of a line drawn north from the eastern shore abutment of Highway 11/17 bridges to the western tip of a point of land on the eastern shore of the outflow from Lake Helen",
+          "Nipigon River - Parmacheene (49\u00b005'N, 88\u00b019'W) from the downstream edge of the Parmacheene CNR bridge abutments, upstream approximately 400 m to the first narrows"
+        ]
+      },
+      {
+        "waterbody": "Polly Lake (49\u00b007'52\"N, 88\u00b015'58\"W)",
+        "rules": [
+          "Dead Rainbow Smelt may be used as bait or possessed for use as bait",
+          "Brook Trout - S-1; must be greater than 56 cm, and C-0",
+          "Northern Pike - S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm",
+          "Walleye and Sauger - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Savanne River (48\u00b056'N, 90\u00b017'W)",
+        "rules": [
+          "Walleye - S-4 and C-2; must be greater than 33 cm, not more than 1 greater than 46 cm"
+        ]
+      },
+      {
+        "waterbody": "Creek to Dexter Creek.",
+        "rules": [
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "Live fish may not be used as bait or possessed for use as bait - refer to Waterbody Exceptions",
+        "rules": [
+          "Arrow River"
+        ]
+      },
+      {
+        "waterbody": "Waterbody Exceptions",
+        "rules": [
+          "Jessie Lake (49\u00b011'19\"N, 88\u00b019'52\"W)",
+          "Lake Helen (49\u00b004'20\"N, 88\u00b016'17\"W)",
+          "Nipigon River",
+          "Polly Lake (49\u00b007'52\"N, 88\u00b015'58\"W)"
+        ]
+      }
+    ]
+  },
+  "7": {
+    "zone_number": 7,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2 waters"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "closed all year",
+        "limits": "S-5 and C-2; total daily catch and 61 cm, of which not more than 1 greater than 30 cm, of which not more than 1 greater 40 cm, and C-2; not more than 1 greater 30 cm, of which none greater than 40"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6; not more than 2 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to Labour Day",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5; not more than 2 greater than Limits: S-1 and C-0"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year 54 than than",
+        "limits": "S-25 and C-12 cm"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 --- PAGE 57 ---"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Odlum and Hambleton Townships",
+        "rules": [
+          "Only artificial lures may be used",
+          "Lake Trout - open from February 15 to March 15 and third Saturday in May to September 30"
+        ]
+      },
+      {
+        "waterbody": "Dog-McMurtry Narrows (Bruyere Township)",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Dog Lake",
+        "rules": [
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "March 15 to June 15 in the following areas:",
+        "rules": [
+          "Dog Lake and Dog River - West Township, from 200 m out from river mouth to the northern township boundary up river",
+          "Dog Lake and McKee Creek (Bay 57) - Stover"
+        ]
+      },
+      {
+        "waterbody": "Township, from 200 m out from creek mouth to 300 m up creek",
+        "rules": [
+          "Dog Lake at Height of Land Bay - Stover"
+        ]
+      },
+      {
+        "waterbody": "Township, from 1.3 km out into Dog Lake to Crooked Lake Portage",
+        "rules": [
+          "Dog Lake at Lochalsh Bay and Lochalsh"
+        ]
+      },
+      {
+        "waterbody": "Doucett, Mosambik Townships and the southeast half of Nameigos Township, excluding Anahareo Lake (48\u00b037'14\"N, 84\u00b041'08\"W)",
+        "rules": [
+          "Only artificial lures and one barbless hook may be used northern boundary of Ermine Township",
+          "Kabinakagami River at Stoney Creek - Lizar"
+        ]
+      },
+      {
+        "waterbody": "Kabinakagami Lake",
+        "rules": [
+          "Kabinakagami River - Lizar and Mosambik"
+        ]
+      },
+      {
+        "waterbody": "Magpie River Downstream of Steephill Falls and its tributaries lying west of the Algoma Central Railway and east of Highway 17 and including Catfish Creek downstream of Catfish Lake",
+        "rules": [
+          "Brook Trout - S-2 and C-1; any size"
+        ]
+      },
+      {
+        "waterbody": "Magpie River - From Mission Falls to Michipicoten River",
+        "rules": [
+          "Walleye and Sauger - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Michipicoten River - from Scott Falls to Lake Superior",
+        "rules": [
+          "Walleye and Sauger - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Michipicoten River in Rabazo Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 15 to June 15"
+        ]
+      },
+      {
+        "waterbody": "Nagagami Lake - Foch Bay",
+        "rules": [
+          "Walleye - open from January 1 to March 14 and third Saturday in May to December 31"
+        ]
+      },
+      {
+        "waterbody": "Nagagami Lake",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 15 to"
+        ]
+      },
+      {
+        "waterbody": "June 15 in the following areas:",
+        "rules": [
+          "Nagagami Lake - Foch, Flanders and"
+        ]
+      },
+      {
+        "waterbody": "Frances Townships, mouth of Foch River",
+        "rules": [
+          "Nagagami Lake - Nagagami Township, at"
+        ]
+      },
+      {
+        "waterbody": "Oba Lake and Oba River",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 15 to June 15 in the following areas:",
+          "Oba Lake and Oba River (White Berry"
+        ]
+      },
+      {
+        "waterbody": "Creek) - from 200 m out from river mouth to intersection of Oba River with Road 6",
+        "rules": [
+          "Oba Lake and Tatnall River - Carney and"
+        ]
+      },
+      {
+        "waterbody": "Martin Townships, from 200 m out from river mouth to 3.5 km up river",
+        "rules": [
+          "Oba River - Ermine Township, downstream from the north boundary of the township to Kabinakagami Lake"
+        ]
+      },
+      {
+        "waterbody": "Oba Lake at Hoodoo Bay and Hoodoo Creek -Carney and Simpson Townships, from Algoma Central Railway trestle crossing the Bay to first falls on the Creek.",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Onaman Lake (50\u00b000'18\"N, 87\u00b026'49\"W)",
+        "rules": [
+          "Closed to all species from March 1 to May 31"
+        ]
+      },
+      {
+        "waterbody": "Rock Lake (48\u00b030'09\"N, 84\u00b033'23\"W) - Tilston Township",
+        "rules": [
+          "Only artificial lures may be used",
+          "Brook Trout - S-2 and C-1; any size"
+        ]
+      },
+      {
+        "waterbody": "Three Finger Lake (48\u00b043'32\"N, 86\u00b019'06\"W) - Pic Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Only barbless hooks may be used",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "June 30 and September 1 to December 31",
+        "rules": [
+          "Walleye - S-0 and C-0"
+        ]
+      },
+      {
+        "waterbody": "Creek to the unnamed lake due north of Dibben Lake",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 15 to June 15"
+        ]
+      },
+      {
+        "waterbody": "Challener Township",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Live fish may not be used as bait or possessed for use as bait",
+        "rules": [
+          "Borealis Lake (49\u00b000'45\"N, 86\u00b044'08\"W)",
+          "Clearwater Lake (48\u00b040'37\"N, 85\u00b040'49\"W) -"
+        ]
+      },
+      {
+        "waterbody": "Laberge Township",
+        "rules": [
+          "Greenwater Lake (49\u00b038'29\"N, 85\u00b056'35\"W)",
+          "Pukaskwa National Park and the surrounding waters south of a line running west from the south boundary of Knowles Township and east of the Thunder Bay-Algoma District Boundary, and including the waters of Pokei Creek,"
+        ]
+      },
+      {
+        "waterbody": "Algoma District",
+        "rules": [
+          "Three Finger Lake - refer to Waterbody Exceptions"
+        ]
+      }
+    ]
+  },
+  "8": {
+    "zone_number": 8,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6; not more than 2 greater th"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to September 15",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "January 1 to April 30 and July 1 to December 31",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "February 15 to March 15 and third Saturday in May to September 30",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-25 and C-12"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year 65 --- PAGE 68 ---",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Blanche River - Marquis Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to June 15"
+        ]
+      },
+      {
+        "waterbody": "Moose, Wright, Pontleroy and St. Jean Baptiste creeks, and the Englehart, Larder and Misema rivers, and the Wabi River and tributaries",
+        "rules": [
+          "Lake Sturgeon - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Glackmeyer Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Saturday before second Sunday in February and September 16 to December 31",
+        "rules": [
+          "Lake Trout - open from second Sunday in"
+        ]
+      },
+      {
+        "waterbody": "Edgar Lake (50\u00b022'N, 80\u00b023'W)",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before third Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "November 1 to December 31",
+        "rules": [
+          "Northern Pike - S-2; not more than 1 greater than 71 cm, and C-1; must be less than 71 cm"
+        ]
+      },
+      {
+        "waterbody": "Tucker Townships",
+        "rules": [
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "Nat River",
+        "rules": [
+          "Lake Sturgeon - open from January 1 to April 14 and July 1 to December 31"
+        ]
+      },
+      {
+        "waterbody": "Groundhog River - Keith Township, between the base of the Horwood Dam downstream to where it enters Groundhog Lake",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to June 15"
+        ]
+      },
+      {
+        "waterbody": "Labyrinth Lake (48\u00b013'46\"N, 79\u00b031'18\"W) - including that part of Waterhen Creek downstream from the Access Road Bridge",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Northern Pike - open from January 1 to April 15 and third Friday in May to December 31",
+          "Smallmouth Bass - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "June to December 31",
+        "rules": [
+          "Walleye - open from January 1 to March 31 and third Friday in May to December 31"
+        ]
+      },
+      {
+        "waterbody": "Townships, from boundary between the two townships to a line at longitude 80\u00b036'30\"W",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to June 15"
+        ]
+      },
+      {
+        "waterbody": "Little Abitibi River",
+        "rules": [
+          "Fish Sanctuary - no fishing from"
+        ]
+      },
+      {
+        "waterbody": "April 15 to June 30 in the following areas:",
+        "rules": [
+          "Little Abitibi River - McQuibban Township, from Pierre Lake Road to part of Pierre Lake lying east of longitude 80\u00b039'30\"W",
+          "Little Abitibi River and Montreuil Lake -"
+        ]
+      },
+      {
+        "waterbody": "Live fish may not be used as bait or possessed for use as bait",
+        "rules": [
+          "Big Club Lake (48\u00b027'45\"N, 80\u00b048'39\"W) -"
+        ]
+      },
+      {
+        "waterbody": "Bond and Macklem Townships",
+        "rules": [
+          "Esker Lake Provincial Park - all lakes in or partially in the park",
+          "Labyrinth Lake - refer to Waterbody Exceptions",
+          "Lake 57 (48\u00b017'46\"N, 80\u00b040'29\"W) -"
+        ]
+      },
+      {
+        "waterbody": "Timmins Township",
+        "rules": [
+          "Nayowin Lake (47\u00b047'27\"N, 81\u00b022'39\"W) -"
+        ]
+      },
+      {
+        "waterbody": "Burrows Township",
+        "rules": [
+          "Pack Can Lake (48\u00b027'54\"N, 79\u00b059'29\"W) -"
+        ]
+      },
+      {
+        "waterbody": "Garrison Township",
+        "rules": [
+          "Pallet Lake (48\u00b016'31\"N, 80\u00b039'05\"W) -"
+        ]
+      }
+    ]
+  },
+  "9": {
+    "zone_number": 9,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "*NEW* As of Jan 1, 2026, the zone-wide minimum size limit for Muskellunge is 137 cm.",
+      "*NEW* Waterbody Exception for Walleye and Sauger combined, and Northern Pike in",
+      "FMZ 9 is part of the Great Lakes. Baitfish and leeches that are both dead and preserved can be",
+      "Baitfish and leeches that are not both dead and preserved may be transported out of:",
+      "an adjacent Bait Management Zone and used in the Great Lakes",
+      "the Great Lakes only to be disposed of immediately more than 30 m from the water."
+    ],
+    "species_regulations": [
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year in the Zone except for the specific waters",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "open all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; *NEW* must be greater than 137 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-4 and C-2; none between 70-90 cm, not more than 1 greater than 90 cm"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "fourth Saturday in April to Labour Day",
+        "limits": "S-1; must be greater than 56 cm, and C-0"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 76",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Splake",
+        "season": "January 1 to September 30",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to April 14 and third Saturday in May to December 31",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-25 and C-12 --- PAGE 79 ---"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Two lines may be used when trolling from a boat in open water",
+        "rules": [
+          "NEW* Lake Superior - Black Bay to the southern tip of the Black Bay Peninsula (48\u00b024'35\"N 88\u00b033'37\"W) to Magnet Island, to Porphyry Island, to an unnamed point (48\u00b020'28\"N 88\u00b046'09\"W) on the southeast side of Sibley Peninsula",
+          "Northern Pike - open all year",
+          "Northern Pike - S-2, not more than 1 greater than 70 cm, none greater than 90 cm, and C-1; none greater than 90 cm",
+          "Walleye and Sauger - open July 1 to"
+        ]
+      },
+      {
+        "waterbody": "December 31",
+        "rules": [
+          "Walleye and Sauger - S-2 and C-1; must be between 40-50 cm"
+        ]
+      }
+    ]
+  },
+  "10": {
+    "zone_number": 10,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "All waters north of Highway 17 and all waters west of where the east bank of the Serpent River crosses",
+      "Waterbodies within the following areas have different regulations that are listed in the Waterbody",
+      "The following waterbodies, or portions of them, have different regulations that are listed in the Waterbody",
+      "FMZ 10, with the exception of Cockburn Island, Michipicoten Island, St. Joseph Island, and Manitoulin"
+    ],
+    "species_regulations": [
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to Labour Day in the Zone except for the specific waters and than 40 cm, and C-1 species listed in the Species Exceptions, 79 --- PAGE 82 ---",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and Season: third Saturday in June to November 30"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "January 1 to September 30",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 122 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6; not more than 1 greater than 61 cm, none greater than 86 cm, and C-2; none greater than 61 cm"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to the third Sunday in March and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; none greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 \u2022 Jarvis Lake 9 (46\u00b040'28\"N, 84\u00b009'39\"W) \u2022 Jen Lake (47\u00b017'38\"N, 81\u00b024'07\"W) \u2022 Jones Lake (46\u00b054'24\"N, 83\u00b029'03\"W) \u2022 Kaufman Lake (46\u00b040'14\"N, 84\u00b010'37\"W) \u2022 Lake 6 (Clem\u2019s Lake) (47\u00b014'28\"N, 81\u00b024'27\"W) - Beulah Township \u2022 Lake 6 (47\u00b025'25\"N, 81\u00b024'58\"W) - \u2022 Lake 7 (47\u00b022'43\"N, 81\u00b026'41\"W) \u2022 Lake 8 (47\u00b043'49\"N, 83\u00b023'10\"W) \u2022 Lake 16 (Heerschap Lake) (47\u00b017'42\"N, 81\u00b025'03\"W) \u2022 Lake 27 (Hydro Lake)"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Fish Sanctuary restrictions)",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait"
+        ]
+      }
+    ]
+  },
+  "11": {
+    "zone_number": 11,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Some Brook Trout Additional Fishing Opportunities in Zone 11 also have Bait Restrictions.",
+      "The following waterbodies, or portions of them, have different regulations that are listed in"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "February 15 to September 30",
+        "limits": "S-5; not more than 1 greater than 61 cm, of which not more than 1 is greater"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6 waters"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "January 1 to third Sunday in March and third Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 122 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to third Sunday in March and third Saturday in May to December 31",
+        "limits": "S-6; not more than 2 greater than 31 cm, and C-2; none greater than 31 cm than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "fourth Saturday in April to September 30 Pacific Salmon",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "February 15 to third Sunday in and third Saturday in May to Labour Day 90",
+        "limits": "S-2; not more than 1 greater than 40 cm, and C-1"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25 --- PAGE 93 ---"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to third Sunday in March and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; none between 43-60 cm, not more than 1 greater than 60 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 \u2022 Malloch Lake (47\u00b004'43\"N, 80\u00b003'04\"W) \u2022 Mirror Lake (46\u00b025'24\"N, 79\u00b007'05\"W) \u2022 Montreuil Lake (46\u00b025'54\"N, 78\u00b054'28\"W) \u2022 Mowat Lake (47\u00b028'51\"N, 79\u00b057'37\"W) \u2022 Mug Lake (46\u00b044'33\"N, 79\u00b022'30\"W) \u2022 Norway Lake (46\u00b045'08\"N, 79\u00b015'08\"W) \u2022 Pine Lake (46\u00b044'47\"N, 79\u00b016'39\"W) \u2022 Pole Lake (46\u00b043'45\"N, 79\u00b021'50\"W) \u2022 Price Lake (46\u00b058'03\"N, 80\u00b007'32\"W) \u2022 Quarry Lake (46\u00b043'43\"N, 79\u00b021'12\"W)"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "McAuslan Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Bay, the North Channel of the French River, 18 Mile Bay, Ranger Bay and Dry Pine Bay to the Highway 607 Bridge",
+        "rules": [
+          "Largemouth and Smallmouth Bass combined -"
+        ]
+      },
+      {
+        "waterbody": "S-4 and C-2; any size",
+        "rules": [
+          "Muskellunge - S-1; must be greater than 137 cm, and C-0",
+          "Northern Pike - S-4; not more than 1 greater than 61 cm, none greater than 86 cm, C-2; none greater than 61 cm"
+        ]
+      },
+      {
+        "waterbody": "Parkman Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait"
+        ]
+      },
+      {
+        "waterbody": "Cross Lake",
+        "rules": [
+          "Closed to all species - from March 16 to Friday before third Saturday in May and December 1 to December 31.",
+          "Muskellunge - open from third Saturday in"
+        ]
+      },
+      {
+        "waterbody": "June to November 30",
+        "rules": [
+          "Muskellunge - S-1 and C-0; must be greater than 137 cm",
+          "Northern Pike - S-4 and C-2; not more than 1 greater than 61 cm, none greater than 86 cm",
+          "Walleye and Yellow Perch - open from January 1 to March 15 and third Saturday in May to October 15",
+          "Walleye - S-2 and C-1; must be between",
+          "Brook Trout - open from May 1 to September 30 40-45 cm"
+        ]
+      },
+      {
+        "waterbody": "McAuslan Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Lake Nipissing - Iron Island vicinity, 100 m around shore",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 16 to Friday before third Saturday in May"
+        ]
+      },
+      {
+        "waterbody": "River (North Himsworth Township)",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 16 to May 31 and October 1 to November 30"
+        ]
+      },
+      {
+        "waterbody": "Lake Temagami (46\u00b059'36\"N, 80\u00b004'15\"W)",
+        "rules": [
+          "Only live or dead baitfish less than 13 cm in length may be used as bait",
+          "Lake Trout - open February 15 to third Sunday in March and third Saturday in May to"
+        ]
+      },
+      {
+        "waterbody": "September 30",
+        "rules": [
+          "Lake Trout - S-2; not more than 1 greater than 50 cm, and C-1, from February 15 to third"
+        ]
+      },
+      {
+        "waterbody": "Sunday in March and third Saturday in May to Labour Day",
+        "rules": [
+          "Lake Trout - S-0 and C-0; day after Labour Day to September 30",
+          "Lake Whitefish - S-25 and C-12",
+          "Walleye - none between 46-60 cm, not more than 1 greater than 60 cm",
+          "Fish Sanctuary - no fishing from Monday after third Sunday in March to June 15 in the following areas:",
+          "Gull Creek from the dam at the outlet of"
+        ]
+      },
+      {
+        "waterbody": "--- PAGE 95 ---",
+        "rules": [
+          "Kokoko Bay north of Island 1063",
+          "Spawning Creek from Spawning Lake, including all waters of Spawning Bay and Loon Bay"
+        ]
+      },
+      {
+        "waterbody": "McAuslan Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Parkman Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Brook Trout - open from May 1 to September 30"
+        ]
+      },
+      {
+        "waterbody": "City of North Bay and East Ferris Township",
+        "rules": [
+          "Lake Trout and Atlantic Salmon - open from third Saturday in June to Friday before fourth"
+        ]
+      },
+      {
+        "waterbody": "Saturday in June",
+        "rules": [
+          "Lake Trout and Atlantic Salmon - S-1 and C-1; must be less than 55 cm",
+          "Fish Sanctuary - no fishing from May 15 to July 31 in the following areas:",
+          "Trout Lake - East Ferris Township, lying between the water\u2019s edge and a line drawn 30 m in perpendicular distance from Poplar"
+        ]
+      },
+      {
+        "waterbody": "Island along the west side of the island from the northwest tip of the island to the southwest tip of the island",
+        "rules": [
+          "Trout Lake - Widdifield Township, lying within a line drawn from the most westerly tip of Kirkwood Island, commonly known as"
+        ]
+      },
+      {
+        "waterbody": "Live fish may not be used as bait or possessed for use as bait",
+        "rules": [
+          "Big Webb Lake (46\u00b049'07\"N, 79\u00b016'15\"W)",
+          "Camp Lake (46\u00b045'20\"N, 79\u00b017'16\"W)",
+          "Cut Lake - refer to Waterbody Exceptions",
+          "Emerald Lake (46\u00b047'39.75\"N, 79\u00b018'4.73\"W)"
+        ]
+      },
+      {
+        "waterbody": "Zone 11",
+        "rules": [
+          "Green Lake - refer to Waterbody Exceptions",
+          "Jimmie Lake (46\u00b044'43\"N, 79\u00b021'04\"W)",
+          "Klock Lake (47\u00b028'05\"N, 80\u00b007'55\"W)",
+          "Liberty Lake (47\u00b010'56\"N, 80\u00b003'37\"W)",
+          "Little Clear Lake (46\u00b008'07\"N, 79\u00b001'44\"W)",
+          "Little Webb Lake (46\u00b049'49\"N, 79\u00b016'26\"W)",
+          "McConnell Lake - refer to Waterbody Exceptions",
+          "Modder Lake (46\u00b045'30\"N, 79\u00b022'52\"W)",
+          "Mug Lake (46\u00b044'33\"N, 79\u00b022'30\"W)",
+          "Norway Lake (46\u00b045'08\"N, 79\u00b015'08\"W)",
+          "Orient Lake (46\u00b045'29\"N, 79\u00b018'30\"W)",
+          "Otter Lake (46\u00b049'01\"N, 79\u00b018'07\"W)",
+          "Pascal Lake (46\u00b009'27\"N, 79\u00b002'12\"W)",
+          "Pine Lake (46\u00b044'47\"N, 79\u00b016'39\"W)",
+          "Planet Lake (47\u00b028'16\"N, 80\u00b008'55\"W)",
+          "Pole Lake (46\u00b043'45\"N, 79\u00b021'50\"W)",
+          "Quarry Lake (46\u00b043'43\"N, 79\u00b021'12\"W)",
+          "Rainbow Lake (47\u00b025'27\"N, 80\u00b010'54\"W)",
+          "Round Lake (46\u00b046'34\"N, 79\u00b018'56\"W)",
+          "Shanty Lake - refer to Waterbody Exceptions",
+          "Slade Lake (47\u00b024'07\"N, 80\u00b010'09\"W)",
+          "Spring Lake (46\u00b045'36\"N, 79\u00b016'37\"W)",
+          "Surecatch Lake - refer to Waterbody Exceptions",
+          "Troutbait Lake (46\u00b048'04\"N, 79\u00b017'14\"W)",
+          "Turtle Lake (46\u00b009'15\"N, 79\u00b001'52\"W)",
+          "Wolf Lake (46\u00b046'49\"N, 79\u00b052'39\"W)"
+        ]
+      },
+      {
+        "waterbody": "Only live or dead baitfish less than 13 cm in length may be used as bait",
+        "rules": [
+          "Lake Temagami (46\u00b059'36\"N, 80\u00b004'15\"W) - refer to Waterbody Exceptions"
+        ]
+      }
+    ]
+  },
+  "12": {
+    "zone_number": 12,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Refer to the Boundary Waters section for information on licences and limits in boundary waters",
+      "American Eel is a specially protected species and may not be caught or possessed under a Recreational",
+      "The following species are not present in this Zone and are closed to fishing all year: Pacific Salmon.",
+      "FMZ 12 is the Ottawa River. Baitfish and leeches that are both dead and preserved can be transported",
+      "Baitfish and leeches that are not both dead and preserved may be transported out of:",
+      "an adjacent Bait Management Zone and used in the Great Lakes",
+      "the Great Lakes only to be disposed of immediately more than 30 m from the water."
+    ],
+    "species_regulations": [
+      {
+        "species": "Lake Trout and Splake",
+        "season": "Friday before fourth Saturday in April to September 30 waters",
+        "limits": "S-2 and C-1; must be greater than 45 cm"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "Friday before fourth Saturday in April to September 30",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "Friday before fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout and Rainbow Trout",
+        "season": "Friday before fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Fishing Regulations Summary 2026",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "Friday before fourth Saturday in June to November 30",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "Friday before third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 137 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to March 31 and Friday before third Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "No limit"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 31 and Friday before third Saturday in May to December 31 from March 1 to June 15 97 --- PAGE 100 ---",
+        "limits": "S-5 and C-2; must be less than 40 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": []
+  },
+  "13": {
+    "zone_number": 13,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Two lines may be used when trolling from a boat in open water in Lake Huron (Main Basin).",
+      "The following species are not present in this Zone and are closed to fishing all year: Brook Trout and Splake.",
+      "FMZ 13 is part of the Great Lakes. Baitfish and leeches that are both dead and preserved can be",
+      "Baitfish and leeches that are not both dead and preserved may be transported out of:",
+      "an adjacent Bait Management Zone and used in the Great Lakes",
+      "the Great Lakes only to be disposed of immediately more than 30 m from the water."
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "fourth Saturday in June to November 30 (905) 447-7879",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-4 and C-2"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 and December 1 to December 31",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 women supporting women in the outdoors community! ontariowomenanglers.c"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15 100 --- PAGE 103 ---",
+        "limits": "S-1; must be greater than 102 cm, and C-0"
+      }
+    ],
+    "waterbody_exceptions": []
+  },
+  "14": {
+    "zone_number": 14,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "The following species are not present in this Zone and are closed to fishing all year: Brook Trout and Splake.",
+      "The following areas of Georgian Bay have different regulations that are listed in the"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and limit for all trout and salmon species"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Herring (Cisco)",
+        "season": "open all year",
+        "limits": "S-25 and C-12"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 and December 1 to December 31",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "fourth Saturday in June to November 30 waters",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-1; must be greater than 137 cm, and C-0 possessio"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to March 1 and May 1 combined to December 31",
+        "limits": "S-2; in one day, possession limit of 4, not more than 1 greater than 86 cm, and C-1; in one day, possession limit of 2, not more than 1 greater than 86 cm"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 1 and May 1 to December 31",
+        "limits": "S-2; in one day, possession limit of 4, none between 41-56 cm, not more than 1 greater than 56 cm, and C-1; in one day, not more than 1 greater than 56 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year 101 --- PAGE 104 ---",
+        "limits": "S-25; in one day, possession limit of 50, and C-12; in one day, possession limit of 25"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Provincial Park. Southern boundary is the swing bridge connecting Rose Point to Parry Island, including Parry Sound Harbour, Hay Bay, Deep Bay and Depot Harbour.",
+        "rules": [
+          "Only one line may be used when angling through the ice",
+          "Lake Trout - open from January 1 to September 30",
+          "Lake Trout - S-0 and C-0; from January 1 to February 7 and April 1 to June 23 and"
+        ]
+      },
+      {
+        "waterbody": "September 1 to September 30",
+        "rules": [
+          "Lake Trout - S-1 and C-1; must be less than 61 cm from February 8 to March 31 and"
+        ]
+      },
+      {
+        "waterbody": "Jones Islands to the lighthouse on Gordon Rocks to the most northerly point of Snake Island to the lighthouse on Snug Island due east to the mainland.",
+        "rules": [
+          "Lake Trout - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "September 30",
+        "rules": [
+          "Lake Trout - S-0 and C-0; from January 1 to February 7 and April 1 to June 23 and"
+        ]
+      },
+      {
+        "waterbody": "--- PAGE 105 ---",
+        "rules": [
+          "Lake Trout - S-1 and C-1; must be less than 61 cm from February 8 to March 31 and"
+        ]
+      },
+      {
+        "waterbody": "Island to Liddon Point on Parry Island.",
+        "rules": [
+          "Lake Trout - closed all year",
+          "For additional clarity on regulations in Big Sound of Parry Sound please refer to the map located at ontario.ca/FMZ14"
+        ]
+      },
+      {
+        "waterbody": "Iroquois Bay of the North Channel of Lake Huron",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "April 30",
+        "rules": [
+          "Lake Trout - S-1 and C-0; must be less than 51 cm and possessing a fin clip with a healed scar"
+        ]
+      },
+      {
+        "waterbody": "Works downstream to longitude 83\u00b045'W, which extends from Eagle Point (Hay Bay) south to the international boundary with the United States",
+        "rules": [
+          "Two lines may be used when trolling from a boat in open water",
+          "Northern Pike - any size",
+          "Walleye - open from January 1 to last day in"
+        ]
+      },
+      {
+        "waterbody": "February and May 15 to December 31",
+        "rules": [
+          "Walleye - S-4 and C-2; any size"
+        ]
+      },
+      {
+        "waterbody": "Township boundary",
+        "rules": [
+          "Walleye - S-0 and C-0 from April 1 to June 15,"
+        ]
+      },
+      {
+        "waterbody": "No fishing - January 1 to April 30",
+        "rules": [
+          "Iroquois Bay - refer to Waterbody Exceptions"
+        ]
+      },
+      {
+        "waterbody": "Saturday in May",
+        "rules": [
+          "Blackstone River and Harbour - Archipelago"
+        ]
+      },
+      {
+        "waterbody": "Township, Lot 37, Concession 5",
+        "rules": [
+          "Moon River - Freeman Township, Lots 33, 34, 35, 36 in Concession 8, 9 and 10",
+          "North River - Matchedash Township, from"
+        ]
+      },
+      {
+        "waterbody": "Laughlin Falls downstream to Coldwater River",
+        "rules": [
+          "Seguin River - Town of Parry Sound",
+          "Shawanaga River - Shawanaga Township, west of C.P.R. right-of-way",
+          "Sucker Creek - Harrison Township, from Highway 69 downstream to a point 250 m west of the C.P.R.",
+          "Tug Channel and unnamed channel - Tay and"
+        ]
+      }
+    ]
+  },
+  "15": {
+    "zone_number": 15,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "There are a number of Brook Trout and Lake Trout waterbodies that have species-specific regulations"
+    ],
+    "species_regulations": [
+      {
+        "species": "Muskellunge",
+        "season": "1st Saturday in June to December 15",
+        "limits": "S-5 and C-2; total daily catch and Limits: S-1; must be greater than 91 cm, and C-0"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to March 31 and third Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 15 and third Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year 105 --- PAGE 108 ---",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Algonquin Park",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Dip nets and baitfish traps may not be used to harvest baitfish",
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Lake Opeongo",
+        "rules": [
+          "Lake Whitefish - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Richards Townships)",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 1 to Friday before third Saturday in May"
+        ]
+      },
+      {
+        "waterbody": "Dam (Round Lake) (45\u00b037'N, 77\u00b028'W) and upstream of the Golden Lake Dam (45\u00b034'N, 77\u00b014'W)",
+        "rules": [
+          "Walleye - S-2 and C-1; must be greater than 50 cm"
+        ]
+      },
+      {
+        "waterbody": "Bagot Township",
+        "rules": [
+          "Walleye - S-2 and C-1; must be greater than 50 cm"
+        ]
+      },
+      {
+        "waterbody": "Calabogie Lake - Bagot and Blithfield Townships, west of line from Nettleton\u2019s Bay to Barnet\u2019s Point and inflowing streams",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 1 to"
+        ]
+      },
+      {
+        "waterbody": "Paxton Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April"
+        ]
+      },
+      {
+        "waterbody": "Jack Lake - Burleigh and Methuen Townships, those waters lying north of the most northerly narrows of Rathbun Bay in Lot 27, Concession 8 (Methuen Township)",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 1 to"
+        ]
+      },
+      {
+        "waterbody": "Jack Lake - Burleigh and Methuen Townships, those waters lying within Lots 22 to 25 in Concession 8, and within Lots 21 to 26 in Concessions 9 and 10 (Methuen Township)",
+        "rules": [
+          "Fish Sanctuary - no fishing from April 1 to"
+        ]
+      },
+      {
+        "waterbody": "Stanhope Township",
+        "rules": [
+          "Only one line may be used when angling through ice",
+          "Lake Trout - S-2 and C-1; none between 40-55 cm"
+        ]
+      },
+      {
+        "waterbody": "Kushog Lake (Ox Narrows) - Stanhope Township, 100 m on either side of the bridge on Highway 35",
+        "rules": [
+          "Fish Sanctuary - no fishing from September 15 to November 30"
+        ]
+      },
+      {
+        "waterbody": "Sebastopol Township",
+        "rules": [
+          "Walleye - S-2 and C-1; must be greater than 50 cm",
+          "Lake Trout - open from third Saturday in May to September 30",
+          "Lake Trout - S-2 and C-1; none between 40-55 cm"
+        ]
+      },
+      {
+        "waterbody": "May in the following areas:",
+        "rules": [
+          "Madawaska River - Bagot Township, Lots 17 and 18, Concessions 9 and 10",
+          "Madawaska River - from Mountain Chute"
+        ]
+      },
+      {
+        "waterbody": "Concession 9 (North Canonto Township)",
+        "rules": [
+          "Madawaska River -from the bridge on Highway 62 at Combermere south to the bridge crossing at Madawaska River at Lot 24, Concession 18 (Raglan Township) on Highway 515",
+          "Madawaska River - Griffith and"
+        ]
+      },
+      {
+        "waterbody": "Matawatchan Townships",
+        "rules": [
+          "Madawaska River - McNabb Township, downstream from the Stewartville Hydro"
+        ]
+      },
+      {
+        "waterbody": "Dam, including Lots 9 to 13 in Concession 6",
+        "rules": [
+          "Madawaska River (Calabogie Lake) -"
+        ]
+      },
+      {
+        "waterbody": "Whitney to the Hamlet of Madawaska",
+        "rules": [
+          "Walleye - open from third Saturday in May to November 30"
+        ]
+      },
+      {
+        "waterbody": "Centennial Lake (45\u00b009'N, 77\u00b004'W)",
+        "rules": [
+          "Walleye - S-2 and C-1; must be greater than 50 cm"
+        ]
+      },
+      {
+        "waterbody": "Mud Lake (45\u00b048'39\"N, 79\u00b008'36\"W) - Paxton Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Murphy\u2019s Lake (Arabis Lake) - Burns Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before third Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "December 1 to December 31",
+        "rules": [
+          "Brook Trout - S-5 and C-2; must be greater than 28 cm"
+        ]
+      },
+      {
+        "waterbody": "Royal Lake (45\u00b049'18\"N, 79\u00b007'58\"W) - Paxton Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April"
+        ]
+      },
+      {
+        "waterbody": "Havelock Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to Friday before third Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "December 1 to December 31",
+        "rules": [
+          "Brook Trout - S-5 and C-2; must be greater than 28 cm"
+        ]
+      },
+      {
+        "waterbody": "Havelock Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Lake Trout - open from third Saturday in"
+        ]
+      },
+      {
+        "waterbody": "Havelock Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait"
+        ]
+      },
+      {
+        "waterbody": "Zone 15",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before third Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "December 1 to December 31",
+        "rules": [
+          "Brook Trout - S-5 and C-2; must be greater than 28 cm"
+        ]
+      },
+      {
+        "waterbody": "Paxton Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Paxton Township",
+        "rules": [
+          "Live fish may not be used as bait or possessed for use as bait",
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April"
+        ]
+      },
+      {
+        "waterbody": "Clara Township",
+        "rules": [
+          "Only one line may be used when angling through the ice",
+          "Brook Trout - S-5 and C-2; must be greater than 28 cm",
+          "Lake Trout - S-2 and C-1; none between 40-55 cm"
+        ]
+      },
+      {
+        "waterbody": "Live fish may not be used as bait or possessed for use as bait",
+        "rules": [
+          "Acorn Lake (45\u00b041'23\"N, 77\u00b036'45\"W)",
+          "Algonquin Park - refer to Waterbody Exceptions",
+          "Blue Paint Lake (45\u00b019'55\"N, 78\u00b042'00\"W)",
+          "Bright Lake (45\u00b023'27\"N, 78\u00b050'46\"W)",
+          "Buchanan Lake (45\u00b019'45\"N, 78\u00b049'31\"W)",
+          "Buck (Mountain) Lake (45\u00b022'35\"N, 77\u00b020'56\"W)",
+          "Burnt Lake (45\u00b041'43\"N, 79\u00b004'06\"W)",
+          "Capsell Lake (45\u00b051'20\"N, 79\u00b011'24\"W)",
+          "Carmichael Lake (45\u00b047'52\"N, 79\u00b007'40\"W) - refer to Waterbody Exceptions",
+          "Cod Lake (45\u00b019'16\"N, 78\u00b054'28\"W)",
+          "Crosstee Lake (Pine Lake) (45\u00b035'07\"N, 78\u00b007'46\"W)",
+          "Crystalline Lake (45\u00b026'24\"N, 78\u00b044'46\"W)",
+          "Doughnut Lake (45\u00b027'51\"N, 78\u00b054'31\"W)",
+          "East Jeannie Lakes (45\u00b020'02\"N, 78\u00b043'40\"W)",
+          "Eastell Lake (45\u00b023'51\"N, 79\u00b001'24\"W)",
+          "Eiler Lake (45\u00b022'36\"N, 78\u00b056'34\"W)",
+          "Finger Lake (45\u00b042'58\"N, 79\u00b004'45\"W)",
+          "Fisher Lake (45\u00b022'58\"N, 78\u00b047'49\"W)",
+          "Island Lake (45\u00b046'02\"N, 79\u00b007'12\"W)",
+          "Kuwasda Lake (45\u00b059'12\"N, 79\u00b008'57\"W)",
+          "Laurier Lake (45\u00b054'24\"N, 79\u00b019'54\"W)",
+          "Little Beaver Lake (45\u00b056'06\"N, 79\u00b012'50\"W)",
+          "Little Butt Lake (45\u00b038'29\"N, 79\u00b002'12\"W)",
+          "Little Nelson Lake (45\u00b028'48.3\"N, 78\u00b057'03.03\"W)",
+          "Little Troutspawn Lake (45\u00b022'58\"N, 78\u00b045'52\"W)",
+          "Little Whetstone Lake (45\u00b041'47\"N, 79\u00b008'29\"W)",
+          "Lonesome Lake (45\u00b034'52\"N, 78\u00b007'58\"W)",
+          "Long Lake (45\u00b049'48\"N, 79\u00b015'33\"W)",
+          "Long Lake (45\u00b051'04\"N, 79\u00b011'23\"W)",
+          "Martencamp Lake (45\u00b025'00\"N, 78\u00b055'27\"W)",
+          "McGuire Lake (45\u00b043'45\"N, 79\u00b004'39\"W)",
+          "Millichamp Lake (45\u00b019'32\"N, 78\u00b049'45\"W)",
+          "Mud Lake - refer to Waterbody Exceptions",
+          "Nabdoe Lake (45\u00b041'15\"N, 79\u00b005'01\"W)",
+          "Niger Lake (45\u00b024'09\"N, 78\u00b050'51\"W)",
+          "Nightfall Lake (45\u00b032'31\"N, 78\u00b056'44\"W)",
+          "Paisley Lake (45\u00b048'44\"N, 79\u00b014'05\"W)",
+          "Peyton Lake (45\u00b046'19\"N, 79\u00b009'08\"W)",
+          "Pine Lake (45\u00b041'24\"N, 79\u00b003'16\"W)",
+          "Red Deer Lake (45\u00b053'12\"N, 79\u00b013'11\"W)",
+          "Roger Lake (45\u00b026'05\"N, 78\u00b044'40\"W)",
+          "Royal Lake - refer to Waterbody Exceptions",
+          "Saunders Lake (45\u00b048'42\"N, 79\u00b007'09\"W)",
+          "Slipper Lake - refer to Waterbody Exceptions",
+          "South Wildcat Lake - refer to Waterbody"
+        ]
+      },
+      {
+        "waterbody": "Exceptions",
+        "rules": [
+          "Stocking Lake - refer to Waterbody Exceptions",
+          "Stoney Lake - refer to Waterbody Exceptions",
+          "Stubinski Lake (45\u00b012'57\"N, 76\u00b053'26\"W)",
+          "Sunrise Lake (45\u00b025'35\"N, 78\u00b045'12\"W)",
+          "Thumb Lake (45\u00b023'21\"N, 78\u00b052'24\"W)",
+          "Trout Lake - refer to Waterbody Exceptions",
+          "Upper Oxbow Lake (45\u00b024'35\"N, 78\u00b057'56\"W)",
+          "Whetstone Lake (45\u00b041'26\"N, 79\u00b007'40\"W)",
+          "Wilbur Lake (45\u00b019'46\"N, 78\u00b054'48\"W)",
+          "Windfall Lake (45\u00b045'20\"N, 79\u00b005'54\"W)"
+        ]
+      }
+    ]
+  },
+  "16": {
+    "zone_number": 16,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "There are several Great Lakes tributaries that have aligned regulations for Atlantic Salmon, Brown Trout,"
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Fishing Regulations Summary 2026",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "fourth Saturday in June to November 30",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "first Saturday in June to December 15",
+        "limits": "S-1; must be greater than 91 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to March 31 and second Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year 117 --- PAGE 120 ---",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 15 and second Saturday in May to December 31",
+        "limits": "S-4 and C-2; not more than 1 greater than 46 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year from Highway 2 (Plains Road) to Hamilton in the Region of Halton) \u2022 Highland Creek - City of Toronto from the downstream edge of the Highway 2 (Kingston Road) bridge to Lake Ontario",
+        "limits": "S-50 and C-25 \u2022 Grindstone Creek - City of Burlington, \u2022 Humber River - City of Toronto, between \u2022 Nottawasaga River - from the Boyne River"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "Bayfield River - on upstream side of Highway 21 bridge in Huron County",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Bayfield River tributaries - Huron County",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Quance Dam to Regional Road 21 at Lynedoch",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Quance Dam in the Town of Delhi",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Bruce and Grey Counties inland rivers and streams Grand River - between the West Garafraxa second only, excluding those waters identified for this area in Zone 16 Additional Fishing Opportunities",
+        "rules": [
+          "All species (except Largemouth and"
+        ]
+      },
+      {
+        "waterbody": "Sauger) - open from fourth Saturday in April to September 30",
+        "rules": [
+          "Largemouth and Smallmouth Bass - open"
+        ]
+      },
+      {
+        "waterbody": "Pilkington 8th Line in Pilkington Township; between 100 m downstream of Pilkington 8th Line bridge from fourth Saturday in June to September 30 and 100 m upstream of Pilkington Township and",
+        "rules": [
+          "Muskellunge - open from first Saturday in"
+        ]
+      },
+      {
+        "waterbody": "Woolwich Township boundary line; and between 100 m downstream of Pilkington Township and",
+        "rules": [
+          "Northern Pike - open from second Saturday in Woolwich Township boundary line and 100 m"
+        ]
+      },
+      {
+        "waterbody": "May to September 30",
+        "rules": [
+          "Walleye and Sauger - open from second"
+        ]
+      },
+      {
+        "waterbody": "Old Baseline Road",
+        "rules": [
+          "Only artificial lures may be used",
+          "Only one single-pointed barbless hook may be used upstream of Highway 86 bridge",
+          "Only artificial lures may be used",
+          "Only one barbless hook may be used",
+          "Brook Trout, Brown Trout and Rainbow"
+        ]
+      },
+      {
+        "waterbody": "Grand River - between the former Town of Paris (City of Brant) and Brantford from a line across the Grand River in Paris at 100 m downstream of the Highway 2 (Dundas Street West) bridge",
+        "rules": [
+          "Brook Trout, Brown Trout and Rainbow Trout - downstream to the pedestrian and service bridge"
+        ]
+      },
+      {
+        "waterbody": "Fletchers Creek (43\u00b037'N, 79\u00b043'W)",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April"
+        ]
+      },
+      {
+        "waterbody": "Britannia Road bridge in the Village of Streetsville",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Caledon, Regional Municipality of Peel, upstream to Highway 9",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "October 1 to December 31 that crosses the Grand River on an angle upstream (west) of the Brant Conservation Area in the City of Brantford",
+        "rules": [
+          "Only artificial lures may be used",
+          "Only one barbless hook may be used",
+          "Fish Sanctuary - no fishing from March 1 to"
+        ]
+      },
+      {
+        "waterbody": "Friday before fourth Saturday in April",
+        "rules": [
+          "Brown Trout, Northern Pike, Rainbow Trout,"
+        ]
+      },
+      {
+        "waterbody": "Grand River - from the pedestrian and service bridge that crosses the Grand River on an angle upstream (west) of the Brant Conservation Area in the City of Brantford to the edge of Lake Erie",
+        "rules": [
+          "Brown Trout and Rainbow Trout (combined) -"
+        ]
+      },
+      {
+        "waterbody": "Paris (City of Brant)",
+        "rules": [
+          "Fish Sanctuary - no fishing from October 1 to"
+        ]
+      },
+      {
+        "waterbody": "Town of Caledonia",
+        "rules": [
+          "Walleye - S-4 and C-2; any size"
+        ]
+      },
+      {
+        "waterbody": "Lake Erie",
+        "rules": [
+          "Walleye and Northern Pike - open from"
+        ]
+      },
+      {
+        "waterbody": "Eglinton Avenue",
+        "rules": [
+          "Brook Trout, Brown Trout and Rainbow Trout combined - S-2 and C-1"
+        ]
+      },
+      {
+        "waterbody": "Dufferin and Simcoe, upstream of Highway 407",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Durham and Simcoe County and the District of Muskoka",
+        "rules": [
+          "Lake Herring (Cisco) - open from January 1 to March 15 and second Saturday in May to"
+        ]
+      },
+      {
+        "waterbody": "September 30",
+        "rules": [
+          "Lake Herring (Cisco) - S-2 and C-1",
+          "Lake Trout - open from January 1 to March 15 and second Saturday in May to September 30",
+          "Lake Whitefish - open from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "September 30",
+        "rules": [
+          "Lake Whitefish - S-2 and C-1",
+          "Muskellunge - closed all year",
+          "Yellow Perch - S-50; in one day, possession limit of 100, and C-25; in one day, possession limit of 50"
+        ]
+      },
+      {
+        "waterbody": "Falls Reserve Waterfall to the first natural waterfall",
+        "rules": [
+          "Fish Sanctuary - closed to night fishing from"
+        ]
+      },
+      {
+        "waterbody": "Maitland River - Huron County, from the downstream side of the bridge on Highway 21 to the upstream side of the bridge on County Road 4",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Maitland River tributaries -Huron County, from the downstream side of the bridge on Highway 21 to the upstream side of the bridge on County Road 4",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Port Albert Fishway to 100 m upstream",
+        "rules": [
+          "Fish Sanctuary - no fishing from fourth"
+        ]
+      },
+      {
+        "waterbody": "Road 86 and Lake Huron",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April"
+        ]
+      },
+      {
+        "waterbody": "Highway 86 downstream to Lake Huron",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Nottawasaga River - Essa Township, waters lying within Lot 1, Concession 5, from Highway 89 above Nicholson Dam downstream to near the confluence of the Boyne River",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Nottawasaga River - from the Boyne River downstream (north) to the Pine River",
+        "rules": [
+          "Rainbow Trout - S-0 and C-0"
+        ]
+      },
+      {
+        "waterbody": "Osprey Townships",
+        "rules": [
+          "Fish Sanctuary - no fishing from fourth"
+        ]
+      },
+      {
+        "waterbody": "Pretty River and tributaries - Town of Collingwood and Nottawasaga Township",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      },
+      {
+        "waterbody": "Denny\u2019s Dam to the concreteabutments downstream",
+        "rules": [
+          "Fish Sanctuary - closed to night fishing from"
+        ]
+      },
+      {
+        "waterbody": "Bruce, from the dam face of the Maple Hill Dam to a point 300 m downstream and including the hydro-electric power channel",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Mill Dam to a point 177 m downstream",
+        "rules": [
+          "Fish Sanctuary - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Artificial Spawning Channels Numbers 1 and 2",
+        "rules": [
+          "Fish Sanctuary - no fishing from fourth"
+        ]
+      },
+      {
+        "waterbody": "River in Harrison Park",
+        "rules": [
+          "Fish Sanctuary - no fishing from September 1 to September 30"
+        ]
+      },
+      {
+        "waterbody": "Reservoir and the bridge at Highway 59",
+        "rules": [
+          "Fish Sanctuary - no fishing from March 15 to"
+        ]
+      },
+      {
+        "waterbody": "Street Bridge (Municipality of Chatham)",
+        "rules": [
+          "Muskellunge - S-1; must be greater than 112 cm, and C-0"
+        ]
+      },
+      {
+        "waterbody": "Cleaver Sideroad",
+        "rules": [
+          "Only artificial lures may be used",
+          "Only one barbless hook may be used",
+          "Brown Trout or Rainbow Trout - S-1 and C-1; must be greater than 50 cm"
+        ]
+      },
+      {
+        "waterbody": "Whitemans Creek (Horner Creek) and tributaries - from the East Quarter Town Line Road downstream to the edge of the Grand River",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday before fourth Saturday in April and"
+        ]
+      }
+    ]
+  },
+  "17": {
+    "zone_number": 17,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "There are several Great Lakes tributaries that have aligned regulations for Rainbow Trout, Brown Trout,"
+    ],
+    "species_regulations": [
+      {
+        "species": "Lake Whitefish",
+        "season": "fourth Saturday in April to November 15 the Zone except for the specific waters and species listed in the Species Exceptions, Waterbody",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "1st Saturday in June to December 15 and 127 --- PAGE 130 ---",
+        "limits": "S-1; must be greater than 112 cm, and C-0 salmo"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "fourth Saturday in April to November 15",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-300; only 30 may be greater than 18 cm, and C-15"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "fourth Saturday in April to September 30",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "second Saturday in May to November 15",
+        "limits": "S-4 and C-1; must be between 35-50 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "East Cross Creek",
+        "rules": [
+          "Walleye - closed all year"
+        ]
+      },
+      {
+        "waterbody": "Lake Scugog - Scugog Township, 100m on both sides of Highway 7A (causeways)",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to"
+        ]
+      },
+      {
+        "waterbody": "Trent-Severn Dam to Ops-Fenelon Boundary",
+        "rules": [
+          "Fish Sanctuary - no fishing from January 1 to Friday after second Saturday in May and"
+        ]
+      },
+      {
+        "waterbody": "Trent River",
+        "rules": [
+          "Fish Sanctuary - No fishing from January 1 to Friday after second Saturday in May and November 16 to December 31 in the following areas:",
+          "Healey Falls - Seymour Township, all water flowing from the north-westerly side of the bridge on County Road 50 to Crowe Bay",
+          "Village of Hastings, 500 m upstream of the dam and 1 km downstream of the dam"
+        ]
+      },
+      {
+        "waterbody": "Number 9 (Myers Lock) at the head of Percy Reach",
+        "rules": [
+          "Walleye -open from January 1 to March 1 and second Saturday in May to December 31"
+        ]
+      },
+      {
+        "waterbody": "Zone 17",
+        "rules": [
+          "Fenelon River - Fenelon Falls in Fenelon"
+        ]
+      },
+      {
+        "waterbody": "Township, from Trent-Severn Dam to second power line 1 km downstream",
+        "rules": [
+          "Fishog River - from the mouth of the river at"
+        ]
+      }
+    ]
+  },
+  "18": {
+    "zone_number": 18,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "FMZ 18 is part of the Southern Bait Management Zone (BMZ). Live or dead baitfish or leeches may not"
+    ],
+    "species_regulations": [
+      {
+        "species": "Muskellunge",
+        "season": "1st Saturday in June to December 15",
+        "limits": "S-1; must be greater than 91 cm"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and greater than 18 cm, and C-15"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Brook Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "fourth Saturday in May to September 8",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "January 1 to March 31 and second Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Splake",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-300; only 30 may be"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 1 and second Saturday in May to December 31",
+        "limits": "S-4 and C-2; must be between 40-50 cm"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "third Saturday in June to December 15",
+        "limits": "S-6 and C-2"
+      }
+    ],
+    "waterbody_exceptions": []
+  },
+  "19": {
+    "zone_number": 19,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "Warmouth is listed as endangered in Ontario and may not be caught or possessed under a",
+      "The following species are not present in this Zone and are closed to fishing all year:",
+      "FMZ 19 is part of the Great Lakes. Baitfish and leeches that are both dead and preserved can",
+      "Baitfish and leeches that are not both dead and preserved may be transported out of:",
+      "an adjacent Bait Management Zone and used in the Great Lakes",
+      "the Great Lakes only to be disposed of immediately more than 30 m from the water."
+    ],
+    "species_regulations": [
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "S-1 and C-0"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Channel Catfish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 and December 1 to December 31",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Largemouth and Smallmouth Bass combined",
+        "season": "fourth Saturday in June to November 30",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "first Saturday in June to December 15",
+        "limits": "S-1; must be greater than 112 cm, and C-0"
+      },
+      {
+        "species": "Northern Pike",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-100 and C-50"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "open all year",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year 135 --- PAGE 138 ---",
+        "limits": "S-50; in one day, possession limit of 100, and C-25; in one day, possession limit of 50"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "All Waters of FMZ 19 79\u00b012'15.88\"W) and following the water\u2019s edge back to its original point of origin.",
+        "rules": [
+          "Gravelly Bay - from the breakwall on the east",
+          "Two lines may be used when angling from a side of the Welland Canal, eastward 500 m boat in open water. to a point at 42\u00b052'7.9\"N, 79\u00b014'9.87\"W, straight northward to the water\u2019s edge at"
+        ]
+      }
+    ]
+  },
+  "20": {
+    "zone_number": 20,
+    "general_info": [
+      "Refer to General Fishing Regulations for more information on how to use this summary.",
+      "American Eel is a specially protected species and may not be caught or possessed under a",
+      "The following species are not present in this Zone and are closed to fishing all year: Brook Trout and Splake.",
+      "FMZ 20, with the exception of the County of Prince Edward, is part of the Great Lakes. Baitfish and leeches",
+      "Baitfish and leeches that are not both dead and preserved may be transported out of:",
+      "an adjacent Bait Management Zone and used in the Great Lakes",
+      "the Great Lakes only to be disposed of immediately more than 30 m from the water."
+    ],
+    "species_regulations": [
+      {
+        "species": "Channel Catfish",
+        "season": "open all year in the Zone except for the specific waters",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Aggregate Limits for Trout and Salmon",
+        "season": "Not specified",
+        "limits": "S-5 and C-2; total daily catch and limit for all trout and salmon species"
+      },
+      {
+        "species": "Atlantic Salmon",
+        "season": "open all year",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Crappie",
+        "season": "open all year",
+        "limits": "S-30 and C-10 possession combine"
+      },
+      {
+        "species": "Lake Sturgeon",
+        "season": "closed all year",
+        "limits": "S-1; must be greater than 63 cm, and C-0"
+      },
+      {
+        "species": "Lake Trout",
+        "season": "January 1 to September 30 and December 1 to December 31",
+        "limits": "S-3 and C-1"
+      },
+      {
+        "species": "January 1 to May 10",
+        "season": "Not specified",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Regular Season:",
+        "season": "Not specified",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Lake Whitefish",
+        "season": "open all year",
+        "limits": "S-12 and C-6"
+      },
+      {
+        "species": "Muskellunge",
+        "season": "third Saturday in June to December 15 third Saturday in June to December 31 Northern Pike first Saturday in July to December 31",
+        "limits": "S-1; must be greater than 137 cm, and C-0"
+      },
+      {
+        "species": "January 1 to May 10",
+        "season": "Not specified",
+        "limits": "S-0 and C-0"
+      },
+      {
+        "species": "Regular Season:",
+        "season": "Not specified",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Aggregate bass limits apply (S-6 and C-2)",
+        "season": "January 1 to March 31 and first Saturday in May to December 31",
+        "limits": "S-6 and C-2"
+      },
+      {
+        "species": "Brown Trout",
+        "season": "open all year 138",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Pacific Salmon",
+        "season": "open all year",
+        "limits": "S-5 and C-2"
+      },
+      {
+        "species": "Rainbow Trout",
+        "season": "open all year",
+        "limits": "S-2 and C-1"
+      },
+      {
+        "species": "Sunfish",
+        "season": "open all year",
+        "limits": "S-100 and C-50 --- PAGE 141 ---"
+      },
+      {
+        "species": "Walleye and Sauger combined",
+        "season": "January 1 to March 1 and first in May to December 31",
+        "limits": "Not specifie"
+      },
+      {
+        "species": "Yellow Perch",
+        "season": "open all year",
+        "limits": "S-50 and C-25 \u2022 Consecon Creek - Hillier and Ameliasburgh Townships, from the dam in the Village of Consecon to Weller\u2019s Bay \u2022 Consecon Creek - Hillier Township, from Lot 86 in Concession 5 to the mouth of the creek Species Exceptions Walleye"
+      }
+    ],
+    "waterbody_exceptions": [
+      {
+        "waterbody": "All waters of FMZ 20",
+        "rules": [
+          "Two lines may be used when angling from a boat in open water, excluding:",
+          "Hamilton Harbour",
+          "Toronto Harbour",
+          "Frenchman\u2019s Bay",
+          "Murray Canal",
+          "Presqu\u2019ile Bay",
+          "Weller\u2019s Bay",
+          "East Lake",
+          "West Lake",
+          "Bay of Quinte (the waters lying west of the Glenora Ferry)",
+          "St. Lawrence River (waters lying east of a line drawn between Bishops Point and the easternmost tips of Howe and"
+        ]
+      },
+      {
+        "waterbody": "Wolfe islands)",
+        "rules": [
+          "all other tributaries to Lake Ontario"
+        ]
+      },
+      {
+        "waterbody": "Atikokan: (807) 597-6971",
+        "rules": [
+          "Licence to Transport or Possess Live Fish Dryden: (807) 223-3341",
+          "Commercial Bait Fish Licences",
+          "Lake Whitefish Dip Netting"
+        ]
+      },
+      {
+        "waterbody": "The following forms of identifcation serve as a sport fshing licence in Ontario:",
+        "rules": [
+          "Canadian Forces Identifcation Card (NDI 20)",
+          "Record of Service Card (NDI 75)",
+          "Canadian Armed Forces Veteran\u2019s Service Card (NDI 75)"
+        ]
+      },
+      {
+        "waterbody": "It\u2019s the law:",
+        "rules": [
+          "clean any plants, animals or algae from your watercraft, trailer and equipment",
+          "drain by removing drain plugs (for example, transom, bilge, motor, live-well and ballast) to allow water to drain from the watercraft"
+        ]
+      }
+    ]
+  }
+}

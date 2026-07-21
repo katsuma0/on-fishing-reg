@@ -1,0 +1,452 @@
+{
+  "raw_differences": {
+    "added": 2,
+    "removed": 2,
+    "changed": 49,
+    "total": 53
+  },
+  "high_confidence_changes": [
+    {
+      "zone": "6",
+      "species": "Brook Trout",
+      "field": "limits",
+      "from": "S-5 and C-2; not more than 1 greater than 30 cm",
+      "to": "S-50 and C-25"
+    },
+    {
+      "zone": "6",
+      "species": "Muskellunge",
+      "field": "season",
+      "from": "third Saturday in June to in May to December 31 46",
+      "to": "third Saturday in June to December 15"
+    },
+    {
+      "zone": "6",
+      "species": "Muskellunge",
+      "field": "limits",
+      "from": "S-5 and C-2; total daily catch and possession December 15",
+      "to": "S-5 and C-2; total daily catch and possession Limits: S-1; must be greater than 91 cm, and C-0 limit for all trout and salmon species"
+    },
+    {
+      "zone": "9",
+      "species": "Muskellunge",
+      "field": "limits",
+      "from": "S-1; must be greater than 91 cm, and C-0",
+      "to": "S-1; *NEW* must be greater than 137 cm, and C-0"
+    },
+    {
+      "zone": "9",
+      "species": "Pacific Salmon",
+      "field": "season",
+      "from": "open all year",
+      "to": "fourth Saturday in April to Labour Day"
+    },
+    {
+      "zone": "9",
+      "species": "Pacific Salmon",
+      "field": "limits",
+      "from": "S-5 and C-2",
+      "to": "S-1; must be greater than 56 cm, and C-0"
+    },
+    {
+      "zone": "9",
+      "species": "Brook Trout",
+      "field": "season",
+      "from": "fourth Saturday in April to Labour Day",
+      "to": "open all year"
+    },
+    {
+      "zone": "11",
+      "species": "Northern Pike",
+      "field": "limits",
+      "from": "S-6; not more than 2 greater than 61",
+      "to": "S-6; not more than 2 greater than 31 cm, and C-2; none greater than 31 cm than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+    }
+  ],
+  "ministry_new_flags": [
+    {
+      "zone": "9",
+      "type": "general_info",
+      "text": "*NEW* As of Jan 1, 2026, the zone-wide minimum size limit for Muskellunge is 137 cm."
+    },
+    {
+      "zone": "9",
+      "type": "general_info",
+      "text": "*NEW* Waterbody Exception for Walleye and Sauger combined, and Northern Pike in"
+    },
+    {
+      "zone": "9",
+      "type": "species",
+      "species": "Muskellunge",
+      "season": "third Saturday in June to December 15",
+      "limits": "S-1; *NEW* must be greater than 137 cm, and C-0"
+    }
+  ],
+  "raw_detail": {
+    "added": [
+      {
+        "zone": "6",
+        "species": "Pacific Salmon"
+      },
+      {
+        "zone": "14",
+        "species": "Lake Herring (Cisco)"
+      }
+    ],
+    "removed": [
+      {
+        "zone": "14",
+        "species": "Lake Herring (cisco)"
+      },
+      {
+        "zone": "20",
+        "species": "Yellow Perch"
+      }
+    ],
+    "changed": [
+      {
+        "zone": "1",
+        "species": "Aggregate Limits for Trout and Salmon",
+        "field": "limits",
+        "from": "S-5 and C-2; total daily catch and cm, of which not more than 1 greater than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm",
+        "to": "S-5 and C-2; total daily catch"
+      },
+      {
+        "zone": "1",
+        "species": "Northern Pike",
+        "field": "limits",
+        "from": "S-6; not more than 2 greater than 61",
+        "to": "S-6; not more than 2 greater than 61 cm, of which not more than 1 greater than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "zone": "2",
+        "species": "Lake Trout",
+        "field": "limits",
+        "from": "S-2; not more than 1 greater than cm from September 1 to September 30, size limit rest of season and C-1; any size",
+        "to": "S-2; not more than 1 greater than 56 cm from September 1 to September"
+      },
+      {
+        "zone": "2",
+        "species": "Aggregate Limits for Trout and Salmon",
+        "field": "limits",
+        "from": "S-5 and C-2; total daily catch",
+        "to": "S-5 and C-2; total daily catch and no size limit rest of season and C-1; any"
+      },
+      {
+        "zone": "3",
+        "species": "Northern Pike",
+        "field": "limits",
+        "from": "Not specified",
+        "to": "S-6; not more than 2 greater th"
+      },
+      {
+        "zone": "5",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-50 and C-25; Meggisi Lake (49°17'04\"N., 92°34'55\"W.); Pipestone Lake - Pipestone Chain (49°04'60\"N., 93°33'00\"W.); Schistose Lake (49°09'17\"N., 93°36'18\"W.); Slender Lake (49°01'60\"N., 93°41'56\"W.); Weld Lake (49°01'39\"N., 93°40'17\"W.)",
+        "to": "S-50 and C-25; Meggisi Lake (49°17'04\"N, 92°34'55\"W); Pipestone Lake - Pipestone Chain (49°04'60\"N, 93°33'00\"W); Schistose Lake (49°09'17\"N, 93°36'18\"W); Slender Lake (49°01'60\"N, 93°41'56\"W); Weld Lake (49°01'39\"N, 93°40'17\"W)"
+      },
+      {
+        "zone": "6",
+        "species": "Walleye and Sauger combined",
+        "field": "season",
+        "from": "January 1 to April 14 and third Saturday",
+        "to": "January 1 to April 14 and third Saturday in May to December 31"
+      },
+      {
+        "zone": "6",
+        "species": "Aggregate Limits for Trout and Salmon",
+        "field": "limits",
+        "from": "S-1; must be greater than 91 cm, and C-0",
+        "to": "Not specified"
+      },
+      {
+        "zone": "6",
+        "species": "Lake Sturgeon",
+        "field": "limits",
+        "from": "S-2; not more than 1 greater than 56 cm",
+        "to": "S-2; not more than 1 greater than 56 cm Yellow Perch"
+      },
+      {
+        "zone": "6",
+        "species": "Atlantic Salmon",
+        "field": "limits",
+        "from": "S-1 and C-0",
+        "to": "S-1 and C-0 combine"
+      },
+      {
+        "zone": "6",
+        "species": "Brook Trout",
+        "field": "season",
+        "from": "fourth Saturday in April to Labour Day Pacific Salmon",
+        "to": "Not specified"
+      },
+      {
+        "zone": "6",
+        "species": "Brook Trout",
+        "field": "limits",
+        "from": "S-5 and C-2; not more than 1 greater than 30 cm",
+        "to": "S-50 and C-25"
+      },
+      {
+        "zone": "6",
+        "species": "Muskellunge",
+        "field": "season",
+        "from": "third Saturday in June to in May to December 31 46",
+        "to": "third Saturday in June to December 15"
+      },
+      {
+        "zone": "6",
+        "species": "Muskellunge",
+        "field": "limits",
+        "from": "S-5 and C-2; total daily catch and possession December 15",
+        "to": "S-5 and C-2; total daily catch and possession Limits: S-1; must be greater than 91 cm, and C-0 limit for all trout and salmon species"
+      },
+      {
+        "zone": "7",
+        "species": "Rainbow Trout",
+        "field": "limits",
+        "from": "S-5; not more than 2 greater than 30 Limits: S-1 and C-0",
+        "to": "S-5; not more than 2 greater than Limits: S-1 and C-0"
+      },
+      {
+        "zone": "7",
+        "species": "Lake Whitefish",
+        "field": "limits",
+        "from": "S-25 and C-12",
+        "to": "S-25 and C-12 cm"
+      },
+      {
+        "zone": "7",
+        "species": "Splake",
+        "field": "limits",
+        "from": "Not specified",
+        "to": "S-5 and C-2"
+      },
+      {
+        "zone": "7",
+        "species": "Muskellunge",
+        "field": "limits",
+        "from": "S-5 and C-2; total daily catch and 61 cm, of which not more than 1 greater than cm, of which not more than 1 greater than 40 cm, and C-2; not more than 1 greater than 30 cm, of which none greater than 40 cm",
+        "to": "S-5 and C-2; total daily catch and 61 cm, of which not more than 1 greater than 30 cm, of which not more than 1 greater 40 cm, and C-2; not more than 1 greater 30 cm, of which none greater than 40"
+      },
+      {
+        "zone": "7",
+        "species": "Lake Sturgeon",
+        "field": "limits",
+        "from": "S-5 and C-2",
+        "to": "Not specified"
+      },
+      {
+        "zone": "9",
+        "species": "Lake Trout",
+        "field": "season",
+        "from": "January 1 to September 30",
+        "to": "January 1 to September 30 76"
+      },
+      {
+        "zone": "9",
+        "species": "Lake Whitefish",
+        "field": "season",
+        "from": "open all year 76",
+        "to": "open all year"
+      },
+      {
+        "zone": "9",
+        "species": "Lake Whitefish",
+        "field": "limits",
+        "from": "S-12 and C-6",
+        "to": "Not specified"
+      },
+      {
+        "zone": "9",
+        "species": "Muskellunge",
+        "field": "limits",
+        "from": "S-1; must be greater than 91 cm, and C-0",
+        "to": "S-1; *NEW* must be greater than 137 cm, and C-0"
+      },
+      {
+        "zone": "9",
+        "species": "Lake Sturgeon",
+        "field": "limits",
+        "from": "Not specified",
+        "to": "S-5 and C-2"
+      },
+      {
+        "zone": "9",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-25 and C-12",
+        "to": "S-25 and C-"
+      },
+      {
+        "zone": "9",
+        "species": "Pacific Salmon",
+        "field": "season",
+        "from": "open all year",
+        "to": "fourth Saturday in April to Labour Day"
+      },
+      {
+        "zone": "9",
+        "species": "Pacific Salmon",
+        "field": "limits",
+        "from": "S-5 and C-2",
+        "to": "S-1; must be greater than 56 cm, and C-0"
+      },
+      {
+        "zone": "9",
+        "species": "Brook Trout",
+        "field": "season",
+        "from": "fourth Saturday in April to Labour Day",
+        "to": "open all year"
+      },
+      {
+        "zone": "9",
+        "species": "Brook Trout",
+        "field": "limits",
+        "from": "S-1; must be greater than 56 cm, and C-0",
+        "to": "Not specified"
+      },
+      {
+        "zone": "9",
+        "species": "Largemouth and Smallmouth Bass combined",
+        "field": "limits",
+        "from": "Not specified",
+        "to": "S-6 and C-2"
+      },
+      {
+        "zone": "10",
+        "species": "Yellow Perch",
+        "field": "season",
+        "from": "open all year 81°24'27\"W.) - Beulah Township; Lake 6 (47°25'25\"N., 81°24'58\"W.) -; Lake 7 (47°22'43\"N., 81°26'41\"W.); Lake 8 (47°43'49\"N., 83°23'10\"W.); Lake 16 (Heerschap Lake) (47°17'42\"N., 81°25'03\"W.)",
+        "to": "open all year"
+      },
+      {
+        "zone": "10",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-50 and C-25; Kaufman Lake (46°40'14\"N., 84°10'37\"W.); Lake 6 (Clem’s Lake) (47°14'28\"N.",
+        "to": "S-50 and C-25; Jarvis Lake 9 (46°40'28\"N, 84°09'39\"W); Jen Lake (47°17'38\"N, 81°24'07\"W); Jones Lake (46°54'24\"N, 83°29'03\"W); Kaufman Lake (46°40'14\"N, 84°10'37\"W); Lake 6 (Clem’s Lake) (47°14'28\"N, 81°24'27\"W) - Beulah Township; Lake 6 (47°25'25\"N, 81°24'58\"W) -; Lake 7 (47°22'43\"N, 81°26'41\"W); Lake 8 (47°43'49\"N, 83°23'10\"W); Lake 16 (Heerschap Lake) (47°17'42\"N, 81°25'03\"W); Lake 27 (Hydro Lake)"
+      },
+      {
+        "zone": "11",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-50 and C-25; Malloch Lake (47°04'43\"N., 80°03'04\"W.); Mirror Lake (46°25'24\"N., 79°07'05\"W.); Montreuil Lake (46°25'54\"N., 78°54'28\"W.); Mowat Lake (47°28'51\"N., 79°57'37\"W.); Mug Lake (46°44'33\"N., 79°22'30\"W.); Norway Lake (46°45'08\"N., 79°15'08\"W.); Pine Lake (46°44'47\"N., 79°16'39\"W.); Pole Lake (46°43'45\"N., 79°21'50\"W.); Price Lake (46°58'03\"N., 80°07'32\"W.); Quarry Lake (46°43'43\"N., 79°21'12\"W.)",
+        "to": "S-50 and C-25; Malloch Lake (47°04'43\"N, 80°03'04\"W); Mirror Lake (46°25'24\"N, 79°07'05\"W); Montreuil Lake (46°25'54\"N, 78°54'28\"W); Mowat Lake (47°28'51\"N, 79°57'37\"W); Mug Lake (46°44'33\"N, 79°22'30\"W); Norway Lake (46°45'08\"N, 79°15'08\"W); Pine Lake (46°44'47\"N, 79°16'39\"W); Pole Lake (46°43'45\"N, 79°21'50\"W); Price Lake (46°58'03\"N, 80°07'32\"W); Quarry Lake (46°43'43\"N, 79°21'12\"W)"
+      },
+      {
+        "zone": "11",
+        "species": "Northern Pike",
+        "field": "limits",
+        "from": "S-6; not more than 2 greater than 61",
+        "to": "S-6; not more than 2 greater than 31 cm, and C-2; none greater than 31 cm than 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm"
+      },
+      {
+        "zone": "11",
+        "species": "Brook Trout",
+        "field": "limits",
+        "from": "S-5; not more than 1 greater than cm, of which not more than 1 is greater than 31 cm, and C-2; none greater than 31 cm 86 cm, and C-2; not more than 1 greater than 61 cm, none greater than 86 cm",
+        "to": "S-5; not more than 1 greater than 61 cm, of which not more than 1 is greater"
+      },
+      {
+        "zone": "13",
+        "species": "Aggregate Limits for Trout and Salmon",
+        "field": "season",
+        "from": "fourth Saturday in June to November 30",
+        "to": "fourth Saturday in June to November 30 (905) 447-7879"
+      },
+      {
+        "zone": "13",
+        "species": "Lake Sturgeon",
+        "field": "limits",
+        "from": "S-6 and C-2 (905) 447-7879",
+        "to": "S-6 and C-2"
+      },
+      {
+        "zone": "14",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-25; in one day, possession limit of 50",
+        "to": "S-25; in one day, possession limit of 50, and C-12; in one day, possession limit of 25"
+      },
+      {
+        "zone": "16",
+        "species": "Aggregate Limits for Trout and Salmon",
+        "field": "limits",
+        "from": "S-5 and C-2; total daily catch and; Humber River - City of Toronto, between; Nottawasaga River - from the Boyne River",
+        "to": "S-5 and C-2; total daily catch"
+      },
+      {
+        "zone": "16",
+        "species": "Yellow Perch",
+        "field": "season",
+        "from": "open all year",
+        "to": "open all year from Highway 2 (Plains Road) to Hamilton in the Region of Halton); Highland Creek - City of Toronto from the downstream edge of the Highway 2 (Kingston Road) bridge to Lake Ontario"
+      },
+      {
+        "zone": "16",
+        "species": "Yellow Perch",
+        "field": "limits",
+        "from": "S-50 and C-25; Grindstone Creek - City of Burlington, from of Lake Ontario (City of Hamilton in the Region of Halton); Highland Creek - City of Toronto from the downstream edge of the Highway 2 (Kingsto",
+        "to": "S-50 and C-25; Grindstone Creek - City of Burlington,; Humber River - City of Toronto, between; Nottawasaga River - from the Boyne River"
+      },
+      {
+        "zone": "17",
+        "species": "Lake Trout",
+        "field": "season",
+        "from": "fourth Saturday in April to September 30 the Zone except for the specific waters , Waterbody",
+        "to": "fourth Saturday in April to September 30"
+      },
+      {
+        "zone": "17",
+        "species": "Lake Trout",
+        "field": "limits",
+        "from": "Not specified",
+        "to": "S-3 and C-1"
+      },
+      {
+        "zone": "17",
+        "species": "Lake Whitefish",
+        "field": "season",
+        "from": "fourth Saturday in April to November 15",
+        "to": "fourth Saturday in April to November 15 the Zone except for the specific waters , Waterbody"
+      },
+      {
+        "zone": "17",
+        "species": "Lake Whitefish",
+        "field": "limits",
+        "from": "S-12 and C-6",
+        "to": "Not specified"
+      },
+      {
+        "zone": "17",
+        "species": "Muskellunge",
+        "field": "limits",
+        "from": "S-1; must be greater than 112 cm, and C-0",
+        "to": "S-1; must be greater than 112 cm, and C-0 salmo"
+      },
+      {
+        "zone": "17",
+        "species": "Largemouth and Smallmouth Bass combined",
+        "field": "limits",
+        "from": "S-6 and C-2 salmo",
+        "to": "S-6 and C-2"
+      },
+      {
+        "zone": "20",
+        "species": "Walleye and Sauger combined",
+        "field": "season",
+        "from": "January 1 to March 1 and first Saturday in May to December 31",
+        "to": "January 1 to March 1 and first in May to December 31"
+      },
+      {
+        "zone": "20",
+        "species": "Walleye and Sauger combined",
+        "field": "limits",
+        "from": "S-4 and C-2; not more than 1 greater than 63 cm",
+        "to": "Not specified"
+      }
+    ]
+  }
+}
