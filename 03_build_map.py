@@ -17,7 +17,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.67"
+VERSION = "v0.68"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -132,7 +132,7 @@ HTML = r"""<!DOCTYPE html>
   .gresults{margin:0 0 14px}
   .gresult{width:100%;text-align:left;appearance:none;background:var(--card);border:1px solid var(--line);
     border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
-  .tag{flex:0 0 46px;width:46px;height:22px;display:flex;align-items:center;justify-content:center;align-self:center;
+  .tag{flex:0 0 46px;width:46px;height:22px;display:flex;align-items:center;justify-content:center;align-self:center;margin:auto 0;
     font-size:9.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;line-height:1;padding:0;
     color:var(--paper);background:var(--forest);border-radius:99px}
   .tag.fish{background:var(--forest-2)}
@@ -143,7 +143,7 @@ HTML = r"""<!DOCTYPE html>
   .grow{flex:1;min-width:0}
   .gt{display:block;font-weight:700;font-size:15px}
   .gs{display:block;font-size:12.5px;color:var(--moss);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .gnone{color:var(--moss);font-size:14px;padding:18px 6px;text-align:center}
+  .gnone{color:var(--moss);font-size:14px;padding:18px 6px;text-align:center;border:1px solid var(--line);border-radius:12px;background:var(--card)}
   .seclabel.grey{color:var(--moss)}
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin:var(--gap-l) 0}
   .fchip{display:inline-flex;align-items:center;justify-content:center;gap:var(--gap-s);
@@ -263,7 +263,7 @@ HTML = r"""<!DOCTYPE html>
 
   footer{width:100%;max-width:720px;margin:auto auto 0;flex:0 0 auto;
     padding:28px 18px calc(20px + env(safe-area-inset-bottom));color:var(--moss);
-    font-size:11.5px;line-height:1.55}
+    font-size:13.5px;line-height:1.55}
   footer a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
