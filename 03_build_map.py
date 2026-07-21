@@ -17,21 +17,23 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.68"
+VERSION = "v0.70"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
-    ("v0.54", "Search made fast, results paint in as they arrive"),
-    ("v0.45", "Phone sheet slides over the map, journal style lake pages"),
-    ("v0.44", "Search rebuilt with category pills for water, parks, towns and fish"),
-    ("v0.41", "Full lake pages from Fish ON-Line, species found and stocking history"),
+    ("v0.70", "Blue by default, it is water after all"),
+    ("v0.69", "One app with Site Journal, parks on the map"),
+    ("v0.54", "Search made fast, results paint in live"),
+    ("v0.45", "Phone sheet slides over the map"),
+    ("v0.44", "Search with category pills"),
+    ("v0.41", "Full lake pages from Fish ON-Line"),
     ("v0.37", "Express edition released"),
-    ("v0.30", "Map redrawn on canvas, boundaries load once, much smoother"),
-    ("v0.26", "Rebuilt on the shared design system for phone and desktop"),
-    ("v0.24", "Every zone swept against the official guide and filled in"),
-    ("v0.19", "Open and closed today, species explorer, works offline"),
-    ("v0.13", "Interactive map wired to Ontario's official zone boundaries"),
-    ("v0.10", "First extraction of seasons and limits from the 148 page PDF"),
+    ("v0.30", "Map redrawn on canvas, much smoother"),
+    ("v0.26", "Rebuilt on the shared design system"),
+    ("v0.24", "Every zone swept against the guide"),
+    ("v0.19", "Open today, species explorer, offline"),
+    ("v0.13", "Map wired to official zone boundaries"),
+    ("v0.10", "Seasons and limits out of the 148 page PDF"),
 ]
 
 SERVICE = ("https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services/"
@@ -40,6 +42,8 @@ OFFICIAL = "https://www.ontario.ca/document/ontario-fishing-regulations-summary"
 
 data = json.load(open(CLEAN, encoding="utf-8"))
 reg_json = json.dumps(data, ensure_ascii=False)
+park_pins = json.dumps(json.load(open("parks_pins.json", encoding="utf-8")),
+                       ensure_ascii=False, separators=(",", ":"))
 build_date = datetime.date.today().isoformat()
 
 HTML = r"""<!DOCTYPE html>
@@ -49,7 +53,7 @@ HTML = r"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>ON Fishing Regulation</title>
 <meta name="description" content="Ontario's 20 fishing zones with seasons, limits and what is open right now."/>
-<meta name="theme-color" content="#00753A"/>
+<meta name="theme-color" content="#07496B"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="icon" type="image/png" href="icon-192.png"/>
 <link rel="apple-touch-icon" href="icon-192.png"/>
@@ -57,18 +61,21 @@ HTML = r"""<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script>/* shared themes: on katsuma0.github.io both apps read Site Journal's theme */
+(function(){try{var v=JSON.parse(localStorage.getItem('site-journal-theme-vars')||'null');if(v&&v.vars){var d=document.documentElement;for(var k in v.vars)d.style.setProperty(k,v.vars[k]);var mc=document.querySelector('meta[name=theme-color]');if(mc&&v.tc)mc.setAttribute('content',v.tc);}}catch(e){}})();</script>
 <style>
   :root{
-    --paper:#F1F6F1; --card:#FFFFFF; --ink:#0F1F17; --forest:#00753A; --forest-2:#18A05A;
-    --forest-press:#005C2C; --green-tint:#E7F3EB; --green-tint-2:#D6EBDC; --moss:#40564B;
-    --mist:#E4EDE4; --mist-2:#C7D7C9; --line:#D3E0D4; --amber:#EFBF25; --amber-soft:#FBEEDC;
+    /* water blue by default; a Site Journal theme overrides these when one is set */
+    --paper:#F0F4F6; --card:#FFFFFF; --ink:#0E1B22; --forest:#005F87; --forest-2:#2E9AC4;
+    --forest-press:#004A6A; --green-tint:#E6F1F6; --green-tint-2:#D3E7F0; --moss:#47565E;
+    --mist:#E3EBEF; --mist-2:#C5D5DD; --line:#D2DFE6; --amber:#EFBF25; --amber-soft:#FBEEDC;
     --danger:#B0574A;
     --r:16px; --r-sm:12px; --r-xs:8px;
     --gap-s:6px; --gap-m:10px; --gap-l:12px;
     --pad-card:14px 16px; --pad-row:12px 14px;
-    --shadow-sm:0 1px 2px rgba(15,31,23,.06);
-    --shadow:0 2px 12px rgba(15,31,23,.08);
-    --shadow-btn:0 3px 10px rgba(0,117,58,.30);
+    --shadow-sm:0 1px 2px rgba(14,27,34,.06);
+    --shadow:0 2px 12px rgba(14,27,34,.08);
+    --shadow-btn:0 3px 10px rgba(0,95,135,.30);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);
@@ -111,7 +118,7 @@ HTML = r"""<!DOCTYPE html>
   .ver{appearance:none;border:none;background:none;cursor:pointer;font-family:inherit;
     font-weight:800;font-size:15px;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;
     padding:0;margin:5px 0 0}
-  .sub{color:var(--moss);font-size:13.5px;margin-top:5px}
+  .sub{color:var(--moss);font-size:13.5px;margin-top:5px;line-height:1.4}
   .sub a{color:var(--forest);text-underline-offset:2px}
   .seclabel{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
     color:var(--forest);margin:22px 2px 12px;display:flex;align-items:center;gap:var(--gap-m)}
@@ -135,10 +142,10 @@ HTML = r"""<!DOCTYPE html>
   .tag{flex:0 0 46px;width:46px;height:22px;display:flex;align-items:center;justify-content:center;align-self:center;margin:auto 0;
     font-size:9.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;line-height:1;padding:0;
     color:var(--paper);background:var(--forest);border-radius:99px}
-  .tag.fish{background:var(--forest-2)}
+  .tag.fish{background:#18A05A}
   .tag.water{background:#3E7CA6}
   .tag.town{background:var(--amber)}
-  .tag.park{background:var(--forest)}
+  .tag.park{background:#00753A}
   .tag.area{background:var(--amber)}
   .grow{flex:1;min-width:0}
   .gt{display:block;font-weight:700;font-size:15px}
@@ -211,12 +218,21 @@ HTML = r"""<!DOCTYPE html>
   .loading{position:absolute;top:14px;left:64px;z-index:1000;background:var(--card);
     border:1px solid var(--line);border-radius:99px;padding:9px 14px;font-size:12.5px;
     font-weight:700;color:var(--moss);box-shadow:var(--shadow-sm)}
-  #togglezones{position:absolute;top:14px;right:14px;z-index:1000;background:var(--card);
+  #togglezones,#toggleparks,#togglelabels{position:absolute;right:14px;z-index:1000;background:var(--card);
     border:1px solid var(--line);border-radius:99px;padding:10px 14px;font-size:12.5px;
     font-weight:700;color:var(--moss);cursor:pointer;box-shadow:var(--shadow-sm);
     transition:background .12s,transform .14s}
-  #togglezones.off{background:var(--forest);border-color:var(--forest);color:var(--paper)}
-  #togglezones:active{transform:scale(.97)}
+  #togglezones{top:14px}
+  #toggleparks{top:60px}
+  #togglelabels{top:106px}
+  #togglezones.off,#toggleparks.off,#togglelabels.off{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+  #togglezones:active,#toggleparks:active,#togglelabels:active{transform:scale(.97)}
+  a.fchip{text-decoration:none}
+  .parkpin{filter:drop-shadow(0 2px 3px rgba(15,31,23,.35))}
+  .leaflet-popup-content-wrapper{border-radius:12px;font-family:inherit}
+  /* embed mode: map only, driven from Site Journal's pull-down */
+  body.embed #panel{display:none}
+  body.embed #mapwrap{position:fixed;inset:0;width:100%;height:100dvh}
   /* hand placed map labels */
   .plabel{font-weight:800;font-size:11px;letter-spacing:.08em;color:var(--moss);opacity:.8;
     white-space:nowrap;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;transform:translate(-50%,-50%)}
@@ -251,15 +267,20 @@ HTML = r"""<!DOCTYPE html>
     max-height:92vh;overflow:auto}
   .sheet.on{transform:translateY(0)}
   .grabber{width:40px;height:4px;border-radius:99px;background:var(--mist-2);margin:7px auto 16px}
-  .vrow{display:flex;gap:12px;align-items:baseline;padding:9px 0;
-    border-bottom:1px dashed var(--line);font-size:13.5px;color:var(--ink);line-height:1.45}
-  .vrow:last-child{border-bottom:none}
+  .verline{font-size:12.5px;color:var(--moss);margin:7px 0;line-height:1.5;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .verline .vv{font-weight:800;color:var(--ink);margin-right:9px;font-variant-numeric:tabular-nums}
   .vv{flex:none;font-weight:800;font-size:12.5px;color:var(--forest);
     font-variant-numeric:tabular-nums;min-width:46px}
   .kind{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--forest)}
   .sheet a{color:var(--forest);text-underline-offset:2px}
   .aboutbody p{margin:1em 0}
   .closing{font-size:12px;font-weight:600;color:var(--moss);text-align:center;margin-top:12px}
+  .xapp{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
+    background:var(--card);border-radius:12px;padding:14px 16px;font-weight:700;font-size:14.5px;
+    color:var(--ink);text-decoration:none}
+  .xapp:active{transform:scale(.98)}
+  .xapp .xgo{font-size:12px;font-weight:800;color:var(--forest)}
 
   footer{width:100%;max-width:720px;margin:auto auto 0;flex:0 0 auto;
     padding:28px 18px calc(20px + env(safe-area-inset-bottom));color:var(--moss);
@@ -288,6 +309,8 @@ HTML = r"""<!DOCTYPE html>
     <p>It makes the check quick, a glance before you head out instead of twenty minutes of scrolling,
       and you can cast knowing you looked it up.</p>
   </div>
+  <div class="kind" style="margin:24px 0 12px">Ontario Parks</div>
+  <a class="xapp" href="https://katsuma0.github.io/sitejournal-app/">Site Journal<span class="xgo">Open</span></a>
   <div class="closing">Regulations from the 2026 summary · Zone boundaries from the Government of
     Ontario · Data prepared __BUILD_DATE__</div>
 </div>
@@ -297,6 +320,8 @@ HTML = r"""<!DOCTYPE html>
     <div id="map"></div>
     <div class="loading" id="loading">Loading zones</div>
     <button id="togglezones">Hide zones</button>
+    <button id="toggleparks">Show parks</button>
+    <button id="togglelabels">Hide labels</button>
   </div>
   <div id="panel">
     <div class="pullwrap" id="pullwrap"><div class="pullbar"></div></div>
@@ -316,7 +341,7 @@ HTML = r"""<!DOCTYPE html>
       <div class="seclabel">Search</div>
       <div class="gsearch" id="gsearch">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="search" inputmode="search" autocomplete="off" placeholder="Search bodies of water, parks, towns, or species">
+        <input id="search" inputmode="search" autocomplete="off" placeholder="Search waters, parks, or towns">
         <button class="gclear" id="gclear" aria-label="Clear search">✕</button>
       </div>
       <div id="gresults" class="gresults" hidden></div>
@@ -700,6 +725,69 @@ function setOverlay(on){
 }
 toggleBtn.onclick=()=>setOverlay(!overlayOn);
 
+/* ---------------- park pins (Site Journal's parks) ---------------- */
+const PARK_PINS=__PARK_PINS__;
+const SJ_URL='https://katsuma0.github.io/sitejournal-app/';
+const SJ_PARK_IDS={}; PARK_PINS.forEach(p=>{ SJ_PARK_IDS[parkBase(p.name)]=p.id; });
+const EMBED=/embed=parks/.test(location.hash||'');
+map.createPane('parks');
+map.getPane('parks').style.zIndex=455;
+const parkIcon=L.divIcon({className:'parkpin',iconSize:[26,34],iconAnchor:[13,32],
+  html:'<svg width="26" height="34" viewBox="0 0 26 34">'
+    +'<path d="M13 1C6.4 1 1 6.4 1 13c0 8.9 12 20 12 20s12-11.1 12-20C25 6.4 19.6 1 13 1z" fill="#00753A" stroke="#FFFFFF" stroke-width="1.6"/>'
+    +'<path d="M13 5.5 18 13h-2.6l3.4 5.5H7.2L10.6 13H8z" fill="#FFFFFF"/>'
+    +'<rect x="12.1" y="18.5" width="1.8" height="3.2" fill="#FFFFFF"/></svg>'});
+const parksLayer=L.layerGroup();
+PARK_PINS.forEach(p=>{
+  const m=L.marker([p.lat,p.lng],{pane:'parks',icon:parkIcon,title:p.name});
+  m.on('click',()=>openParkPin(p));
+  parksLayer.addLayer(m);
+});
+function openParkPin(p){
+  const el=document.createElement('div');
+  const nm=document.createElement('div'); nm.textContent=p.name;
+  nm.style.cssText='font-weight:800;font-size:13.5px;margin-bottom:4px;color:var(--ink)';
+  const a=document.createElement('a'); a.textContent='Open in Site Journal';
+  a.href=SJ_URL+'#park='+p.id;
+  a.style.cssText='color:var(--forest);font-weight:700;font-size:12.5px;text-decoration:underline;text-underline-offset:2px';
+  if(EMBED&&window.parent!==window){
+    a.href='#'; a.onclick=e=>{ e.preventDefault(); parent.postMessage({type:'sj-open-park',id:p.id},'*'); };
+  }
+  el.appendChild(nm); el.appendChild(a);
+  L.popup({closeButton:false,offset:[0,-30]}).setLatLng([p.lat,p.lng]).setContent(el).openOn(map);
+}
+const parksBtn=document.getElementById('toggleparks');
+let parksOn = EMBED ? true : localStorage.getItem('onfr-parks')==='on';
+function setParks(on){
+  parksOn=on;
+  parksBtn.textContent=on?'Hide parks':'Show parks';
+  parksBtn.classList.toggle('off',!on);
+  if(on){ if(!map.hasLayer(parksLayer)) parksLayer.addTo(map); }
+  else if(map.hasLayer(parksLayer)) map.removeLayer(parksLayer);
+  if(!EMBED){ try{ localStorage.setItem('onfr-parks',on?'on':'off'); }catch(e){} }
+}
+parksBtn.onclick=()=>setParks(!parksOn);
+setParks(parksOn);
+
+/* labels toggle: city names and the fine tile labels */
+const labelsBtn=document.getElementById('togglelabels');
+let labelsOn = localStorage.getItem('onfr-labels')!=='off';
+function setLabels(on){
+  labelsOn=on;
+  labelsBtn.textContent=on?'Hide labels':'Show labels';
+  labelsBtn.classList.toggle('off',!on);
+  ['onlabels','marks'].forEach(pn=>{ const p=map.getPane(pn); if(p) p.style.display=on?'':'none'; });
+  try{ localStorage.setItem('onfr-labels',on?'on':'off'); }catch(e){}
+}
+labelsBtn.onclick=()=>setLabels(!labelsOn);
+setLabels(labelsOn);
+
+/* embed mode: just the map, for Site Journal's pull-down */
+if(EMBED){
+  document.body.classList.add('embed');
+  setTimeout(()=>map.invalidateSize(),60);
+}
+
 /* ---------------- phone sheet ---------------- */
 const panelEl=document.getElementById('panel');
 const pullwrap=document.getElementById('pullwrap');
@@ -730,6 +818,7 @@ pullwrap.addEventListener('touchend',e=>{
 });
 
 map.on('click', e=>{
+  if(EMBED) return;                            // embedded map: pins do the talking
   if(!overlayOn) return;                       // zones hidden, leave the map alone
   const z=zoneAt(e.latlng.lng, e.latlng.lat);
   if(z){ selectZone(z); if(typeof setSheet==='function') setSheet(false); }
@@ -1002,15 +1091,23 @@ function onSearch(){
     const paint=()=>{
       if(seq!==searchSeq) return;
       const remAll=remC.length?remC:remP;
-      pr.places.forEach(pl=>{ if(pl.z==null) pl.z=zoneAt(pl.lng,pl.lat);
-        pl.sub=[pl.z?('Zone '+pl.z):'', pl.loc||''].filter(Boolean).join(' · '); });
-      remAll.forEach(w=>{ const e=pr.waters.find(x=>x.nl===w.n.toLowerCase()&&(!x.z||!w.z||x.z===w.z))
-          ||pr.waters.find(x=>x.nl===w.n.toLowerCase());
-        if(e&&e.loc) w.loc=e.loc;
+      pr.places.forEach(pl=>{ if(pl.z==null) pl.z=zoneAt(pl.lng,pl.lat); });
+      /* every place-like result gets a location under its name, curated rows included */
+      const all=buildLocal(q).concat(pr.places, remAll);
+      all.forEach(w=>{
+        if(w.kind==='zone'||w.fish) return;
+        if(!w.loc){
+          const e=pr.waters.find(x=>x.nl===w.n.toLowerCase()&&(!x.z||!w.z||x.z===w.z))
+              ||pr.waters.find(x=>x.nl===w.n.toLowerCase());
+          if(e&&e.loc) w.loc=e.loc;
+        }
+        if(!w.loc){ const g=pr.places.find(x=>x!==w&&x.n.toLowerCase()===w.n.toLowerCase());
+          if(g&&g.loc) w.loc=g.loc; }
         if(!w.loc){ const t=stk.find(x=>x.n.toLowerCase()===w.n.toLowerCase()&&(x.town||x.dist));
           if(t) w.loc=titleCase(t.town||'')||t.dist; }
-        w.sub=[w.z?('Zone '+w.z):'', w.loc||''].filter(Boolean).join(' · '); });
-      renderResults(finalize(buildLocal(q).concat(pr.places, remAll), q), outstanding>0);
+        w.sub=[w.z?('Zone '+w.z):'', w.loc||''].filter(Boolean).join(' · ')||w.sub||'Ontario';
+      });
+      renderResults(finalize(all, q), outstanding>0);
     };
     const track=(prom,assign)=>{ outstanding++;
       prom.then(assign).catch(()=>{}).then(()=>{ outstanding--; paint(); }); };
@@ -1055,7 +1152,11 @@ function renderPlace(w){
   let html=`<div class="zhead"><h2>${esc(w.n)}</h2>
       <button class="fchip" id="wclear">Clear</button></div>
     <p class="meta">${esc(meta)}</p>`;
-  if(w.z) html+=`<div class="filters"><button class="fchip on" id="wzone">Zone ${w.z} rules</button></div>`;
+  const sjId=/park/i.test(w.ptype||'')?SJ_PARK_IDS[parkBase(w.n)]:null;
+  if(w.z||sjId) html+=`<div class="filters">`
+    +(w.z?`<button class="fchip on" id="wzone">Zone ${w.z} rules</button>`:'')
+    +(sjId?`<a class="fchip on" href="${SJ_URL}#park=${sjId}">Open in Site Journal</a>`:'')
+    +`</div>`;
   html+=`<p class="meta" style="margin-top:14px">Place data from the Canadian Geographical Names Database.</p>`;
   detailEl.innerHTML=html;
   document.getElementById('wclear').onclick=()=>{ searchEl.value=''; onSearch(); };
@@ -1163,6 +1264,16 @@ function fromHash(){ const m=(location.hash||'').match(/zone=(\d+)/); if(m) sele
 window.addEventListener('hashchange',fromHash);
 fromHash();
 
+/* ---------------- shared themes: follow Site Journal live ---------------- */
+window.addEventListener('storage',e=>{
+  if(e.key!=='site-journal-theme-vars') return;
+  try{
+    var v=JSON.parse(e.newValue||'null'), d=document.documentElement;
+    if(v&&v.vars){ for(var k in v.vars) d.style.setProperty(k,v.vars[k]); }
+    else location.reload();   /* theme cleared back to default */
+  }catch(_){}
+});
+
 /* ---------------- offline ---------------- */
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
@@ -1173,11 +1284,12 @@ if('serviceWorker' in navigator && location.protocol.startsWith('http')){
 """
 
 version_rows = "".join(
-    f'<div class="vrow"><span class="vv">{v}</span><span>{t}</span></div>'
+    f'<div class="verline"><span class="vv">{v}</span>{t}</div>'
     for v, t in VERSIONS)
 
 html = (HTML.replace("__VERSION_ROWS__", version_rows)
             .replace("__REG_JSON__", reg_json)
+            .replace("__PARK_PINS__", park_pins)
             .replace("__SERVICE__", SERVICE)
             .replace("__OFFICIAL__", OFFICIAL)
             .replace("__BUILD_DATE__", build_date)

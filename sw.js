@@ -5,7 +5,7 @@
      so a previously loaded map keeps working without a connection.
    Note: service workers only run over http(s) (e.g. GitHub Pages), not from a
    file:// path. */
-const CACHE = 'onfish-v5';
+const CACHE = 'onfish-v6';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
