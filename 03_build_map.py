@@ -18,7 +18,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.73"
+VERSION = "v0.74"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -588,6 +588,7 @@ async function _placeSearch(q){
     if(it.latitude==null) return;
     const code=(it.concise||{}).code||'';
     const nm=(it.name||'').trim();
+    if(/queen elizabeth ii wildlands|dalton digby wildlands/i.test(nm)) return; /* that one belongs to the parks side, old name included */
     const isPark=/\b(provincial|national) park\b/i.test(nm)||/\bpark$/i.test(nm)||code==='PARK';
     if(isPark) places.push({n:nm, lat:it.latitude, lng:it.longitude, place:true,
       ptype:/national/i.test(nm)?'National park':'Provincial park', loc:it.location||''});
@@ -1129,6 +1130,7 @@ function parkBase(n){
   return n.toLowerCase().replace(/\s+(provincial|national)\s+park$/,'').replace(/\s+park$/,'').trim();
 }
 function finalize(list,q){
+  list=list.filter(r=>!/queen elizabeth ii wildlands|dalton digby wildlands/i.test(r.n||''));
   const best={};
   list.forEach(r=>{ if(catOf(r)!=='park') return;
     const b=parkBase(r.n), pr=/\b(provincial|national) park\b/i.test(r.n)?2:1;
@@ -1187,6 +1189,9 @@ function onSearch(){
   gsearch.classList.toggle('has', !!q.trim());
   const seq=++searchSeq;
   if(!q.trim()){ restoreList(); return; }
+  /* the journal's console words belong to the journal */
+  if(['debugsearch','statsearch','dummydata','dummyhundop','-dummyhundop','forlaurie'].includes(q.trim().toLowerCase())){
+    showResults(); renderResults([],false); return; }
   showResults();
   const stillLoading=q.trim().length>=3;
   renderResults(finalize(buildLocal(q), q), stillLoading);
