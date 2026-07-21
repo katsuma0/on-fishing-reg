@@ -2,9 +2,16 @@
 __pycache__/
 *.pyc
 
-# Large source PDFs (~25 MB each) — keep locally; uncomment to exclude from repo.
-# mnr-2026-fishing-regulations-summary-en-2025-12-08.pdf
-# mnr-2025-fishing-regulations-summary-en-2024-12-09.pdf
+# Large source PDFs (~25 MB each) — kept locally, not published.
+mnr-2026-fishing-regulations-summary-en-2025-12-08.pdf
+mnr-2025-fishing-regulations-summary-en-2024-12-09.pdf
+
+# Local-only working files (not part of the public repo)
+CLAUDE.md
+README_PARSER.md
+debug_parser.py
+express/
+ontario-fishing-express.zip
 
 # OS noise
 .DS_Store
