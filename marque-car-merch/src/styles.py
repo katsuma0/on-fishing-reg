@@ -43,6 +43,16 @@ def car_flat(car, body, key, glass="#2A333B"):
         gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {deck_x} {deck_y} L {cowl} {belt} Z"
     P=[f'<path d="{d}" fill="{body}"/>']
     P.append(f'<path d="{gl}" fill="{glass}"/>')
+    if g.get("white_roof"):
+        rp=f"M {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {rr_y+26} L {rf_x} {rf_y+26} Z"
+        P.append(f'<path d="{rp}" fill="#ECE8DD"/>')
+        P.append(f'<path d="M {rf_x} {rf_y} L {rr_x} {rr_y}" fill="none" stroke="{key}" stroke-width="4"/>')
+    if g.get("taxi"):
+        rx=(rf_x+rr_x)/2; ry=min(rf_y,rr_y)
+        P.append(f'<rect x="{rx-8}" y="{ry-14}" width="16" height="16" fill="{key}"/>')            # post
+        P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="#F3C24E"/>')  # andon
+        P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="none" stroke="{key}" stroke-width="4"/>')
+        P.append(f'<line x1="{rx-30}" y1="{ry-28}" x2="{rx+30}" y2="{ry-28}" stroke="{key}" stroke-width="3"/>')
     if g.get("wing"):
         x0,x1,wy=g["wing"]
         P.append(f'<rect x="{x0}" y="{wy}" width="{x1-x0}" height="12" rx="3" fill="{body}"/>')

@@ -42,9 +42,9 @@ TOYO_GEOM = {
  "supra90": dict(nose_x=34,tail_x=952,belly=290,nose_y=252,tail_y=246,hood_y=236,
     cowl_x=432,roof_fy=152,roof_ry=156,roof_fx=520,roof_rx=660,deck_x=884,deck_y=240,
     fwx=252,rwx=774,wr=64,belt=214),
- "crown": dict(nose_x=36,tail_x=958,belly=288,nose_y=244,tail_y=226,hood_y=216,
-    cowl_x=374,roof_fy=132,roof_ry=132,roof_fx=458,roof_rx=684,deck_x=742,deck_y=214,
-    fwx=250,rwx=774,wr=62,belt=198),
+ "crown": dict(nose_x=36,tail_x=958,belly=288,nose_y=244,tail_y=228,hood_y=214,
+    cowl_x=356,roof_fy=128,roof_ry=128,roof_fx=440,roof_rx=700,deck_x=760,deck_y=210,
+    fwx=250,rwx=778,wr=62,belt=196,taxi=True),
  "gr86": dict(nose_x=36,tail_x=952,belly=288,nose_y=252,tail_y=242,hood_y=232,
     cowl_x=442,roof_fy=150,roof_ry=152,roof_fx=526,roof_rx=680,deck_x=884,deck_y=234,
     fwx=252,rwx=772,wr=62,belt=210),
@@ -53,7 +53,7 @@ TOYO_GEOM = {
 TOYO_PAINT = {
  "gt2000":"#B23A2E","ae86":"#2F7D82","celica":"#C96A2B","supra80":"#2C5AA0",
  "mr2":"#E2A61E","fj40":"#40694C","hilux":"#B5642A","prius":"#3E86C0",
- "yaris":"#C6382C","supra90":"#D19A1E","crown":"#7C2E2E","gr86":"#2E7D5B",
+ "yaris":"#C6382C","supra90":"#D19A1E","crown":"#23252E","gr86":"#2E7D5B",
 }
 TOYO_GEOM.update({
  "tacoma": dict(nose_x=40,tail_x=960,belly=284,nose_y=222,tail_y=236,hood_y=202,
@@ -68,8 +68,12 @@ TOYO_GEOM.update({
  "im": dict(nose_x=48,tail_x=950,belly=286,nose_y=236,tail_y=222,hood_y=210,
     cowl_x=356,roof_fy=124,roof_ry=130,roof_fx=444,roof_rx=688,deck_x=886,deck_y=222,
     fwx=254,rwx=758,wr=64,belt=190),
+ "fjcruiser": dict(nose_x=58,tail_x=944,belly=274,nose_y=210,tail_y=196,hood_y=196,
+    cowl_x=352,roof_fy=104,roof_ry=106,roof_fx=440,roof_rx=756,deck_x=886,deck_y=200,
+    fwx=254,rwx=752,wr=80,belt=168,white_roof=True),
 })
-TOYO_PAINT.update({"tacoma":"#C25A2E","grcorolla":"#C6382C","rav4":"#6E8CA0","im":"#E9E6DE"})
+TOYO_PAINT.update({"tacoma":"#B5642A","grcorolla":"#C6382C","rav4":"#8B8D90",
+                   "im":"#E9E6DE","fjcruiser":"#F2B400"})
 SIL.update(TOYO_GEOM)
 PAINT.update(TOYO_PAINT)
 
@@ -89,10 +93,10 @@ CARS_T = [
  _car(4,"supra80","SUPRA A80","MK4 TWIN-TURBO · 1993–2002"),
  _car(5,"mr2","MR2","AW11 · 1984–1989"),
  _car(6,"fj40","LAND CRUISER","FJ40 · 1960–1984"),
- _car(7,"hilux","HILUX","THE INDESTRUCTIBLE · 1968–"),
+ _car(7,"fjcruiser","FJ CRUISER","SUN FUSION 4X4 · 2006–2014"),
  _car(8,"prius","PRIUS","XW20 HYBRID · 2003–2009"),
  _car(9,"rav4","RAV4","ADVENTURE · 2019–"),
- _car(10,"crown","CROWN","S60 · 1971–1974"),
+ _car(10,"crown","CROWN","COMFORT · TOKYO TAXI", sky="#E6C86E"),
  _car(11,"im","iM","COROLLA iM · 2016–2018", sky="#5C87A6"),
  _car(12,"gr86","86","GT86 BOXER · 2012–2021"),
 ]
