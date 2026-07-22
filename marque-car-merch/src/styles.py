@@ -61,9 +61,7 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         hood=f"M {nose+24} {nose_y+2} L {cowl} {hood_y+2} L {cowl} {hood_y+16} L {nose+30} {nose_y+16} Z"
         roof=f"M {rf_x} {rf_y+1} L {rr_x} {rr_y+1} L {rr_x} {rr_y+13} L {rf_x} {rf_y+13} Z"
         P.append(f'<g clip-path="url(#cc{uid})"><path d="{hood}" fill="{light(body,0.34)}"/>'
-                 f'<path d="{roof}" fill="{light(body,0.34)}"/>'
-                 f'<ellipse cx="{(nose+cowl)/2+30:.0f}" cy="{hood_y+9}" rx="30" ry="5" fill="#fff" fill-opacity="0.7"/>'
-                 f'<ellipse cx="{(rf_x+rr_x)/2:.0f}" cy="{min(rf_y,rr_y)+7}" rx="32" ry="4.5" fill="#fff" fill-opacity="0.5"/></g>')
+                 f'<path d="{roof}" fill="{light(body,0.34)}"/></g>')
     if g.get("white_roof"):
         rp=f"M {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {rr_y+26} L {rf_x} {rf_y+26} Z"
         P.append(f'<path d="{rp}" fill="#ECE8DD"/>')
@@ -95,7 +93,6 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{g.get("wheel", body)}"/>')
         if cel:
             P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
-            P.append(f'<circle cx="{cx-wr*0.22:.0f}" cy="{cy-wr*0.24:.0f}" r="{wr*0.1:.0f}" fill="#fff" fill-opacity="0.55"/>')
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{key}"/>')
     return "".join(P), d, gl
 
