@@ -18,7 +18,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.76"
+VERSION = "v0.77"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -284,6 +284,15 @@ HTML = r"""<!DOCTYPE html>
   .leaflet-zonefill-pane canvas{mix-blend-mode:multiply}
   /* richer blue water on the base map */
   .leaflet-tile-pane{filter:saturate(1.85) contrast(1.05)}
+  /* smooth crossings: same-origin page jumps (to and from Site Journal) cross-fade */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
+  @media (prefers-reduced-motion:reduce){ @view-transition{navigation:none} }
+  /* every fresh panel rises in with a small spring */
+  @keyframes blockIn{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+  #detail.anim{animation:blockIn .32s cubic-bezier(.32,1.22,.38,1)}
+  .srow:active{transform:scale(.985)}
+  .gresult:active{transform:scale(.985)}
   /* app feel on iOS: no rubber band fights, no long-press callouts on the map */
   body{overscroll-behavior-y:none}
   #map{-webkit-touch-callout:none;-webkit-user-select:none}
@@ -1110,7 +1119,10 @@ const rbox=document.getElementById('gresults');
 let searchSeq=0;
 let lastWater=null;
 function homeSections(on){ ['mainhome','fishhome'].forEach(id=>{ const e=document.getElementById(id); if(e) e.hidden=!on; }); }
-function showDetail(){ rbox.hidden=true; detailEl.hidden=false; }
+function showDetail(){ rbox.hidden=true; detailEl.hidden=false;
+  /* microtask: runs after the caller has set the new content but before paint,
+     so the whole panel rises in exactly once per open */
+  Promise.resolve().then(()=>{ detailEl.classList.remove('anim'); void detailEl.offsetWidth; detailEl.classList.add('anim'); }); }
 function showResults(){ rbox.hidden=false; detailEl.hidden=true; homeSections(false); }
 function restoreList(){ rbox.hidden=true; rbox.innerHTML=''; detailEl.hidden=false; homeSections(true);
   if(typeof clearPin==='function') clearPin();
