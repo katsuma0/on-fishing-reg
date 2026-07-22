@@ -1,0 +1,88 @@
+# MARQUE — World Motor Index
+
+A **uniform design system** for print-on-demand car merch. Ten iconic cars from ten
+countries, all rendered through **one template** so that every product — a t-shirt, a
+framed print, a calendar page — reads at a glance as the same collection.
+
+The concept: each car is a numbered **"archive plate"**. The colour comes from the
+**flag of the country that built the car**; everything else stays fixed. Change the
+data, the design stays uniform.
+
+Open `gallery.html` in a browser to see the full lookbook (10 plates + t-shirt mockups
++ a calendar mockup + the system breakdown). It is fully self-contained — fonts are
+embedded, no internet needed.
+
+## What's the "same-project" DNA?
+
+Constant on every product:
+
+- Frame + corner crop-marks
+- `MARQUE` housemark + `WORLD MOTOR INDEX`
+- `No. XX / 10` registry number
+- Full-bleed `MAKE / MODEL` wordmark
+- National-flag origin stamp
+- Monospace 6-cell spec grid
+- Footer registry line + barcode motif
+- One type system: **Saira Condensed** (display) + **IBM Plex Mono** (data)
+
+Variable per machine: model name, flag, accent colour (pulled from the flag),
+side-profile silhouette, six spec values, entry number.
+
+## The ten (Series 01)
+
+| No. | Car | Origin |
+|----:|-----|--------|
+| 01 | Nissan Skyline GT-R (BNR34) | 🇯🇵 Japan |
+| 02 | Porsche 911 Carrera (993) | 🇩🇪 Germany |
+| 03 | Lamborghini Countach | 🇮🇹 Italy |
+| 04 | Jaguar E-Type | 🇬🇧 United Kingdom |
+| 05 | Chevrolet Corvette (C3) | 🇺🇸 United States |
+| 06 | Alpine A110 | 🇫🇷 France |
+| 07 | Volvo P1800 | 🇸🇪 Sweden |
+| 08 | Hyundai Ioniq 5 N | 🇰🇷 South Korea |
+| 09 | Lada Niva (VAZ-2121) | 🇷🇺 USSR / Russia |
+| 10 | Holden Monaro | 🇦🇺 Australia |
+
+## Files
+
+```
+gallery.html            self-contained lookbook (open this)
+designs/*.svg           10 print-ready plates, portrait 1200×1600 (fonts embedded)
+mockups/*.svg           standalone t-shirt + calendar mockups
+mockups/*.png           quick previews
+src/                    the generator
+  sil.py                parametric car-silhouette engine (shared line-art family)
+  flags.py              simplified national flags
+  gen.py                car dataset + the plate template
+  build.py              builds plates, mockups and the gallery
+  shoot.js              renders SVG/HTML to PNG (Playwright/Chromium)
+```
+
+## Regenerate / edit
+
+```bash
+cd src
+npm install @fontsource/saira-condensed @fontsource/ibm-plex-mono @fontsource/archivo playwright
+python3 build.py         # -> ../out/  (or adjust OUT)
+```
+
+To add or change a car, edit the `CARS` list in `src/gen.py` (make, model, country,
+flag, accent, silhouette key, specs). To tweak a silhouette, edit its geometry dict in
+`src/sil.py`. Everything else stays uniform automatically.
+
+The output SVGs are vector and print-ready. For DTG/POD, export at the platform's
+required size; the art is built for **dark garments** (cream ink + flag). A light-garment
+variant inverts the ink — see `plate_inner(..., ink=...)` in `src/gen.py`.
+
+## Notes on source & selling
+
+- **The designs use public, factual reference** — country of origin, drivetrain, era,
+  and national flags (public domain). They do **not** copy copyrighted brochure artwork.
+- **Marque and model names are trademarks.** Printing e.g. "PORSCHE 911" to sell is
+  trademark use, and POD platforms routinely remove such listings. A **"safe mode"** of
+  this template swaps the marque for era + chassis code + origin
+  (e.g. `TYPE BNR34 · JAPAN · 1999`) and keeps every other element, so the line still
+  looks identical. Ask and it can be generated.
+- The reference site `autocatalogarchive.com` is **blocked by this environment's network
+  policy**, so its PDFs were neither downloaded nor required — the system stands on its
+  own facts.
