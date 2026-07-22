@@ -49,6 +49,47 @@ The earlier two cuts remain in the same system:
 
 `gallery.html` shows both. Series 02 leads.
 
+## Brand Rally Calendars (2027)
+
+The line the project now leads with: **one 12-month wall calendar per marque**, so the
+whole shelf reads as a family — *"Toyota Calendar," "Honda Calendar," "Jeep Calendar."*
+Every page shares the same **cel-shaded Retro Rally** treatment, so twelve cars from one
+brand hang together and any two brands still read as the same collection.
+
+Uniform on every brand:
+
+- Cel-shaded vector car (flat posterized shading, single windshield gloss — no gradients)
+- **Drivetrain-encoded wheels**: same 5-lug alloy on both axles, the *driven* wheel a touch
+  brighter with a brand-colour centre cap, the un-driven one slightly darker + plain cap —
+  so AWD/4WD fills both, FWD the front, RWD the rear. A `AWD / 4WD / FWD / RWD` tag names it.
+- A **subtle, tone-on-tone country-of-origin motif**, identical across a brand's 12 months —
+  a rising sun for Japan, faint stars & stripes for the USA.
+- Brand accent colour on the ground stripe, the circled date, and the wheel caps.
+- `MARQUE · WORLD MOTOR INDEX · No.XX/12` registry line; `Grot` display + `Plex` data type.
+
+| Brand | Origin | Accent | Drivetrain mix |
+|-------|--------|--------|----------------|
+| **Toyota** | 🇯🇵 Japan | red | 4WD / AWD / RWD / FWD |
+| **Honda** | 🇯🇵 Japan | red | RWD / FWD / AWD |
+| **Acura** | 🇯🇵 Japan | deep red | FWD / AWD (SH-AWD) |
+| **Lexus** | 🇯🇵 Japan | sapphire | RWD (F) / AWD / 4WD |
+| **Ford** | 🇺🇸 USA | blue | RWD / 4WD / AWD / FWD |
+| **Jeep** | 🇺🇸 USA | army-olive | 4WD / AWD |
+
+```
+{brand}-calendar-2027.html   self-contained 12-month wall (open this)
+{brand}-calendar/*.svg       12 print-ready pages, portrait 1200×1680
+{brand}-designs.html         design-review view — just the car artworks, stacked to scroll
+src/{brand}.py               that brand's 12 silhouette geometries + colours + drivetrains
+src/styles.py                the shared Rally panel + calendar frame + wheel/motif engine
+src/genbuild.py              generic per-brand calendar builder
+src/designview.py            builds the scrollable design-review pages
+```
+
+To add a brand, write one `src/{brand}.py` (12 geometry dicts, a paint map, an accent, and a
+`CARS_x` list with per-car drivetrains), register it in `genbuild.py` + `designview.py`, and
+rerun. Everything else — layout, motif, wheels, type — stays uniform automatically.
+
 ## The ten (Series 01 & 02)
 
 | No. | Car | Origin |

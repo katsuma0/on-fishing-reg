@@ -50,7 +50,10 @@ def build(brand_title, country, cars, filename):
     print("wrote",filename)
 
 if __name__=="__main__":
-    import toyota, honda, ford
+    import toyota, honda, ford, acura, lexus, jeep
     build("TOYOTA","Japan", toyota.CARS_T, "toyota-designs.html")
     build("HONDA","Japan", honda.CARS_H, "honda-designs.html")
     build("FORD","United States", ford.CARS_F, "ford-designs.html")
+    build("ACURA","Japan", acura.CARS_A, "acura-designs.html")
+    build("LEXUS","Japan", lexus.CARS_L, "lexus-designs.html")
+    build("JEEP","United States", jeep.CARS_J, "jeep-designs.html")

@@ -70,5 +70,8 @@ def build(brand, country, cars, prefix, spot):
     print("built",prefix,W,H)
 
 if __name__=="__main__":
-    import ford
+    import ford, acura, lexus, jeep
     build("FORD","United States", ford.CARS_F, "ford", ford.ACCENT)
+    build("ACURA","Japan", acura.CARS_A, "acura", acura.ACCENT)
+    build("LEXUS","Japan", lexus.CARS_L, "lexus", lexus.ACCENT)
+    build("JEEP","United States", jeep.CARS_J, "jeep", jeep.ACCENT)
