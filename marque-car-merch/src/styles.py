@@ -87,25 +87,23 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="{dark(body,0.12)}"/>')      # cover
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="none" stroke="{key}" stroke-width="4"/>')
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.14:.0f}" fill="{key}"/>')
-    # drivetrain-encoded wheels: driven = solid filled rim; non-driven = open ring
+    # same 5-lug alloy on both axles; the driven ('working') wheel is only slightly
+    # brighter with a brand-colour centre cap, the un-driven one a touch darker.
     dt=car.get("drivetrain","AWD").upper()
     fd = dt in ("AWD","4WD","FWD"); rd = dt in ("AWD","4WD","RWD")
-    rimc=g.get("wheel", body)
+    rimc=g.get("wheel", body); acc=car.get("accent","#222")
     for cx,driven in ((fwx,fd),(rwx,rd)):
         cy=GY-wr
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')            # tyre
-        if driven:
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{rimc}"/>')
-            if cel:
-                P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{key}"/>')
-        else:  # open/hollow rim (spokes only) marks the un-driven axle
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{rimc}" stroke-width="{wr*0.13:.0f}"/>')
-            for a in (0,60,120):
-                import math
-                dx=math.cos(math.radians(a))*wr*0.44; dy=math.sin(math.radians(a))*wr*0.44
-                P.append(f'<line x1="{cx-dx:.0f}" y1="{cy-dy:.0f}" x2="{cx+dx:.0f}" y2="{cy+dy:.0f}" stroke="{rimc}" stroke-width="{wr*0.1:.0f}"/>')
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{rimc}"/>')
+        rim = rimc if driven else dark(rimc,0.26)
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')                       # tyre
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="{rim}"/>')               # rim face
+        if cel:
+            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
+        for i in range(5):                                                                       # 5 lug slots
+            a=math.radians(i*72-90); hx=cx+math.cos(a)*wr*0.35; hy=cy+math.sin(a)*wr*0.35
+            P.append(f'<circle cx="{hx:.0f}" cy="{hy:.0f}" r="{wr*0.085:.0f}" fill="{key}"/>')
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.19:.0f}" fill="{acc if driven else key}"/>')  # centre cap
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.19:.0f}" fill="none" stroke="{key}" stroke-width="2.5"/>')
     return "".join(P), d, gl
 
 # ============================ STYLE PANELS ==================================
