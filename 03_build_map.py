@@ -18,7 +18,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.74"
+VERSION = "v0.75"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -122,7 +122,7 @@ HTML = r"""<!DOCTYPE html>
       overflow-y:auto;overscroll-behavior:contain;
       transition:transform .34s cubic-bezier(.32,1.22,.38,1)}
     #panel.min,#panel.drag{border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(19,32,25,.22)}
-    #panel.min{transform:translateY(calc(100% - 108px));overflow:hidden}
+    #panel.min{transform:translateY(calc(100% - 108px - env(safe-area-inset-top)));overflow:hidden}
     #panel.drag{transition:none}
     #panel .pullwrap{display:none}
     #panel.min .pullwrap,#panel.drag .pullwrap{display:block}
@@ -244,7 +244,7 @@ HTML = r"""<!DOCTYPE html>
     font-weight:700;color:var(--moss);box-shadow:var(--shadow-sm)}
   /* map toggles: the words stay put, the colour says on or off */
   #togglezones,#toggleparks,#togglelabels{position:absolute;right:14px;z-index:1000;background:var(--card);
-    border:1px solid var(--line);border-radius:99px;padding:10px 16px;font-size:12.5px;
+    border:1px solid var(--line);border-radius:99px;padding:10px 16px;font-size:12.5px;white-space:nowrap;
     font-weight:700;color:var(--moss);cursor:pointer;box-shadow:var(--shadow-sm);
     transition:background .12s,transform .14s}
   #togglezones{top:calc(14px + env(safe-area-inset-top))}
@@ -385,9 +385,9 @@ HTML = r"""<!DOCTYPE html>
   <div id="mapwrap">
     <div id="map"></div>
     <div class="loading" id="loading">Loading zones</div>
-    <button id="togglezones">Zones</button>
-    <button id="toggleparks">Parks</button>
-    <button id="togglelabels">Labels</button>
+    <button id="togglezones">Show zones</button>
+    <button id="toggleparks">Show parks</button>
+    <button id="togglelabels">Show labels</button>
   </div>
   <div id="panel">
     <div class="pullwrap" id="pullwrap"><div class="pullbar"></div></div>
@@ -648,7 +648,7 @@ const zoneMeta={};
 const zoneFeatures=[];
 
 /* ---------------- map ---------------- */
-const map=L.map('map',{minZoom:4,maxZoom:16,zoomControl:false}).setView([50.2,-85.5],5);
+const map=L.map('map',{minZoom:4,maxZoom:16,zoomControl:false,doubleClickZoom:false}).setView([50.2,-85.5],5);
 const TILESET=THEME_DARK?'dark_nolabels':'voyager_nolabels';
 const LABELSET=THEME_DARK?'dark_only_labels':'voyager_only_labels';
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/'+TILESET+'/{z}/{x}/{y}{r}.png',
