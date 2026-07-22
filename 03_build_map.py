@@ -18,10 +18,11 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.77"
+VERSION = "v0.78"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
+    ("v0.78", "One back button, a clear path, no more getting lost"),
     ("v0.73", "Site Journal themes here too, dark map included"),
     ("v0.71", "Fish ID, every species drawn and explained"),
     ("v0.70", "Blue by default, it is water after all"),
@@ -153,6 +154,14 @@ HTML = r"""<!DOCTYPE html>
   .zhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 2px}
   .zhead h2{font-size:20px;font-weight:800;letter-spacing:-.01em;color:var(--forest);margin:0}
   .meta{font-size:13px;color:var(--moss);margin:4px 0 0;font-variant-numeric:tabular-nums}
+  /* one back control per page, top left, shows where it returns to */
+  .navback{appearance:none;border:none;background:none;font-family:inherit;cursor:pointer;
+    display:inline-flex;align-items:center;gap:3px;color:var(--forest);font-weight:700;font-size:14px;
+    padding:8px 10px 8px 0;margin:8px 0 2px;-webkit-tap-highlight-color:transparent;transition:transform .14s}
+  .navback:active{transform:scale(.96)}
+  .navback svg{flex:none}
+  .vtitle{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:2px 0 0}
+  .vhero{display:flex;gap:12px;align-items:flex-start;margin-top:2px}
   .empty{font-size:13.5px;color:var(--moss);text-align:center;padding:34px 10px}
 
   /* controls ----------------------------------------------------------- */
@@ -284,9 +293,13 @@ HTML = r"""<!DOCTYPE html>
   .leaflet-zonefill-pane canvas{mix-blend-mode:multiply}
   /* richer blue water on the base map */
   .leaflet-tile-pane{filter:saturate(1.85) contrast(1.05)}
-  /* smooth crossings: same-origin page jumps (to and from Site Journal) cross-fade */
+  /* smooth crossings: a depth push between pages (to and from Site Journal).
+     The leaving page falls back and fades; the arriving one rises through with a spring. */
   @view-transition{navigation:auto}
-  ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
+  @keyframes vtOut{to{opacity:0;transform:scale(1.03)}}
+  @keyframes vtIn{from{opacity:0;transform:scale(.94) translateY(14px)}}
+  ::view-transition-old(root){animation:vtOut .26s cubic-bezier(.4,0,.2,1) both}
+  ::view-transition-new(root){animation:vtIn .40s cubic-bezier(.32,1.14,.38,1) both}
   @media (prefers-reduced-motion:reduce){ @view-transition{navigation:none} }
   /* every fresh panel rises in with a small spring */
   @keyframes blockIn{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
@@ -781,7 +794,7 @@ fetch(BOUNDS_URL).then(r=>r.json()).then(gj=>{
   fmzLine=L.geoJSON(gj,{renderer:lineRenderer, smoothFactor:1.4, style:lineStyle}).addTo(map);
   if(!overlayOn){ map.removeLayer(fmz); map.removeLayer(fmzLine); }
   const l=document.getElementById('loading'); if(l) l.remove();
-  if(selectedZone){ renderPanel(selectedZone); zoomToZone(selectedZone); }
+  if(selectedZone){ zoomToZone(selectedZone); }
 }).catch(()=>{
   const l=document.getElementById('loading');
   if(l) l.textContent='Map offline, use the numbers';
@@ -1016,7 +1029,7 @@ for(let z=1;z<=20;z++){
 
 const detailEl=document.getElementById('detail');
 const searchEl=document.getElementById('search');
-function showEmpty(){ detailEl.innerHTML=''; }
+function showEmpty(){ detailEl.innerHTML=''; detailEl.hidden=true; }
 showEmpty();
 
 /* ---------------- selection and panel ---------------- */
@@ -1024,27 +1037,78 @@ function paintTiles(){
   document.querySelectorAll('.ztile[data-zone]').forEach(c=>
     c.classList.toggle('on',Number(c.dataset.zone)===selectedZone));
 }
-function clearZone(){
-  selectedZone=null; lastWater=null;
-  restyleZones();
-  paintTiles();
-  history.replaceState(null,'',location.pathname+location.search);
-  showEmpty();
+/* ---------------- detail navigation stack ---------------- */
+function titleOf(v){ return v.type==='zone'?('Zone '+v.z) : v.type==='fish'?v.name : v.w.n; }
+function subOf(v){
+  if(v.type==='zone') return (zoneMeta[v.z]&&zoneMeta[v.z].name)?esc(zoneMeta[v.z].name):'Seasons and limits';
+  if(v.type==='fish'){ const m=speciesMap[v.name]||{}; let n=0,open=0; for(let z=1;z<=20;z++) if(m[z]){ n++; if(seasonStatus(m[z].season).status==='open') open++; }
+    return open+' of '+n+' zones open now'; }
+  if(v.type==='place'){ const kind=/park/i.test(v.w.ptype||'')?v.w.ptype:'Town';
+    return [v.w.z?('Zone '+v.w.z):'Zone unknown', v.w.loc||'', kind].filter(Boolean).map(esc).join(' · '); }
+  if(v.type==='water') return [v.w.z?('Zone '+v.w.z):'', v.w.loc||''].filter(Boolean).map(esc).join(' · ');
+  return '';
 }
-function selectZone(z, fromWater){
+function bodyOf(v){
+  if(v.type==='zone') return zoneBody(v.z);
+  if(v.type==='fish') return fishBody(v.name);
+  if(v.type==='water') return waterBody(v.w);
+  if(v.type==='place') return placeBody(v.w);
+  return '';
+}
+function paintNav(){
+  const v=navStack[navStack.length-1];
+  if(!v){ goHomeNav(); return; }
+  showDetail();
+  const backTxt = navStack.length>1 ? titleOf(navStack[navStack.length-2]) : 'All zones';
+  const meta=subOf(v);
+  detailEl.innerHTML =
+    `<button class="navback" id="navback"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m15 18-6-6 6-6"/></svg><span>${esc(backTxt)}</span></button>`
+    + `<h2 class="vtitle">${esc(titleOf(v))}</h2>`
+    + (meta?`<p class="meta">${meta}</p>`:'')
+    + bodyOf(v);
+  document.getElementById('navback').onclick=popView;
+  wireBody(v);
+  applyMapForView(v);
+  const p=document.getElementById('panel'); if(p) p.scrollTop=0;
+}
+function wireBody(v){
+  if(v.type==='zone'){
+    detailEl.querySelectorAll('#splist .srow[data-sp]').forEach(row=>{
+      if(FISH_ID.some(f=>f.match.some(m=>row.dataset.sp.toLowerCase().includes(m))))
+        row.onclick=()=>pushView({type:'fish',name:row.dataset.sp});
+      else row.classList.add('flat');
+    });
+  } else if(v.type==='fish'){
+    detailEl.querySelectorAll('.srow[data-z]').forEach(row=>row.onclick=()=>pushView({type:'zone',z:Number(row.dataset.z)}));
+  } else if(v.type==='water'||v.type==='place'){
+    const zb=document.getElementById('wzone'); if(zb&&v.w.z) zb.onclick=()=>pushView({type:'zone',z:Number(v.w.z)});
+  }
+}
+function applyMapForView(v){
+  if(v.type==='zone'){ selectedZone=v.z; exploreSpecies=null; restyleZones(); paintTiles(); zoomToZone(v.z);
+    if(('#zone='+v.z)!==location.hash) history.replaceState(null,'','#zone='+v.z); }
+  else if(v.type==='fish'){ exploreSpecies=v.name; selectedZone=null;
+    if(typeof setOverlay==='function' && typeof overlayOn!=='undefined' && !overlayOn) setOverlay(true);
+    restyleZones(); paintTiles(); }
+  else { exploreSpecies=null; restyleZones(); paintTiles();
+    if(IS_MAP && v.w.lat!=null) goToWater(v.w.n,v.w.lat,v.w.lng,null); }
+}
+function pushView(v){ navStack.push(v); paintNav(); }
+function replaceRoot(v){ navStack=[v]; paintNav(); }
+function popView(){ buzz(6); navStack.pop(); if(navStack.length) paintNav(); else goHomeNav(); }
+function refreshNav(){ if(navStack.length) paintNav(); }
+function goHomeNav(){ navStack=[]; selectedZone=null; exploreSpecies=null; lastWater=null;
+  restyleZones(); paintTiles();
+  history.replaceState(null,'',location.pathname+location.search);
+  searchEl.value=''; gsearch.classList.remove('has'); restoreList(); }
+function clearZone(){ goHomeNav(); }
+function selectZone(z){
   z=Number(z);
-  if(!fromWater) lastWater=null;
-  if(z===selectedZone){ clearZone(); return; }   // tapping the same zone clears it
-  selectedZone=z;
-  searchEl.value='';
-  restyleZones();
-  paintTiles();
-  renderPanel(z);
-  zoomToZone(z);
-  if(('#zone='+z)!==location.hash) history.replaceState(null,'','#zone='+z);
-  const mh=document.getElementById('mainhome');
-  if(mh&&!mh.hidden){ detailEl.scrollIntoView({behavior:'smooth',block:'start'}); }
-  else document.getElementById('panel').scrollTop=0;
+  searchEl.value=''; gsearch.classList.remove('has');
+  if(z===selectedZone && navStack.length<=1){ goHomeNav(); return; }  // tapping the live zone clears it
+  const fromHome=(function(){ const mh=document.getElementById('mainhome'); return mh&&!mh.hidden; })();
+  replaceRoot({type:'zone',z});
+  if(fromHome) detailEl.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function speciesRow(r, st, ss){
@@ -1056,24 +1120,15 @@ function speciesRow(r, st, ss){
     </div><span class="pill ${st}">${label(st)}</span></div>`;
 }
 
-function renderPanel(z){
-  if(typeof showDetail==='function') showDetail();
+function zoneBody(z){
   const d=REG[z];
-  if(!d){ detailEl.innerHTML=`<p class="empty">No data for zone ${z}.</p>`; return; }
+  if(!d) return `<p class="empty">No data for zone ${z}.</p>`;
   const info=(d.general_info||[]).filter(Boolean);
   const sp=[...(d.species_regulations||[])].sort(bySpecies);   // closed first, then popularity
   const wb=d.waterbody_exceptions||[];
   const descr=(zoneMeta[z]&&zoneMeta[z].descr)||'';
-
-  let html='';
-  const chips=[];
-  if(exploreSpecies) chips.push(`<button class="fchip" id="backexp">Back to ${esc(exploreSpecies)}</button>`);
-  if(lastWater) chips.push(`<button class="fchip" id="backwater">Back to ${esc(lastWater.n)}</button>`);
-  if(chips.length) html+=`<div class="filters">${chips.join('')}</div>`;
-  html+=`<div class="seclabel">Zone ${z} · Species and limits</div>
+  let html=`<div class="seclabel grey" style="margin-top:16px">Species and limits</div>
     <div id="splist">${sp.map(r=>{const ss=seasonStatus(r.season); return speciesRow(r, ss.status, ss);}).join('')}</div>`;
-  /* wired below once the html is in the page: tapping a species opens its fish page */
-
   if(wb.length){
     html+=`<details class="blk"><summary>Waterbody exceptions <span class="rcount">${wb.length}</span></summary>
       <div class="body">${wb.map(w=>`<div class="wb"><b>${esc(w.waterbody)}</b>${
@@ -1085,15 +1140,7 @@ function renderPanel(z){
       <div class="body">${info.length?`<ul>${info.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:''}
       ${descr?`<li style="list-style:none;margin-top:8px" class="mt">${esc(descr)}</li>`:''}</div></details>`;
   }
-  detailEl.innerHTML=html;
-
-  const be=document.getElementById('backexp');
-  if(be) be.onclick=()=>renderExplore(exploreSpecies);
-  const bw=document.getElementById('backwater');
-  if(bw) bw.onclick=()=>renderWater(lastWater);
-  detailEl.querySelectorAll('#splist .srow[data-sp]').forEach(row=>{
-    row.onclick=()=>openFish(row.dataset.sp);
-  });
+  return html;
 }
 
 /* ---------------- waterbody search ---------------- */
@@ -1118,15 +1165,15 @@ const gclear=document.getElementById('gclear');
 const rbox=document.getElementById('gresults');
 let searchSeq=0;
 let lastWater=null;
+let navStack=[];   /* the detail panel is a stack: one back button pops it, home when empty */
 function homeSections(on){ ['mainhome','fishhome'].forEach(id=>{ const e=document.getElementById(id); if(e) e.hidden=!on; }); }
-function showDetail(){ rbox.hidden=true; detailEl.hidden=false;
+function showDetail(){ rbox.hidden=true; detailEl.hidden=false; homeSections(false);
   /* microtask: runs after the caller has set the new content but before paint,
      so the whole panel rises in exactly once per open */
   Promise.resolve().then(()=>{ detailEl.classList.remove('anim'); void detailEl.offsetWidth; detailEl.classList.add('anim'); }); }
 function showResults(){ rbox.hidden=false; detailEl.hidden=true; homeSections(false); }
-function restoreList(){ rbox.hidden=true; rbox.innerHTML=''; detailEl.hidden=false; homeSections(true);
-  if(typeof clearPin==='function') clearPin();
-  if(selectedZone) renderPanel(selectedZone); else showEmpty(); }
+function restoreList(){ rbox.hidden=true; rbox.innerHTML=''; detailEl.hidden=true; detailEl.innerHTML='';
+  homeSections(true); if(typeof clearPin==='function') clearPin(); }
 
 // Word based matching; filler words are ignored so "zone 15 walleye" works.
 const FILLERS=['zone','lake','the'];
@@ -1211,15 +1258,16 @@ function renderResults(list, pending){
 }
 function gotoResult(r){
   searchEl.value=r.n; gsearch.classList.add('has');
-  if(r.kind==='zone'){ showDetail(); if(selectedZone===r.z) renderPanel(r.z); else selectZone(r.z); return; }
-  if(r.fish){ openFish(r.n); return; }
+  if(r.kind==='zone'){ replaceRoot({type:'zone',z:Number(r.z)}); return; }
+  if(r.fish){ openFishView(r.n); return; }
   openWater(r);
 }
 function onSearch(){
   const q=searchEl.value;
   gsearch.classList.toggle('has', !!q.trim());
   const seq=++searchSeq;
-  if(!q.trim()){ restoreList(); return; }
+  if(!q.trim()){ rbox.hidden=true; rbox.innerHTML='';
+    if(navStack.length) paintNav(); else restoreList(); return; }
   /* the journal's console words belong to the journal */
   if(['debugsearch','statsearch','dummydata','dummyhundop','-dummyhundop','forlaurie'].includes(q.trim().toLowerCase())){
     showResults(); renderResults([],false); return; }
@@ -1273,44 +1321,36 @@ function metaLine(w){
   if(w.loc) parts.push(w.loc);
   return parts.join(' · ');
 }
+function curWaterIs(w){ const v=navStack[navStack.length-1]; return v&&(v.type==='water'||v.type==='place')&&v.w===w; }
 function openWater(w){
-  if(w.place){ if(IS_MAP&&w.lat!=null) goToWater(w.n,w.lat,w.lng,null); renderPlace(w); return; }
+  if(w.place){ replaceRoot({type:'place',w}); return; }
   if(IS_MAP){
     if(w.curated && w.lat!=null) goToWater(w.n,w.lat,w.lng,null);
-    else if(w.lid) araCentre(w.lid).then(c=>{ if(c) goToWater(w.n,c.lat,c.lng,null); }).catch(()=>{});
+    else if(w.lid) araCentre(w.lid).then(c=>{ if(c&&curWaterIs(w)) goToWater(w.n,c.lat,c.lng,null); }).catch(()=>{});
   }
-  renderWater(w);
+  replaceRoot({type:'water',w});
   if(w.curated){
     araSearch(w.n).then(list=>{
       const hit=list.find(x=>x.n.toLowerCase()===w.n.toLowerCase());
-      if(hit){ hit.lat=w.lat; hit.lng=w.lng; hit.curated=false; renderWater(hit); }
+      if(hit&&curWaterIs(w)){ Object.assign(w,{lat:hit.lat,lng:hit.lng,curated:false,lid:hit.lid,area:hit.area,maxd:hit.maxd,meand:hit.meand,species:hit.species,z:w.z||hit.z}); refreshNav(); }
     }).catch(()=>{});
   }
 }
-function renderPlace(w){
-  showDetail();
-  const kind=/park/i.test(w.ptype||'')?w.ptype:'Town';
-  const meta=[w.z?('Zone '+w.z):'Zone unknown', w.loc||'', kind].filter(Boolean).join(' · ');
-  let html=`<div class="zhead"><h2>${esc(w.n)}</h2>
-      <button class="fchip" id="wclear">Clear</button></div>
-    <p class="meta">${esc(meta)}</p>`;
+/* place (town or park): body only; header/title/meta come from the nav frame */
+function placeBody(w){
   const sjId=/park/i.test(w.ptype||'')?SJ_PARK_IDS[parkBase(w.n)]:null;
-  if(w.z||sjId) html+=`<div class="filters">`
+  let html='';
+  if(w.z||sjId) html+=`<div class="filters" style="margin-top:14px">`
     +(w.z?`<button class="fchip on" id="wzone">Zone ${w.z} rules</button>`:'')
     +(sjId?`<a class="fchip on" href="${SJ_URL}#park=${sjId}">Open in Site Journal</a>`:'')
     +`</div>`;
   html+=`<p class="meta" style="margin-top:14px">Place data from the Canadian Geographical Names Database.</p>`;
-  detailEl.innerHTML=html;
-  document.getElementById('wclear').onclick=()=>{ searchEl.value=''; onSearch(); };
-  const zb=document.getElementById('wzone');
-  if(zb) zb.onclick=()=>selectZone(w.z,true);
+  return html;
 }
-function renderWater(w){
-  showDetail();
-  lastWater=w;
-  let html=`<div class="zhead"><h2>${esc(w.n)}</h2>
-      <button class="fchip" id="wclear">Clear</button></div>`;
-  if(w.z) html+=`<div class="filters"><button class="fchip on" id="wzone">Zone ${w.z} rules</button></div>`;
+/* water body: body only */
+function waterBody(w){
+  let html='';
+  if(w.z) html+=`<div class="filters" style="margin-top:14px"><button class="fchip on" id="wzone">Zone ${w.z} rules</button></div>`;
   const rows=[];
   if(w.z) rows.push(['Zone','Zone '+w.z]);
   if(w.area) rows.push(['Surface area',w.area.toLocaleString()+' ha']);
@@ -1327,24 +1367,25 @@ function renderWater(w){
   }
   html+=`<div class="seclabel grey">Stocking</div><div id="wstock"><p class="empty">Checking stocking records</p></div>
     <p class="meta" style="margin-top:14px">Lake data from Fish ON-Line and MNRF stocking records.</p>`;
-  detailEl.innerHTML=html;
-  document.getElementById('wclear').onclick=()=>{ searchEl.value=''; onSearch(); };
-  const zb=document.getElementById('wzone');
-  if(zb) zb.onclick=()=>selectZone(w.z,true);
+  /* fill the async pieces after this body is in the DOM */
+  Promise.resolve().then(()=>fillWaterAsync(w));
+  return html;
+}
+function fillWaterAsync(w){
   if(!w.loc && !w._locTried){
     w._locTried=true;
     placeSearch(w.n).then(pr=>{
       const e=pr.waters.find(x=>x.nl===w.n.toLowerCase()&&(!x.z||!w.z||x.z===w.z))
         ||pr.waters.find(x=>x.nl===w.n.toLowerCase());
-      if(e&&e.loc){ w.loc=e.loc; renderWater(w); return; }
+      if(e&&e.loc){ w.loc=e.loc; if(curWaterIs(w)) refreshNav(); return; }
       return searchStocked(w.n).then(list=>{
         const t=list.find(x=>x.n.toLowerCase()===w.n.toLowerCase()&&(x.town||x.dist));
-        if(t){ w.loc=titleCase(t.town||'')||t.dist; renderWater(w); }
+        if(t){ w.loc=titleCase(t.town||'')||t.dist; if(curWaterIs(w)) refreshNav(); }
       });
     }).catch(()=>{});
   }
   searchStocked(w.n).then(list=>{
-    const el=document.getElementById('wstock'); if(!el) return;
+    const el=document.getElementById('wstock'); if(!el||!curWaterIs(w)) return;
     const hits=list.filter(x=>x.n.toLowerCase()===w.n.toLowerCase());
     if(!hits.length){ el.innerHTML='<p class="empty">No stocking records since 2017.</p>'; return; }
     const sp={}; hits.forEach(h=>Object.entries(h.sp).forEach(([x,y])=>{ sp[x]=Math.max(sp[x]||0,y); }));
@@ -1352,7 +1393,7 @@ function renderWater(w){
     el.innerHTML=(where?`<p class="meta" style="margin:0 0 8px">${esc(where)}</p>`:'')+
       Object.entries(sp).sort((a,b)=>b[1]-a[1]).map(([x,y])=>
         `<div class="rrow"><span>${esc(x)}</span><span class="rcount">Last stocked ${y}</span></div>`).join('');
-  }).catch(()=>{ const el=document.getElementById('wstock'); if(el) el.innerHTML='<p class="empty">Stocking data not reachable.</p>'; });
+  }).catch(()=>{ const el=document.getElementById('wstock'); if(el&&curWaterIs(w)) el.innerHTML='<p class="empty">Stocking data not reachable.</p>'; });
 }
 /* ---------------- species explorer ---------------- */
 for(const z in REG) for(const r of REG[z].species_regulations||[]){
@@ -1381,7 +1422,7 @@ function allRegSpecies(){
 function openFishCard(f){
   const cands=allRegSpecies().filter(n=>{ const nl=n.toLowerCase(); return f.match.some(m=>nl.includes(m)); })
     .sort((a,b)=>a.length-b.length);
-  if(cands.length){ searchEl.value=f.name; gsearch.classList.add('has'); showDetail(); homeSections(false); openFish(cands[0]); }
+  openFishView(cands.length?cands[0]:f.name);
 }
 (function(){
   const l=document.getElementById('fishlist');
@@ -1394,30 +1435,34 @@ function openFishCard(f){
       <img loading="lazy" src="fish/${f.img}.jpg" alt="${esc(f.name)}"><span>${esc(f.name)}</span></button>`).join('');
   g.querySelectorAll('.fcard').forEach(el=>el.onclick=()=>openFishCard(FISH_ID[Number(el.dataset.i)]));
 })();
-function openFish(name){
-  exploreSpecies=name;
-  if(typeof setOverlay==='function' && typeof overlayOn!=='undefined' && !overlayOn) setOverlay(true);
-  if(typeof restyleZones==='function') restyleZones();
-  renderExplore(name);
-}
-function clearDetail(){ if(selectedZone) renderPanel(selectedZone); else showEmpty(); }
-function exitExplore(){ exploreSpecies=null; restyleZones(); clearDetail(); }
-function renderExplore(name){
+/* start a fresh fish page from home or search */
+function openFishView(name){ replaceRoot({type:'fish',name}); }
+/* fish page body: the picture and identification, then where it is open by zone.
+   The name lives once in the nav title, never repeated in the card. */
+function fishBody(name){
+  const nl=name.toLowerCase();
+  const f=FISH_ID.find(x=>x.match.some(m=>nl.includes(m)));
   const m=speciesMap[name]||{}, present=[];
   for(let z=1;z<=20;z++){ if(m[z]) present.push({z,rec:m[z],st:seasonStatus(m[z].season).status}); }
-  const openN=present.filter(r=>r.st==='open').length;
-  detailEl.innerHTML=`<div class="zhead"><h2>${esc(name)}</h2>
-      <button class="fchip" id="exitexp">Clear</button></div>
-    <p class="meta">${openN} zones open now · in ${present.length} zones</p>`
-    + fishIdCards(name)
-    + `<div class="seclabel">By zone</div>`
-    + present.map(r=>`<button class="srow" data-z="${r.z}"><div class="col">
+  let html='';
+  if(f){
+    html+=`<div class="idcard" style="margin-top:14px">
+      <img loading="lazy" src="fish/${f.img}.jpg" alt="${esc(f.name)}">
+      <div class="idbody">
+        <div class="seclabel grey" style="margin:0 0 6px">How to tell</div>
+        <ul class="idtell">${f.tell.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+        <div class="idrow"><b>Eats:</b> ${esc(f.eat)}</div>
+        <div class="idrow"><b>Bites on:</b> ${esc(f.bite)}</div>
+      </div></div>`;
+  }
+  html+=`<div class="seclabel grey">Seasons by zone</div>`
+    + (present.length?present.map(r=>`<button class="srow" data-z="${r.z}" data-st="${r.st}"><div class="col">
         <div class="nm">Zone ${r.z}</div>
         <div class="mt">${esc(r.rec.season)}</div>
         <div class="mt">${esc(r.rec.limits)}</div>
-      </div><span class="pill ${r.st}">${label(r.st)}</span></button>`).join('');
-  document.getElementById('exitexp').onclick=exitExplore;
-  detailEl.querySelectorAll('.srow[data-z]').forEach(row=>row.onclick=()=>selectZone(row.dataset.z));
+      </div><span class="pill ${r.st}">${label(r.st)}</span></button>`).join('')
+      : `<p class="empty">Not listed in the zone tables.</p>`);
+  return html;
 }
 
 /* ---------------- sheets ---------------- */
