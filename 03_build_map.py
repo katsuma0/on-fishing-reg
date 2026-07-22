@@ -18,7 +18,7 @@ CLEAN = "fishing_zones_clean.json"
 OUT = "index.html"
 
 # Beta version mark. Counts the prompts in this project; bump on every change.
-VERSION = "v0.75"
+VERSION = "v0.76"
 
 # Changelog shown on the versions page, newest first. Add a line each release.
 VERSIONS = [
@@ -122,7 +122,11 @@ HTML = r"""<!DOCTYPE html>
       overflow-y:auto;overscroll-behavior:contain;
       transition:transform .34s cubic-bezier(.32,1.22,.38,1)}
     #panel.min,#panel.drag{border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(19,32,25,.22)}
-    #panel.min{transform:translateY(calc(100% - 108px - env(safe-area-inset-top)));overflow:hidden}
+    /* the strip shows grabber, eyebrow, title and version, same as Site Journal;
+       the appbar slides up over its notch padding with a transform so nothing reflows */
+    #panel.min{transform:translateY(calc(100% - 106px - env(safe-area-inset-bottom)));overflow:hidden}
+    #panel .appbar{transition:transform .34s cubic-bezier(.32,1.22,.38,1)}
+    #panel.min .appbar{transform:translateY(calc(-1 * env(safe-area-inset-top)))}
     #panel.drag{transition:none}
     #panel .pullwrap{display:none}
     #panel.min .pullwrap,#panel.drag .pullwrap{display:block}
@@ -280,6 +284,9 @@ HTML = r"""<!DOCTYPE html>
   .leaflet-zonefill-pane canvas{mix-blend-mode:multiply}
   /* richer blue water on the base map */
   .leaflet-tile-pane{filter:saturate(1.85) contrast(1.05)}
+  /* app feel on iOS: no rubber band fights, no long-press callouts on the map */
+  body{overscroll-behavior-y:none}
+  #map{-webkit-touch-callout:none;-webkit-user-select:none}
   /* dark theme: dark tiles, zone colours glow instead of multiply, halos flip */
   body.darkmap .leaflet-tile-pane{filter:none}
   body.darkmap .leaflet-zonefill-pane canvas{mix-blend-mode:screen;opacity:.5}
@@ -436,6 +443,18 @@ const EMBED = /embed=parks/.test(location.hash||'');
 /* the one dark theme darkens the map too */
 const THEME_DARK=(function(){ try{ const v=JSON.parse(localStorage.getItem('site-journal-theme-vars')||'null'); return !!(v&&v.dark); }catch(e){ return false; } })();
 if(THEME_DARK) document.body.classList.add('darkmap');
+
+/* haptics, same feel as Site Journal: native inside the app, vibration elsewhere */
+let _lastBuzz=0;
+function buzz(ms){
+  const n=Date.now(); if(n-_lastBuzz<80) return; _lastBuzz=n;
+  try{ const C=window.Capacitor;
+    if(C&&C.Plugins&&C.Plugins.Haptics){ C.Plugins.Haptics.impact({style:'LIGHT'}); return; }
+  }catch(e){}
+  try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+document.addEventListener('click',function(e){
+  if(e.target&&e.target.closest&&e.target.closest('button,.srow,.trow,.fcard,.frow,.xapp,.fmz')) buzz(5);
+},{capture:true});
 const SERVICE = "__SERVICE__";
 const ZONE_FIELD = "FISHERIES_MANAGEMENT_ZONE_ID";
 
@@ -886,7 +905,7 @@ let sheetMin=false, dragY=null, dragged=false;
 function setSheet(min){ sheetMin=min;
   panelEl.classList.toggle('min',min);
   panelEl.classList.remove('drag'); panelEl.style.transform='';
-  if(min) panelEl.scrollTop=0; }
+  if(min) panelEl.scrollTop=0; buzz(8); }
 panelEl.addEventListener('touchstart',e=>{
   dragged=false;
   if(sheetMin){ dragY=e.touches[0].clientY; return; }
@@ -1491,3 +1510,12 @@ html = (HTML.replace("__VERSION_ROWS__", version_rows)
 with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
 print(f"Wrote {OUT} ({len(html)//1024} KB)")
+
+# Version lockstep: stamp the service worker cache with the build version so
+# phones never keep serving a stale build cache-first (the onfish-v6 trap).
+sw = open("sw.js", encoding="utf-8").read()
+sw_new = re.sub(r"const CACHE = '[^']*';", f"const CACHE = 'onfish-{VERSION}';", sw, count=1)
+if sw_new == sw and f"onfish-{VERSION}" not in sw:
+    raise SystemExit("sw.js cache line not found; refusing to ship an unstamped service worker")
+open("sw.js", "w", encoding="utf-8").write(sw_new)
+print(f"Stamped sw.js cache onfish-{VERSION}")
