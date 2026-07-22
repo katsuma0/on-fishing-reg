@@ -37,6 +37,7 @@ def car_flat(car, body, key, glass="#2A333B"):
     g=SIL[car["sil"]]; d=_outline(g)
     cowl,hood_y=g["cowl_x"],g["hood_y"]; rf_y,rr_y,rf_x,rr_x=g["roof_fy"],g["roof_ry"],g["roof_fx"],g["roof_rx"]
     deck_x,deck_y,belt=g["deck_x"],g["deck_y"],g["belt"]; fwx,rwx,wr=g["fwx"],g["rwx"],g["wr"]
+    nose=g["nose_x"]; belly=g["belly"]
     if g.get("pickup"):
         gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {belt} L {cowl} {belt} Z"
     else:
@@ -53,6 +54,8 @@ def car_flat(car, body, key, glass="#2A333B"):
         P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="#F3C24E"/>')  # andon
         P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="none" stroke="{key}" stroke-width="4"/>')
         P.append(f'<line x1="{rx-30}" y1="{ry-28}" x2="{rx+30}" y2="{ry-28}" stroke="{key}" stroke-width="3"/>')
+    if g.get("splitter"):
+        P.append(f'<path d="M {nose-40} {belly+2} L {nose+120} {belly+2} L {nose+120} {belly+15} L {nose-48} {belly+17} Z" fill="{dark(body,0.55)}"/>')
     if g.get("wing"):
         x0,x1,wy=g["wing"]
         P.append(f'<rect x="{x0}" y="{wy}" width="{x1-x0}" height="12" rx="3" fill="{body}"/>')
@@ -62,7 +65,7 @@ def car_flat(car, body, key, glass="#2A333B"):
     for cx in (fwx,rwx):
         cy=GY-wr
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{body}"/>')
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{g.get("wheel", body)}"/>')
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{key}"/>')
     return "".join(P), d, gl
 
@@ -98,28 +101,21 @@ def panel_halftone(car, uid):
     return "".join(P), paper, ink, spot
 
 def panel_rally(car, uid):
-    """retro rally/travel poster: sunburst + warm blocks + flat car."""
+    """retro poster: clean two-tone sky/ground + flat car (no sun). Per-car scale."""
     key=car["key"]; spot=PAINT[key]; acc=car["accent"]
-    bg=car.get("sky", spot)   # scene tint source (decoupled so light cars can pop)
-    sky=light(bg,0.72); ground="#2E2A22"; cream="#F0E9D6"; ink="#241E16"
-    P=[f'<rect width="{PW}" height="{IMG_H}" fill="{sky}"/>']
-    cx,cy=600,470
-    # sunburst rays
-    rays=[]
-    for i in range(24):
-        a0=math.radians(i*15); a1=math.radians(i*15+7.5)
-        if i%2==0:
-            rays.append(f'<path d="M{cx} {cy} L{cx+math.cos(a0)*1200:.0f} {cy+math.sin(a0)*1200:.0f} L{cx+math.cos(a1)*1200:.0f} {cy+math.sin(a1)*1200:.0f} Z" fill="{light(bg,0.5)}"/>')
-    P.append(f'<clipPath id="rc{uid}"><rect width="{PW}" height="{IMG_H}"/></clipPath><g clip-path="url(#rc{uid})">'+"".join(rays)+'</g>')
-    # sun disc
-    P.append(f'<circle cx="{cx}" cy="{cy}" r="300" fill="{light(bg,0.35)}"/>')
-    # ground band
-    P.append(f'<rect x="0" y="720" width="{PW}" height="{IMG_H-720}" fill="{ground}"/>')
-    P.append(f'<rect x="0" y="700" width="{PW}" height="24" fill="{acc}"/>')
-    # flat car on the ground
+    bg=car.get("sky", spot)
+    ground="#2E2A22"; cream="#F0E9D6"; ink="#241E16"; gy=706
+    P=[f'<defs><linearGradient id="sky{uid}" x1="0" y1="0" x2="0" y2="1">'
+       f'<stop offset="0%" stop-color="{light(bg,0.88)}"/><stop offset="100%" stop-color="{light(bg,0.52)}"/></linearGradient></defs>']
+    P.append(f'<rect width="{PW}" height="{IMG_H}" fill="url(#sky{uid})"/>')
+    P.append(f'<rect x="0" y="{gy+18}" width="{PW}" height="{IMG_H-gy-18}" fill="{ground}"/>')
+    P.append(f'<rect x="0" y="{gy}" width="{PW}" height="18" fill="{acc}"/>')
     body,d,gl=car_flat(car,spot,ink,glass=dark(spot,0.4))
-    P.append(f'<ellipse cx="600" cy="700" rx="430" ry="22" fill="#000" fill-opacity="0.18"/>')
-    P.append(_place(body+f'<path d="{d}" fill="none" stroke="{ink}" stroke-width="5"/>',1.12,40,339))
+    sc=1.14*car.get("cscale",1.0)
+    ty=gy-GY*sc; tx=600-500*sc
+    P.append(f'<ellipse cx="600" cy="{gy}" rx="{430*sc:.0f}" ry="20" fill="#000" fill-opacity="0.16"/>')
+    P.append(f'<g transform="translate({tx:.1f},{ty:.1f}) scale({sc:.4f})">{body}'
+             f'<path d="{d}" fill="none" stroke="{ink}" stroke-width="5"/></g>')
     return "".join(P), cream, ink, acc
 
 def panel_distressed(car, uid):
