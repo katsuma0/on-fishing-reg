@@ -79,27 +79,27 @@ PAINT.update(TOYO_PAINT)
 
 ACCENT="#E01F26"  # Toyota red — used for the stripe + circled date across the year
 
-def _car(no, key, model, meta, sil=None, sky=None, cscale=None):
+def _car(no, key, model, meta, sil=None, sky=None, cscale=None, dt="AWD"):
     d = dict(no=no, key=key, sil=sil or key, make="TOYOTA", model=model, country="JAPAN",
-             flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1])
+             flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1], drivetrain=dt)
     if sky: d["sky"] = sky
     if cscale: d["cscale"] = cscale
     return d
 
 # 2027 lineup
 CARS_T = [
- _car(1,"tacoma","TACOMA","TRD OFF-ROAD · 2024–", cscale=1.10),
- _car(2,"ae86","COROLLA AE86","GT-S TRUENO · 1983–1987"),
- _car(3,"grcorolla","GR COROLLA","MORIZO EDITION · 2023–"),
- _car(4,"supra80","SUPRA A80","MK4 TWIN-TURBO · 1993–2002"),
- _car(5,"mr2","MR2","AW11 · 1984–1989"),
- _car(6,"fj40","LAND CRUISER","FJ40 · 1960–1984", cscale=1.06),
- _car(7,"fjcruiser","FJ CRUISER","SUN FUSION 4X4 · 2006–2014", cscale=1.06),
- _car(8,"prius","PRIUS","XW20 HYBRID · 2003–2009", cscale=0.82),
- _car(9,"rav4","RAV4","ADVENTURE · 2019–", cscale=1.04),
- _car(10,"crown","CROWN","COMFORT · TOKYO TAXI", sky="#CBA24E"),
- _car(11,"im","iM","COROLLA iM · 2016–2018", sky="#5C87A6", cscale=0.90),
- _car(12,"gr86","86","GT86 BOXER · 2012–2021"),
+ _car(1,"tacoma","TACOMA","TRD OFF-ROAD · 2024–", cscale=1.10, dt="4WD"),
+ _car(2,"ae86","COROLLA AE86","GT-S TRUENO · 1983–1987", dt="RWD"),
+ _car(3,"grcorolla","GR COROLLA","MORIZO EDITION · 2023–", dt="AWD"),
+ _car(4,"supra80","SUPRA A80","MK4 TWIN-TURBO · 1993–2002", dt="RWD"),
+ _car(5,"mr2","MR2","AW11 · 1984–1989", dt="RWD"),
+ _car(6,"fj40","LAND CRUISER","FJ40 · 1960–1984", cscale=1.06, dt="4WD"),
+ _car(7,"fjcruiser","FJ CRUISER","SUN FUSION 4X4 · 2006–2014", cscale=1.06, dt="4WD"),
+ _car(8,"prius","PRIUS","XW20 HYBRID · 2003–2009", cscale=0.82, dt="FWD"),
+ _car(9,"rav4","RAV4","ADVENTURE · 2019–", cscale=1.04, dt="AWD"),
+ _car(10,"crown","CROWN","COMFORT · TOKYO TAXI", sky="#CBA24E", dt="RWD"),
+ _car(11,"im","iM","COROLLA iM · 2016–2018", sky="#5C87A6", cscale=0.90, dt="FWD"),
+ _car(12,"gr86","86","GT86 BOXER · 2012–2021", dt="RWD"),
 ]
 
 if __name__ == "__main__":

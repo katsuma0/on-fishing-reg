@@ -55,26 +55,26 @@ PAINT.update(HONDA_PAINT)
 
 ACCENT="#E1051E"  # Honda red — stripe + circled date
 
-def _car(no, key, model, meta, sky=None, cscale=None):
+def _car(no, key, model, meta, sky=None, cscale=None, dt="AWD"):
     d = dict(no=no, key=key, sil=key, make="HONDA", model=model, country="JAPAN",
-             flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1])
+             flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1], drivetrain=dt)
     if sky: d["sky"] = sky
     if cscale: d["cscale"] = cscale
     return d
 
 CARS_H = [
- _car(1,"nsx","NSX","NA1 · 1990–2005"),
- _car(2,"civicr","CIVIC TYPE R","FL5 · 2023–", sky="#6E86A0"),
- _car(3,"s2000","S2000","AP1 ROADSTER · 1999–2009"),
- _car(4,"integra","INTEGRA TYPE R","DC2 · 1995–2001"),
- _car(5,"crx","CR-X","SiR · 1987–1991", cscale=0.90),
- _car(6,"prelude","PRELUDE","BB · 1991–1996"),
- _car(7,"beat","BEAT","PP1 KEI · 1991–1996", cscale=0.72),
- _car(8,"ridgeline","RIDGELINE","UNIBODY · 2005–", cscale=1.05),
- _car(9,"crv","CR-V","2018–", cscale=1.04),
- _car(10,"odyssey","ODYSSEY","2018–", cscale=1.06),
- _car(11,"hondae","HONDA e","EV · 2020–2024", cscale=0.86),
- _car(12,"accord","ACCORD","2018–"),
+ _car(1,"nsx","NSX","NA1 · 1990–2005", dt="RWD"),
+ _car(2,"civicr","CIVIC TYPE R","FL5 · 2023–", sky="#6E86A0", dt="FWD"),
+ _car(3,"s2000","S2000","AP1 ROADSTER · 1999–2009", dt="RWD"),
+ _car(4,"integra","INTEGRA TYPE R","DC2 · 1995–2001", dt="FWD"),
+ _car(5,"crx","CR-X","SiR · 1987–1991", cscale=0.90, dt="FWD"),
+ _car(6,"prelude","PRELUDE","BB · 1991–1996", dt="FWD"),
+ _car(7,"beat","BEAT","PP1 KEI · 1991–1996", cscale=0.72, dt="RWD"),
+ _car(8,"ridgeline","RIDGELINE","UNIBODY · 2005–", cscale=1.05, dt="AWD"),
+ _car(9,"crv","CR-V","2018–", cscale=1.04, dt="AWD"),
+ _car(10,"odyssey","ODYSSEY","2018–", cscale=1.06, dt="FWD"),
+ _car(11,"hondae","HONDA e","EV · 2020–2024", cscale=0.86, dt="RWD"),
+ _car(12,"accord","ACCORD","2018–", dt="FWD"),
 ]
 
 if __name__ == "__main__":

@@ -87,13 +87,25 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="{dark(body,0.12)}"/>')      # cover
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="none" stroke="{key}" stroke-width="4"/>')
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.14:.0f}" fill="{key}"/>')
-    for cx in (fwx,rwx):
+    # drivetrain-encoded wheels: driven = solid filled rim; non-driven = open ring
+    dt=car.get("drivetrain","AWD").upper()
+    fd = dt in ("AWD","4WD","FWD"); rd = dt in ("AWD","4WD","RWD")
+    rimc=g.get("wheel", body)
+    for cx,driven in ((fwx,fd),(rwx,rd)):
         cy=GY-wr
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{g.get("wheel", body)}"/>')
-        if cel:
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{key}"/>')
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')            # tyre
+        if driven:
+            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="{rimc}"/>')
+            if cel:
+                P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
+            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{key}"/>')
+        else:  # open/hollow rim (spokes only) marks the un-driven axle
+            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.5:.0f}" fill="none" stroke="{rimc}" stroke-width="{wr*0.13:.0f}"/>')
+            for a in (0,60,120):
+                import math
+                dx=math.cos(math.radians(a))*wr*0.44; dy=math.sin(math.radians(a))*wr*0.44
+                P.append(f'<line x1="{cx-dx:.0f}" y1="{cy-dy:.0f}" x2="{cx+dx:.0f}" y2="{cy+dy:.0f}" stroke="{rimc}" stroke-width="{wr*0.1:.0f}"/>')
+            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.16:.0f}" fill="{rimc}"/>')
     return "".join(P), d, gl
 
 # ============================ STYLE PANELS ==================================
@@ -127,6 +139,33 @@ def panel_halftone(car, uid):
     P.append(f'<rect width="{PW}" height="{IMG_H}" filter="url(#gr{uid})" opacity="0.08"/>')
     return "".join(P), paper, ink, spot
 
+def _star(cx,cy,r,fill):
+    p=[]
+    for i in range(10):
+        ang=math.pi/2+i*math.pi/5; rr=r if i%2==0 else r*0.42
+        p.append(f"{cx+rr*math.cos(ang):.1f},{cy-rr*math.sin(ang):.1f}")
+    return f'<polygon points="{" ".join(p)}" fill="{fill}"/>'
+
+def country_motif(country, bg, gy):
+    """Subtle, tone-on-tone origin marker — the same across a brand's 12 months."""
+    c=country.upper(); P=[]; t1=light(bg,0.70)
+    if "JAPAN" in c:                       # rising sun (subtle)
+        cx=600; r=168
+        for i in range(-3,4):
+            a=math.radians(90-i*15)
+            P.append(f'<polygon points="{cx},{gy} {cx+math.cos(a-0.026)*840:.0f},{gy-math.sin(a-0.026)*840:.0f} {cx+math.cos(a+0.026)*840:.0f},{gy-math.sin(a+0.026)*840:.0f}" fill="{t1}"/>')
+        P.append(f'<path d="M {cx-r} {gy} A {r} {r} 0 0 1 {cx+r} {gy} Z" fill="{light(bg,0.58)}"/>')
+    elif any(k in c for k in ("UNITED STATES","USA","AMERICA")):   # stars & stripes (subtle)
+        for i in range(5):
+            P.append(f'<rect x="0" y="{gy-260+i*52}" width="{PW}" height="22" fill="{t1}"/>')
+        for rr in range(3):
+            for col in range(5):
+                P.append(_star(96+col*74, 92+rr*66, 15, light(bg,0.5)))
+    elif "GERMANY" in c:                   # three faint bands (subtle)
+        for i in range(3):
+            P.append(f'<rect x="0" y="{54+i*34}" width="{PW}" height="20" fill="{t1}"/>')
+    return "".join(P)
+
 def panel_rally(car, uid):
     """retro poster: clean two-tone sky/ground + flat car (no sun). Per-car scale."""
     key=car["key"]; spot=PAINT[key]; acc=car["accent"]
@@ -134,7 +173,8 @@ def panel_rally(car, uid):
     ground="#2E2A22"; cream="#F0E9D6"; ink="#241E16"; gy=706
     # flat, posterized backdrop (no gradients) to match the cel/vexel treatment
     P=[f'<rect width="{PW}" height="{IMG_H}" fill="{light(bg,0.74)}"/>']
-    P.append(f'<rect x="0" y="{gy-150}" width="{PW}" height="150" fill="{light(bg,0.62)}"/>')  # hard horizon band
+    P.append(f'<clipPath id="sky{uid}"><rect x="0" y="0" width="{PW}" height="{gy}"/></clipPath>')
+    P.append(f'<g clip-path="url(#sky{uid})">{country_motif(car.get("country",""), bg, gy)}</g>')  # subtle origin marker
     P.append(f'<rect x="0" y="{gy+18}" width="{PW}" height="{IMG_H-gy-18}" fill="{ground}"/>')
     P.append(f'<rect x="0" y="{gy}" width="{PW}" height="18" fill="{acc}"/>')
     body,d,gl=car_flat(car,spot,ink,glass=dark(spot,0.42),cel=True)
@@ -143,6 +183,10 @@ def panel_rally(car, uid):
     P.append(f'<ellipse cx="600" cy="{gy}" rx="{430*sc:.0f}" ry="20" fill="#000" fill-opacity="0.16"/>')
     P.append(f'<g transform="translate({tx:.1f},{ty:.1f}) scale({sc:.4f})">{body}'
              f'<path d="{d}" fill="none" stroke="{ink}" stroke-width="6.5" stroke-linejoin="round"/></g>')
+    # drivetrain tag
+    dt=car.get("drivetrain","AWD").upper()
+    P.append(T(94, 78, dt, 30, "Grot", ink, weight=900, ls=3))
+    P.append(T(94, 104, "DRIVE", 13, "Plex", mix(ink,light(bg,0.5),0.5), weight=400, ls=4))
     return "".join(P), cream, ink, acc
 
 def panel_distressed(car, uid):
