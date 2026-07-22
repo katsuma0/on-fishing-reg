@@ -37,9 +37,18 @@ def car_flat(car, body, key, glass="#2A333B"):
     g=SIL[car["sil"]]; d=_outline(g)
     cowl,hood_y=g["cowl_x"],g["hood_y"]; rf_y,rr_y,rf_x,rr_x=g["roof_fy"],g["roof_ry"],g["roof_fx"],g["roof_rx"]
     deck_x,deck_y,belt=g["deck_x"],g["deck_y"],g["belt"]; fwx,rwx,wr=g["fwx"],g["rwx"],g["wr"]
-    gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {deck_x} {deck_y} L {cowl} {belt} Z"
+    if g.get("pickup"):
+        gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {belt} L {cowl} {belt} Z"
+    else:
+        gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {deck_x} {deck_y} L {cowl} {belt} Z"
     P=[f'<path d="{d}" fill="{body}"/>']
     P.append(f'<path d="{gl}" fill="{glass}"/>')
+    if g.get("wing"):
+        x0,x1,wy=g["wing"]
+        P.append(f'<rect x="{x0}" y="{wy}" width="{x1-x0}" height="12" rx="3" fill="{body}"/>')
+        P.append(f'<rect x="{x0}" y="{wy}" width="{x1-x0}" height="12" rx="3" fill="none" stroke="{key}" stroke-width="4"/>')
+        P.append(f'<rect x="{x0+10}" y="{wy}" width="10" height="{belt-wy+18}" fill="{key}"/>')
+        P.append(f'<rect x="{x1-20}" y="{wy}" width="10" height="{belt-wy+18}" fill="{key}"/>')
     for cx in (fwx,rwx):
         cy=GY-wr
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')
@@ -81,7 +90,8 @@ def panel_halftone(car, uid):
 def panel_rally(car, uid):
     """retro rally/travel poster: sunburst + warm blocks + flat car."""
     key=car["key"]; spot=PAINT[key]; acc=car["accent"]
-    sky=light(spot,0.72); ground="#2E2A22"; cream="#F0E9D6"; ink="#241E16"
+    bg=car.get("sky", spot)   # scene tint source (decoupled so light cars can pop)
+    sky=light(bg,0.72); ground="#2E2A22"; cream="#F0E9D6"; ink="#241E16"
     P=[f'<rect width="{PW}" height="{IMG_H}" fill="{sky}"/>']
     cx,cy=600,470
     # sunburst rays
@@ -89,10 +99,10 @@ def panel_rally(car, uid):
     for i in range(24):
         a0=math.radians(i*15); a1=math.radians(i*15+7.5)
         if i%2==0:
-            rays.append(f'<path d="M{cx} {cy} L{cx+math.cos(a0)*1200:.0f} {cy+math.sin(a0)*1200:.0f} L{cx+math.cos(a1)*1200:.0f} {cy+math.sin(a1)*1200:.0f} Z" fill="{light(spot,0.5)}"/>')
+            rays.append(f'<path d="M{cx} {cy} L{cx+math.cos(a0)*1200:.0f} {cy+math.sin(a0)*1200:.0f} L{cx+math.cos(a1)*1200:.0f} {cy+math.sin(a1)*1200:.0f} Z" fill="{light(bg,0.5)}"/>')
     P.append(f'<clipPath id="rc{uid}"><rect width="{PW}" height="{IMG_H}"/></clipPath><g clip-path="url(#rc{uid})">'+"".join(rays)+'</g>')
     # sun disc
-    P.append(f'<circle cx="{cx}" cy="{cy}" r="300" fill="{light(spot,0.35)}"/>')
+    P.append(f'<circle cx="{cx}" cy="{cy}" r="300" fill="{light(bg,0.35)}"/>')
     # ground band
     P.append(f'<rect x="0" y="720" width="{PW}" height="{IMG_H-720}" fill="{ground}"/>')
     P.append(f'<rect x="0" y="700" width="{PW}" height="24" fill="{acc}"/>')
@@ -172,7 +182,8 @@ def calendar_page(car, style_key, month="MARCH", year="2026", first_wd=0, days=3
     my=IMG_H+96
     P.append(T(90, my, month, 92, "Grot", ink, weight=900))
     P.append(T(PW-90, my-46, year, 26, "Plex", mute, anchor="end", ls=3))
-    P.append(T(PW-90, my-8, f"{car['make']} {car['model']} · {car['country']}", 19, "Plex", accent, anchor="end", ls=1))
+    sub=car.get("sub", car["country"])
+    P.append(T(PW-90, my-8, f"{car['make']} {car['model']} · {sub}", 19, "Plex", accent, anchor="end", ls=1))
     P.append(f'<line x1="90" y1="{my+28}" x2="{PW-90}" y2="{my+28}" stroke="{ink}" stroke-width="2" stroke-opacity="0.25"/>')
     P.append(month_grid(96, my+92, PW-192, ink, mute, accent, first_wd, days, car["no"]))
     P.append(T(90, PH-40, f"MARQUE™  ·  WORLD MOTOR INDEX  ·  No.{car['no']:02d}/12", 15, "Plex", mute, ls=1))

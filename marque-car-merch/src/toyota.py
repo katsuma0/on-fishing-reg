@@ -55,28 +55,46 @@ TOYO_PAINT = {
  "mr2":"#E2A61E","fj40":"#40694C","hilux":"#B5642A","prius":"#3E86C0",
  "yaris":"#C6382C","supra90":"#D19A1E","crown":"#7C2E2E","gr86":"#2E7D5B",
 }
+TOYO_GEOM.update({
+ "tacoma": dict(nose_x=40,tail_x=960,belly=284,nose_y=222,tail_y=236,hood_y=202,
+    cowl_x=322,roof_fy=108,roof_ry=108,roof_fx=402,roof_rx=522,deck_x=560,deck_y=228,
+    fwx=250,rwx=792,wr=80,belt=176,pickup=True),
+ "grcorolla": dict(nose_x=50,tail_x=950,belly=286,nose_y=238,tail_y=224,hood_y=212,
+    cowl_x=364,roof_fy=122,roof_ry=126,roof_fx=452,roof_rx=706,deck_x=888,deck_y=222,
+    fwx=256,rwx=756,wr=70,belt=192),
+ "rav4": dict(nose_x=52,tail_x=950,belly=278,nose_y=220,tail_y=210,hood_y=198,
+    cowl_x=352,roof_fy=110,roof_ry=116,roof_fx=448,roof_rx=748,deck_x=888,deck_y=204,
+    fwx=252,rwx=758,wr=76,belt=176),
+ "im": dict(nose_x=48,tail_x=950,belly=286,nose_y=236,tail_y=222,hood_y=210,
+    cowl_x=356,roof_fy=124,roof_ry=130,roof_fx=444,roof_rx=688,deck_x=886,deck_y=222,
+    fwx=254,rwx=758,wr=64,belt=190),
+})
+TOYO_PAINT.update({"tacoma":"#C25A2E","grcorolla":"#C6382C","rav4":"#6E8CA0","im":"#E9E6DE"})
 SIL.update(TOYO_GEOM)
 PAINT.update(TOYO_PAINT)
 
 ACCENT="#E01F26"  # Toyota red — used for the stripe + circled date across the year
 
-def _car(no, key, model, meta):
-    return dict(no=no, key=key, sil=key, make="TOYOTA", model=model, country="JAPAN",
-                flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1])
+def _car(no, key, model, meta, sil=None, sky=None):
+    d = dict(no=no, key=key, sil=sil or key, make="TOYOTA", model=model, country="JAPAN",
+             flag="japan", accent=ACCENT, meta=meta, sub=meta.split("· ")[-1])
+    if sky: d["sky"] = sky
+    return d
 
+# 2027 lineup
 CARS_T = [
- _car(1,"gt2000","2000GT","TOYOTA 2000GT · 1967–1970"),
+ _car(1,"tacoma","TACOMA","TRD OFF-ROAD · 2024–"),
  _car(2,"ae86","COROLLA AE86","GT-S TRUENO · 1983–1987"),
- _car(3,"celica","CELICA","LIFTBACK GT · 1970–1977"),
- _car(4,"supra80","SUPRA A80","TWIN-TURBO · 1993–2002"),
+ _car(3,"grcorolla","GR COROLLA","MORIZO EDITION · 2023–"),
+ _car(4,"supra80","SUPRA A80","MK4 TWIN-TURBO · 1993–2002"),
  _car(5,"mr2","MR2","AW11 · 1984–1989"),
  _car(6,"fj40","LAND CRUISER","FJ40 · 1960–1984"),
  _car(7,"hilux","HILUX","THE INDESTRUCTIBLE · 1968–"),
  _car(8,"prius","PRIUS","XW20 HYBRID · 2003–2009"),
- _car(9,"yaris","GR YARIS","RALLY-BRED · 2020–"),
- _car(10,"supra90","SUPRA A90","REBORN · 2019–"),
- _car(11,"crown","CROWN","S60 · 1971–1974"),
- _car(12,"gr86","GR86","BOXER COUPE · 2021–"),
+ _car(9,"rav4","RAV4","ADVENTURE · 2019–"),
+ _car(10,"crown","CROWN","S60 · 1971–1974"),
+ _car(11,"im","iM","COROLLA iM · 2016–2018", sky="#5C87A6"),
+ _car(12,"gr86","86","GT86 BOXER · 2012–2021"),
 ]
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Toyota Rally Calendar 2026 — 12 months, one iconic Toyota each, Rally style."""
+"""Toyota Rally Calendar 2027 — 12 months, one iconic Toyota each, Rally style."""
 import os
 import toyota, styles
 from toyota import CARS_T
@@ -7,9 +7,11 @@ from styles import calendar_page, page_svg, FONTS, PW, PH
 from gen import esc
 
 OUT=os.path.join(os.path.dirname(os.path.abspath(__file__)),"out")
-MONTHS=[("JANUARY",4,31),("FEBRUARY",0,28),("MARCH",0,31),("APRIL",3,30),
-        ("MAY",5,31),("JUNE",1,30),("JULY",3,31),("AUGUST",6,31),
-        ("SEPTEMBER",2,30),("OCTOBER",4,31),("NOVEMBER",0,30),("DECEMBER",2,31)]
+# 2027 first-weekday (Sun=0) + days
+MONTHS=[("JANUARY",5,31),("FEBRUARY",1,28),("MARCH",1,31),("APRIL",4,30),
+        ("MAY",6,31),("JUNE",2,30),("JULY",4,31),("AUGUST",0,31),
+        ("SEPTEMBER",3,30),("OCTOBER",5,31),("NOVEMBER",1,30),("DECEMBER",3,31)]
+YEAR="2027"
 
 def svg_tag(inner,cls):
     return f'<svg class="{cls}" viewBox="0 0 {PW} {PH}" xmlns="http://www.w3.org/2000/svg" role="img">{inner}</svg>'
@@ -47,26 +49,26 @@ def gallery():
     cells=[]
     for i,c in enumerate(CARS_T):
         mn,fw,dd=MONTHS[i]
-        page=calendar_page(c,"rally",month=mn,year="2026",first_wd=fw,days=dd)
+        page=calendar_page(c,"rally",month=mn,year=YEAR,first_wd=fw,days=dd)
         cells.append(f'<div class="m">{svg_tag(page,"art")}</div>')
     grid='<div class="grid">'+"".join(cells)+'</div>'
-    note=('<p class="note"><b>The Toyota year.</b> Twelve months, twelve Toyotas — 2000GT to GR86, '
-          'Land Cruiser to Prius — every page built from the one Rally template so the calendar hangs together as a set. '
+    note=('<p class="note"><b>The Toyota year.</b> Twelve months, twelve Toyotas — Tacoma to 86, '
+          'Land Cruiser to RAV4 — every page built from the one Rally template so the calendar hangs together as a set. '
           'Vector art throughout, print-ready at A3 / 12&times;12in.</p>'
           '<p class="note">“Toyota”, the model names and badges are trademarks; this is a design study / mock-up. '
           'For a real sale you’d either licence the marks or drop to a mark-free version (body + era + silhouette).</p>')
     body=f"""
 <button class="toggle grot" onclick="(function(){{var r=document.documentElement;var d=(r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';r.setAttribute('data-theme',d?'light':'dark');}})()">Theme</button>
 <header class="hero"><div class="wrap">
-  <div class="kick">Rally Calendar · 2026 · Vector Art</div>
+  <div class="kick">Rally Calendar · 2027 · Vector Art</div>
   <h1 class="grot">TOYOTA<br>THE YEAR.</h1>
   <div class="s">A MARQUE World Motor Index Calendar</div>
   <p class="lede">Twelve icons from one marque, one per month, in the Retro Rally style — sunburst, bold flat shapes, a month you can read across the room. Each silhouette is drawn to resemble the real car, kept as clean vector art.</p>
 </div></header>
-<section><div class="wrap"><div class="shead"><h2 class="grot">The 2026 wall</h2>
+<section><div class="wrap"><div class="shead"><h2 class="grot">The 2027 wall</h2>
   <p>January → December. One template, twelve Toyotas.</p></div>{grid}</div></section>
 <section><div class="wrap"><div class="shead"><h2 class="grot">Notes</h2></div>{note}</div></section>
-<footer><div class="wrap">MARQUE™ · Toyota Rally Calendar 2026 · vector · uniform 12-month</div></footer>
+<footer><div class="wrap">MARQUE™ · Toyota Rally Calendar 2027 · vector · uniform 12-month</div></footer>
 """
     return f'<style>{FONTS}{CSS}</style>{body}'
 
@@ -75,14 +77,14 @@ if __name__=="__main__":
     for i,c in enumerate(CARS_T):
         mn,fw,dd=MONTHS[i]
         open(os.path.join(OUT,"toyota_cal",f"{i+1:02d}_{mn.lower()}_{c['key']}.svg"),"w").write(
-            page_svg(c,"rally",month=mn,year="2026",first_wd=fw,days=dd))
+            page_svg(c,"rally",month=mn,year=YEAR,first_wd=fw,days=dd))
     # 12-up spread PNG source (3 cols x 4)
     cols=3; sc=0.34; cw=int(PW*sc); ch=int(PH*sc)
     rows=(len(CARS_T)+cols-1)//cols; W,H=cols*cw,rows*ch
     b=[f'<rect width="{W}" height="{H}" fill="#2A261E"/>']
     for i,c in enumerate(CARS_T):
         mn,fw,dd=MONTHS[i]; gx=(i%cols)*cw; gy=(i//cols)*ch
-        b.append(f'<g transform="translate({gx},{gy}) scale({sc})">{calendar_page(c,"rally",month=mn,year="2026",first_wd=fw,days=dd)}</g>')
+        b.append(f'<g transform="translate({gx},{gy}) scale({sc})">{calendar_page(c,"rally",month=mn,year=YEAR,first_wd=fw,days=dd)}</g>')
     open(os.path.join(OUT,"toyota_spread.svg"),"w").write(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><style>{FONTS}</style></defs>'+"".join(b)+"</svg>")
     open(os.path.join(OUT,"toyota_calendar.html"),"w").write(gallery())
