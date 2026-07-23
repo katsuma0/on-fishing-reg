@@ -32,6 +32,87 @@ def T(x,y,s,size,fam,fill,anchor="start",ls=0,op=1.0,weight=400):
 def _place(inner, s, tx, ty):
     return f'<g transform="translate({tx},{ty}) scale({s})">{inner}</g>'
 
+# --- wheel system -----------------------------------------------------------
+# Two subtle, "if-you-know-you-know" signals, both drawn as BLACK marks on a
+# body-colour rim so the whole thing stays two-tone:
+#   1) VEHICLE TYPE  -> the rim motif (5-dot mesh for sport, thin spokes for a
+#      coupe, fine turbine for a sedan, chunky bead lugs for an SUV, big steel
+#      vents for a truck, closed aero disc for an EV).
+#   2) DRIVETRAIN    -> the centre-cap colour only: a driven wheel keeps the
+#      brand-accent hub, an idle (un-driven) wheel gets a plain white hub.
+#      AWD/4WD => both driven, FWD => front only, RWD => rear only.
+VT = {
+ # original 10 (gen.py)
+ "skyline":"sport","porsche":"sport","countach":"sport","etype":"sport",
+ "corvette":"sport","alpine":"sport","volvo":"coupe","ioniq":"ev",
+ "niva":"suv","monaro":"coupe",
+ # Toyota
+ "tacoma":"truck","ae86":"coupe","grcorolla":"sport","supra80":"sport",
+ "mr2":"sport","fj40":"suv","fjcruiser":"suv","prius":"ev","rav4":"suv",
+ "crown":"sedan","im":"sedan","gr86":"sport",
+ # Honda
+ "nsx":"sport","civicr":"sport","s2000":"sport","integra":"coupe","crx":"coupe",
+ "prelude":"coupe","beat":"sport","ridgeline":"truck","crv":"suv",
+ "odyssey":"sedan","hondae":"ev","accord":"sedan",
+ # Ford
+ "mustang":"sport","f150":"truck","fordgt":"sport","bronco":"suv",
+ "focusrs":"sport","fiestast":"sport","explorer":"suv","gt40":"sport",
+ "escortcos":"sport","thunderbird":"coupe","ranger":"truck","mache":"ev",
+ # Acura
+ "a_nsx":"sport","a_integs":"sport","a_rsx":"coupe","a_tltyps":"sedan",
+ "a_tsx":"sedan","a_legend":"coupe","a_rl":"sedan","a_ilx":"sedan",
+ "a_tlxs":"sedan","a_mdx":"suv","a_rdx":"suv","a_cl":"coupe",
+ # Lexus
+ "lx_lc":"sport","lx_lfa":"sport","lx_isf":"sedan","lx_rcf":"coupe",
+ "lx_gsf":"sedan","lx_ls":"sedan","lx_sc":"coupe","lx_rx":"suv",
+ "lx_gx":"suv","lx_lx":"suv","lx_ux":"suv","lx_nx":"suv",
+ # Jeep
+ "j_wrangler":"suv","j_cj5":"suv","j_grandche":"suv","j_cherokee":"suv",
+ "j_gladiator":"truck","j_wagoneer":"suv","j_renegade":"suv","j_compass":"suv",
+ "j_comanche":"truck","j_grandwag":"suv","j_willys":"suv","j_trackhawk":"suv",
+}
+IDLE_CAP="#F3EFE6"   # warm white — marks the un-driven wheel
+
+def _rim_motif(vt, cx, cy, wr, key):
+    """BLACK rim-signature marks for one vehicle type (drawn on the body-colour rim)."""
+    rf=wr*0.56; P=[]
+    def ring(r,sw): P.append(f'<circle cx="{cx}" cy="{cy}" r="{r:.1f}" fill="none" stroke="{key}" stroke-width="{sw:.1f}"/>')
+    def dots(r,rad,n=5,off=-90):
+        for i in range(n):
+            a=math.radians(i*(360/n)+off)
+            P.append(f'<circle cx="{cx+math.cos(a)*r:.1f}" cy="{cy+math.sin(a)*r:.1f}" r="{rad:.1f}" fill="{key}"/>')
+    def spokes(n,inner,outer,sw):
+        for i in range(n):
+            a=math.radians(i*(360/n)-90)
+            x1=cx+math.cos(a)*inner; y1=cy+math.sin(a)*inner
+            x2=cx+math.cos(a)*outer; y2=cy+math.sin(a)*outer
+            P.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{key}" stroke-width="{sw:.1f}" stroke-linecap="round"/>')
+    if vt=="sport":          # 5 black dots (mesh)
+        dots(wr*0.34, wr*0.10)
+    elif vt=="coupe":        # 5 slim spokes
+        spokes(5, wr*0.17, rf*0.97, wr*0.055)
+    elif vt=="sedan":        # fine 10-hole turbine
+        dots(wr*0.36, wr*0.048, n=10)
+    elif vt=="suv":          # rugged: bead ring + 5 chunky lugs by the hub
+        ring(rf*0.9, wr*0.05); dots(wr*0.205, wr*0.072)
+    elif vt=="truck":        # steel dish: 5 big round vents
+        dots(wr*0.30, wr*0.115, n=5)
+    elif vt=="ev":           # closed aero disc: rim ring + 6 thin slots
+        ring(rf*0.9, wr*0.05); spokes(6, wr*0.19, rf*0.80, wr*0.038)
+    return "".join(P)
+
+def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False):
+    """One wheel: black tyre, body-colour rim, black type-motif, drivetrain hub."""
+    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',                    # tyre
+       f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="{rim}"/>']           # rim face (body colour)
+    if cel:
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
+    P.append(_rim_motif(vt, cx, cy, wr, key))                                     # type signature
+    cap = accent if driven else IDLE_CAP                                          # drivetrain tell
+    P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.15:.0f}" fill="{cap}"/>')     # hub
+    P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.15:.0f}" fill="none" stroke="{key}" stroke-width="2.5"/>')
+    return "".join(P)
+
 # --- car in flat 2-colour (for halftone / rally) ---------------------------
 def car_flat(car, body, key, glass="#2A333B", cel=False):
     g=SIL[car["sil"]]; d=_outline(g)
@@ -87,23 +168,13 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="{dark(body,0.12)}"/>')      # cover
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.6:.0f}" fill="none" stroke="{key}" stroke-width="4"/>')
         P.append(f'<circle cx="{sx}" cy="{sy}" r="{sr*0.14:.0f}" fill="{key}"/>')
-    # same 5-lug alloy on both axles; the driven ('working') wheel is only slightly
-    # brighter with a brand-colour centre cap, the un-driven one a touch darker.
+    # wheels: type-signature rim + drivetrain hub (see draw_wheel / VT above)
     dt=car.get("drivetrain","AWD").upper()
     fd = dt in ("AWD","4WD","FWD"); rd = dt in ("AWD","4WD","RWD")
     rimc=g.get("wheel", body); acc=car.get("accent","#222")
-    for cx,driven in ((fwx,fd),(rwx,rd)):
-        cy=GY-wr
-        rim = rimc if driven else dark(rimc,0.26)
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>')                       # tyre
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="{rim}"/>')               # rim face
-        if cel:
-            P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
-        for i in range(5):                                                                       # 5 lug slots
-            a=math.radians(i*72-90); hx=cx+math.cos(a)*wr*0.35; hy=cy+math.sin(a)*wr*0.35
-            P.append(f'<circle cx="{hx:.0f}" cy="{hy:.0f}" r="{wr*0.085:.0f}" fill="{key}"/>')
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.19:.0f}" fill="{acc if driven else key}"/>')  # centre cap
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.19:.0f}" fill="none" stroke="{key}" stroke-width="2.5"/>')
+    vt=car.get("vtype", VT.get(car["sil"], "sedan"))
+    P.append(draw_wheel(fwx, GY-wr, wr, rimc, key, vt, fd, acc, cel))
+    P.append(draw_wheel(rwx, GY-wr, wr, rimc, key, vt, rd, acc, cel))
     return "".join(P), d, gl
 
 # ============================ STYLE PANELS ==================================
