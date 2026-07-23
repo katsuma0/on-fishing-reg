@@ -68,28 +68,25 @@ VT = {
  "j_gladiator":"truck","j_wagoneer":"suv","j_renegade":"suv","j_compass":"suv",
  "j_comanche":"truck","j_grandwag":"suv","j_willys":"suv","j_trackhawk":"suv",
 }
-IDLE_CAP="#F3EFE6"   # warm white — marks the un-driven wheel
-# tyre "fatness" per type: fraction of the wheel that is body-colour RIM; the
-# rest reads as black tyre. Low fraction => fat off-road tyre (truck/SUV);
-# high fraction => low-profile tyre (sports). No marks on the rim — clean.
-TIRE={"sport":0.72,"coupe":0.64,"sedan":0.58,"ev":0.60,"suv":0.48,"truck":0.40}
-DT_TELL="hub"        # how the drivetrain reads: "hub" | "fillhollow" | "none"
+RIM="#A6ACB2"        # uniform alloy-grey rim on every car
+# tyre "fatness" per type: fraction of the wheel that is grey RIM, rest is black
+# tyre. Kept in a TIGHT band so no tyre ever thins out to just a line.
+TIRE={"sport":0.60,"coupe":0.58,"sedan":0.54,"ev":0.56,"suv":0.48,"truck":0.42}
+DT_TELL="hub"        # drivetrain read: "hub" (tiny accent pin, driven only) | "none"
 
 def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False, tell=None):
-    """Clean, sleek wheel: a black tyre + a plain body-colour rim (no rim marks).
-    The tyre THICKNESS carries the vehicle type; the small hub carries drivetrain."""
+    """Clean, sleek wheel: black tyre + grey rim disc (no marks). The tyre
+    THICKNESS carries the vehicle type. Drivetrain is a *very* subtle tell: a
+    driven wheel gets a tiny accent pin at the hub; an idle wheel is identical
+    (just the plain grey hub), so you have to look closely to catch it."""
     tell = tell or DT_TELL
-    rf = wr*TIRE.get(vt, 0.58)
-    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',        # black tyre
-       f'<circle cx="{cx}" cy="{cy}" r="{rf:.0f}" fill="{rim}"/>']    # clean rim face
-    hr=wr*0.14
-    if tell=="hub":                                                   # accent=driven, white=idle
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="{accent if driven else IDLE_CAP}"/>')
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="none" stroke="{key}" stroke-width="2"/>')
-    elif tell=="fillhollow":                                          # solid=driven, ring=idle (mono)
-        if driven: P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="{key}"/>')
-        else: P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="none" stroke="{key}" stroke-width="{wr*0.05:.0f}"/>')
-    # tell=="none": rim left perfectly clean; drivetrain shown only by the panel tag
+    rf = wr*TIRE.get(vt, 0.54)
+    hub = dark(rim, 0.42)
+    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',            # black tyre
+       f'<circle cx="{cx}" cy="{cy}" r="{rf:.0f}" fill="{rim}"/>',        # grey rim
+       f'<circle cx="{cx}" cy="{cy}" r="{wr*0.13:.0f}" fill="{hub}"/>']   # grey hub (both wheels identical)
+    if tell=="hub" and driven:                                           # tiny accent pin — driven only
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.05:.0f}" fill="{accent}"/>')
     return "".join(P)
 
 # --- car in flat 2-colour (for halftone / rally) ---------------------------
@@ -112,21 +109,15 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<clipPath id="cc{uid}"><path d="{d}"/></clipPath>')
     P.append(f'<path d="{d}" fill="{body}"/>')
     if cel:
-        # hard-edged posterized shadow on the lower body (no gradient)
-        sh=f"M {nose-14} {belly+14} L {tail+14} {belly+14} L {tail+14} {belt+26} L {nose-14} {belt+8} Z"
-        P.append(f'<g clip-path="url(#cc{uid})"><path d="{sh}" fill="{dark(body,0.30)}"/>'
-                 f'<rect x="{nose-14}" y="{belly-16}" width="{tail-nose+28}" height="34" fill="{dark(body,0.5)}"/></g>')
+        # ABSTRACT: one clean lower-body shadow plane — no deep rocker band
+        sh=f"M {nose-14} {belly+14} L {tail+14} {belly+14} L {tail+14} {belt+30} L {nose-14} {belt+12} Z"
+        P.append(f'<g clip-path="url(#cc{uid})"><path d="{sh}" fill="{dark(body,0.22)}"/></g>')
     P.append(f'<path d="{gl}" fill="{glass}"/>')
     if cel:
-        # glass: hard reflection stripe + gloss + clean outline; hard top highlights; spec spots
-        r0=cowl+(rf_x-cowl)*0.2
-        P.append(f'<polygon points="{r0:.0f},{belt} {r0+66:.0f},{rf_y+16} {r0+128:.0f},{rf_y+16} {r0+58:.0f},{belt}" fill="{light(glass,0.5)}"/>')
-        P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="4"/>')
-        P.append(f'<circle cx="{rf_x+20}" cy="{rf_y+24}" r="9" fill="#fff" fill-opacity="0.85"/>')
-        hood=f"M {nose+24} {nose_y+2} L {cowl} {hood_y+2} L {cowl} {hood_y+16} L {nose+30} {nose_y+16} Z"
-        roof=f"M {rf_x} {rf_y+1} L {rr_x} {rr_y+1} L {rr_x} {rr_y+13} L {rf_x} {rf_y+13} Z"
-        P.append(f'<g clip-path="url(#cc{uid})"><path d="{hood}" fill="{light(body,0.34)}"/>'
-                 f'<path d="{roof}" fill="{light(body,0.34)}"/></g>')
+        # ABSTRACT: flat glass + the single windshield gloss + a clean thin outline.
+        # (reflection stripe and hood/roof highlight bands removed — sleeker, more abstract)
+        P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="3.5"/>')
+        P.append(f'<circle cx="{rf_x+20}" cy="{rf_y+24}" r="9" fill="#fff" fill-opacity="0.8"/>')
     if g.get("white_roof"):
         rp=f"M {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {rr_y+26} L {rf_x} {rf_y+26} Z"
         P.append(f'<path d="{rp}" fill="#ECE8DD"/>')
@@ -155,7 +146,7 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
     # wheels: type-signature rim + drivetrain hub (see draw_wheel / VT above)
     dt=car.get("drivetrain","AWD").upper()
     fd = dt in ("AWD","4WD","FWD"); rd = dt in ("AWD","4WD","RWD")
-    rimc=g.get("wheel", body); acc=car.get("accent","#222")
+    rimc=RIM; acc=car.get("accent","#222")
     vt=car.get("vtype", VT.get(car["sil"], "sedan"))
     P.append(draw_wheel(fwx, GY-wr, wr, rimc, key, vt, fd, acc, cel))
     P.append(draw_wheel(rwx, GY-wr, wr, rimc, key, vt, rd, acc, cel))
