@@ -119,6 +119,11 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
     cowl,hood_y=g["cowl_x"],g["hood_y"]; rf_y,rr_y,rf_x,rr_x=g["roof_fy"],g["roof_ry"],g["roof_fx"],g["roof_rx"]
     deck_x,deck_y,belt=g["deck_x"],g["deck_y"],g["belt"]; fwx,rwx,wr=g["fwx"],g["rwx"],g["wr"]
     nose=g["nose_x"]; tail=g["tail_x"]; belly=g["belly"]; nose_y=g["nose_y"]; uid=car["key"]
+    # SIGNATURE DETAIL — KEEP. The greenhouse starts at the cowl point (cowl,hood_y)
+    # while the glass front edge drops to (cowl,belt); because belt sits slightly
+    # above hood_y, this leaves the small stepped "indent" where the windshield
+    # pops up out of the body at the base of the A-pillar. Do not flatten: preserve
+    # the cowl_x / hood_y / belt relationship and this vertical `L {cowl} {belt}` edge.
     if g.get("pickup"):
         gl=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {belt} L {cowl} {belt} Z"
     else:

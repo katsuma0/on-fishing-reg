@@ -26,6 +26,9 @@ def _outline(g):
     nose_y,tail_y,hood_y = g["nose_y"],g["tail_y"],g["hood_y"]
     cowl=g["cowl_x"]; rf_y,rr_y=g["roof_fy"],g["roof_ry"]; rf_x,rr_x=g["roof_fx"],g["roof_rx"]
     deck_x,deck_y=g["deck_x"],g["deck_y"]; fwx,rwx,wr=g["fwx"],g["rwx"],g["wr"]
+    # The (cowl-70,hood_y+4)->(cowl,hood_y) hood run meeting the steep windshield
+    # rise to (rf_x,rf_y) forms the cowl corner that reads as the signature
+    # "windshield pops up from the body" indent. KEEP these three points.
     top=[(nose,belly),(nose+6,nose_y),(cowl-70,hood_y+4),(cowl,hood_y),
          (rf_x,rf_y),(rr_x,rr_y),(deck_x,deck_y),(tail-4,tail_y),(tail,belly)]
     aw=wr+12
