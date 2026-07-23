@@ -32,15 +32,12 @@ def T(x,y,s,size,fam,fill,anchor="start",ls=0,op=1.0,weight=400):
 def _place(inner, s, tx, ty):
     return f'<g transform="translate({tx},{ty}) scale({s})">{inner}</g>'
 
-# --- wheel system -----------------------------------------------------------
-# Two subtle, "if-you-know-you-know" signals, both drawn as BLACK marks on a
-# body-colour rim so the whole thing stays two-tone:
-#   1) VEHICLE TYPE  -> the rim motif (5-dot mesh for sport, thin spokes for a
-#      coupe, fine turbine for a sedan, chunky bead lugs for an SUV, big steel
-#      vents for a truck, closed aero disc for an EV).
-#   2) DRIVETRAIN    -> the centre-cap colour only: a driven wheel keeps the
-#      brand-accent hub, an idle (un-driven) wheel gets a plain white hub.
-#      AWD/4WD => both driven, FWD => front only, RWD => rear only.
+# --- wheel system (clean & sleek) -------------------------------------------
+# The rim is a plain body-colour disc — NO marks on it. Two quiet signals:
+#   1) VEHICLE TYPE  -> the TYRE thickness. Fat black tyre for trucks (and SUVs),
+#      thin low-profile tyre for sports/small cars, medium for sedans/coupes.
+#   2) DRIVETRAIN    -> the small centre hub only (see DT_TELL): driven wheel =
+#      brand-accent hub, idle wheel = white hub. AWD/4WD both, FWD front, RWD rear.
 VT = {
  # original 10 (gen.py)
  "skyline":"sport","porsche":"sport","countach":"sport","etype":"sport",
@@ -72,45 +69,27 @@ VT = {
  "j_comanche":"truck","j_grandwag":"suv","j_willys":"suv","j_trackhawk":"suv",
 }
 IDLE_CAP="#F3EFE6"   # warm white — marks the un-driven wheel
+# tyre "fatness" per type: fraction of the wheel that is body-colour RIM; the
+# rest reads as black tyre. Low fraction => fat off-road tyre (truck/SUV);
+# high fraction => low-profile tyre (sports). No marks on the rim — clean.
+TIRE={"sport":0.72,"coupe":0.64,"sedan":0.58,"ev":0.60,"suv":0.48,"truck":0.40}
+DT_TELL="hub"        # how the drivetrain reads: "hub" | "fillhollow" | "none"
 
-def _rim_motif(vt, cx, cy, wr, key):
-    """BLACK rim-signature marks for one vehicle type (drawn on the body-colour rim)."""
-    rf=wr*0.56; P=[]
-    def ring(r,sw): P.append(f'<circle cx="{cx}" cy="{cy}" r="{r:.1f}" fill="none" stroke="{key}" stroke-width="{sw:.1f}"/>')
-    def dots(r,rad,n=5,off=-90):
-        for i in range(n):
-            a=math.radians(i*(360/n)+off)
-            P.append(f'<circle cx="{cx+math.cos(a)*r:.1f}" cy="{cy+math.sin(a)*r:.1f}" r="{rad:.1f}" fill="{key}"/>')
-    def spokes(n,inner,outer,sw):
-        for i in range(n):
-            a=math.radians(i*(360/n)-90)
-            x1=cx+math.cos(a)*inner; y1=cy+math.sin(a)*inner
-            x2=cx+math.cos(a)*outer; y2=cy+math.sin(a)*outer
-            P.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{key}" stroke-width="{sw:.1f}" stroke-linecap="round"/>')
-    if vt=="sport":          # 5 black dots (mesh)
-        dots(wr*0.34, wr*0.10)
-    elif vt=="coupe":        # 5 slim spokes
-        spokes(5, wr*0.17, rf*0.97, wr*0.055)
-    elif vt=="sedan":        # fine 10-hole turbine
-        dots(wr*0.36, wr*0.048, n=10)
-    elif vt=="suv":          # rugged: bead ring + 5 chunky lugs by the hub
-        ring(rf*0.9, wr*0.05); dots(wr*0.205, wr*0.072)
-    elif vt=="truck":        # steel dish: 5 big round vents
-        dots(wr*0.30, wr*0.115, n=5)
-    elif vt=="ev":           # closed aero disc: rim ring + 6 thin slots
-        ring(rf*0.9, wr*0.05); spokes(6, wr*0.19, rf*0.80, wr*0.038)
-    return "".join(P)
-
-def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False):
-    """One wheel: black tyre, body-colour rim, black type-motif, drivetrain hub."""
-    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',                    # tyre
-       f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="{rim}"/>']           # rim face (body colour)
-    if cel:
-        P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.56:.0f}" fill="none" stroke="{key}" stroke-width="3"/>')
-    P.append(_rim_motif(vt, cx, cy, wr, key))                                     # type signature
-    cap = accent if driven else IDLE_CAP                                          # drivetrain tell
-    P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.15:.0f}" fill="{cap}"/>')     # hub
-    P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.15:.0f}" fill="none" stroke="{key}" stroke-width="2.5"/>')
+def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False, tell=None):
+    """Clean, sleek wheel: a black tyre + a plain body-colour rim (no rim marks).
+    The tyre THICKNESS carries the vehicle type; the small hub carries drivetrain."""
+    tell = tell or DT_TELL
+    rf = wr*TIRE.get(vt, 0.58)
+    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',        # black tyre
+       f'<circle cx="{cx}" cy="{cy}" r="{rf:.0f}" fill="{rim}"/>']    # clean rim face
+    hr=wr*0.14
+    if tell=="hub":                                                   # accent=driven, white=idle
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="{accent if driven else IDLE_CAP}"/>')
+        P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="none" stroke="{key}" stroke-width="2"/>')
+    elif tell=="fillhollow":                                          # solid=driven, ring=idle (mono)
+        if driven: P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="{key}"/>')
+        else: P.append(f'<circle cx="{cx}" cy="{cy}" r="{hr:.0f}" fill="none" stroke="{key}" stroke-width="{wr*0.05:.0f}"/>')
+    # tell=="none": rim left perfectly clean; drivetrain shown only by the panel tag
     return "".join(P)
 
 # --- car in flat 2-colour (for halftone / rally) ---------------------------
