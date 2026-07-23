@@ -68,30 +68,65 @@ VT = {
  "j_gladiator":"truck","j_wagoneer":"suv","j_renegade":"suv","j_compass":"suv",
  "j_comanche":"truck","j_grandwag":"suv","j_willys":"suv","j_trackhawk":"suv",
 }
-RIM="#7E848C"        # uniform alloy graphite-grey rim (solid — reads against light sky)
-# tyre "fatness" per type: fraction that is grey RIM, rest is black tyre. A very
-# TIGHT band so tyres barely differ, and even the lowest super-sports keep a solid
-# black tyre (never a thin line).
+RIM="#6C727A"        # solid graphite rim — dark enough to read against any background
+# tyre "fatness" per type: fraction that is RIM, rest is black tyre. A very TIGHT
+# band so tyres barely differ, and even the lowest super-sports keep a solid tyre.
 TIRE={"sport":0.56,"coupe":0.55,"sedan":0.53,"ev":0.54,"suv":0.50,"truck":0.47}
 DT_TELL="hub"        # drivetrain read: "hub" (tiny accent pin, driven only) | "none"
 
 def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False, tell=None):
-    """Clean, sleek wheel: black tyre + grey rim disc (no marks). The tyre
-    THICKNESS carries the vehicle type. Drivetrain is a *very* subtle tell: a
-    driven wheel gets a tiny accent pin at the hub; an idle wheel is identical
-    (just the plain grey hub), so you have to look closely to catch it."""
+    """Solid wheel: black tyre + a solid graphite rim disc with a subtly darker
+    lower half so it reads as a SOLID disc (never see-through). Tyre thickness
+    carries the type; a tiny accent pin marks the hub of driven wheels only."""
     tell = tell or DT_TELL
-    rf = wr*TIRE.get(vt, 0.54)
-    hub = dark(rim, 0.42)
-    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',            # black tyre
-       f'<circle cx="{cx}" cy="{cy}" r="{rf:.0f}" fill="{rim}"/>',        # grey rim
-       f'<circle cx="{cx}" cy="{cy}" r="{wr*0.13:.0f}" fill="{hub}"/>']   # grey hub (both wheels identical)
-    if tell=="hub" and driven:                                           # tiny accent pin — driven only
+    rf = wr*TIRE.get(vt, 0.53)
+    P=[f'<circle cx="{cx}" cy="{cy}" r="{wr}" fill="{key}"/>',            # tyre
+       f'<circle cx="{cx}" cy="{cy}" r="{rf:.0f}" fill="{rim}"/>']        # solid rim
+    P.append(f'<path d="M {cx-rf:.0f} {cy:.0f} A {rf:.0f} {rf:.0f} 0 0 1 {cx+rf:.0f} {cy:.0f} Z" '  # lower shade -> solid dome
+             f'fill="{dark(rim,0.26)}"/>')
+    P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.13:.0f}" fill="{dark(rim,0.5)}"/>')  # hub
+    if tell=="hub" and driven:
         P.append(f'<circle cx="{cx}" cy="{cy}" r="{wr*0.05:.0f}" fill="{accent}"/>')
     return "".join(P)
 
+def _shade(uid, g, body, lvl):
+    """Body tonal planes for one ABSTRACTION LEVEL (clipped to the car outline):
+    lvl 1 = clean two-tone; 2 = bolder; 3 = hard angular facets; 4 = full low-poly."""
+    nose=g["nose_x"]; tail=g["tail_x"]; belly=g["belly"]; belt=g["belt"]
+    cowl=g["cowl_x"]; hy=g["hood_y"]; rrx=g["roof_rx"]
+    fwx=g["fwx"]; rwx=g["rwx"]; mid=(nose+tail)//2; q=(nose+mid)//2
+    edge=dark(body,0.6)
+    def poly(pts,c,sw=0):
+        s=f' stroke="{edge}" stroke-width="{sw}" stroke-linejoin="round"' if sw else ''
+        return '<path d="M '+" L ".join(f"{x:.0f} {y:.0f}" for x,y in pts)+f' Z" fill="{c}"{s}/>'
+    P=[f'<g clip-path="url(#cc{uid})">']
+    if lvl<=1:                       # CLEAN — raked lower plane + rocker
+        P.append(poly([(nose-16,belt+34),(tail+18,belt-4),(tail+18,belly+50),(nose-16,belly+50)], dark(body,0.15)))
+        P.append(f'<rect x="{nose-16}" y="{belly-6}" width="{tail-nose+34}" height="42" fill="{dark(body,0.30)}"/>')
+    elif lvl==2:                     # BOLD — hood highlight + one raked lower plane
+        P.append(poly([(nose-10,belt),(cowl,hy),(cowl,belt)], light(body,0.16)))
+        P.append(poly([(nose-16,belt+28),(tail+18,belt-8),(tail+18,belly+50),(nose-16,belly+50)], dark(body,0.22)))
+    elif lvl==3:                     # FACETED — hard angular planes, clear contrast
+        P.append(poly([(nose,belly),(cowl,hy),(q,belt),(nose,belt)], light(body,0.26)))
+        P.append(poly([(cowl,hy),(rrx,belt),(mid,belt),(q,belt)], light(body,0.04)))
+        P.append(poly([(q,belt),(mid,belt),(rwx,belly),(fwx,belly)], dark(body,0.20)))
+        P.append(poly([(mid,belt),(rrx,belt),(tail,belly),(rwx,belly)], dark(body,0.34)))
+        P.append(f'<rect x="{nose-16}" y="{belly-2}" width="{tail-nose+34}" height="40" fill="{dark(body,0.48)}"/>')
+    else:                            # POLYGON — high-contrast crystalline shards + edges
+        sw=2.4
+        P.append(poly([(nose,belly),(cowl,hy),(fwx,belt)], light(body,0.42), sw))
+        P.append(poly([(nose,belly),(fwx,belt),(fwx+26,belly)], dark(body,0.06), sw))
+        P.append(poly([(cowl,hy),(q,belt-10),(fwx+26,belly),(fwx,belt)], light(body,0.14), sw))
+        P.append(poly([(cowl,hy),(mid,belt),(q,belt-10)], light(body,0.44), sw))
+        P.append(poly([(q,belt-10),(mid,belt),(rwx,belly),(fwx+26,belly)], dark(body,0.18), sw))
+        P.append(poly([(mid,belt),(rrx,belt),(rwx,belly)], light(body,0.06), sw))
+        P.append(poly([(rrx,belt),(tail,belly),(rwx,belly)], dark(body,0.40), sw))
+        P.append(poly([(fwx+26,belly),(rwx,belly),(tail,belly),(tail+16,belly+46),(nose-14,belly+46)], dark(body,0.54), sw))
+    P.append('</g>')
+    return "".join(P)
+
 # --- car in flat 2-colour (for halftone / rally) ---------------------------
-def car_flat(car, body, key, glass="#2A333B", cel=False):
+def car_flat(car, body, key, glass="#2A333B", cel=False, lvl=1):
     g=SIL[car["sil"]]; d=_outline(g)
     cowl,hood_y=g["cowl_x"],g["hood_y"]; rf_y,rr_y,rf_x,rr_x=g["roof_fy"],g["roof_ry"],g["roof_fx"],g["roof_rx"]
     deck_x,deck_y,belt=g["deck_x"],g["deck_y"],g["belt"]; fwx,rwx,wr=g["fwx"],g["rwx"],g["wr"]
@@ -110,21 +145,16 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<clipPath id="cc{uid}"><path d="{d}"/></clipPath>')
     P.append(f'<path d="{d}" fill="{body}"/>')
     if cel:
-        # TWO-TONE body + bottom — a RAKED lower plane (more abstract than a flat
-        # band) plus a darker rocker strip along the very bottom.
-        lo=dark(body,0.16); bot=dark(body,0.32)
-        loply=f"M {nose-16} {belt+34} L {tail+18} {belt-4} L {tail+18} {belly+50} L {nose-16} {belly+50} Z"
-        P.append(f'<g clip-path="url(#cc{uid})"><path d="{loply}" fill="{lo}"/>'
-                 f'<rect x="{nose-16}" y="{belly-6}" width="{tail-nose+34}" height="42" fill="{bot}"/></g>')
-    if cel:
-        # windshield: two tones of a LIGHTER shade of the body colour, split so the
-        # brighter tone is the FRONT windshield pane itself (no gloss dot).
-        gA=light(body,0.60); gB=light(body,0.42)
+        # body tonal planes for this abstraction level
+        P.append(_shade(uid, g, body, lvl))
+        # windshield = a clearly LIGHTER shade of the body colour (the glass)
+        gA=light(body,0.56)
         P.append(f'<clipPath id="gg{uid}"><path d="{gl}"/></clipPath>')
-        P.append(f'<path d="{gl}" fill="{gB}"/>')                                    # side + rear glass
-        wind=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {cowl} {belt} Z"                   # front windshield pane
-        P.append(f'<g clip-path="url(#gg{uid})"><path d="{wind}" fill="{gA}"/></g>')
-        P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="3.5"/>')
+        P.append(f'<path d="{gl}" fill="{gA}"/>')
+        if lvl>=3:                                                                   # angular reflection facet
+            wind=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {(rf_x+rr_x)//2} {rr_y} L {cowl} {belt} Z"
+            P.append(f'<g clip-path="url(#gg{uid})"><path d="{wind}" fill="{light(body,0.34)}"/></g>')
+        P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="{3.5 if lvl<4 else 2.6}"/>')
     else:
         P.append(f'<path d="{gl}" fill="{glass}"/>')
     if g.get("white_roof"):
@@ -133,10 +163,8 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<path d="M {rf_x} {rf_y} L {rr_x} {rr_y}" fill="none" stroke="{key}" stroke-width="4"/>')
     if g.get("taxi"):
         rx=(rf_x+rr_x)/2; ry=min(rf_y,rr_y)
-        P.append(f'<rect x="{rx-8}" y="{ry-14}" width="16" height="16" fill="{key}"/>')            # post
-        P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="#F3C24E"/>')  # andon
-        P.append(f'<rect x="{rx-48}" y="{ry-44}" width="96" height="32" rx="8" fill="none" stroke="{key}" stroke-width="4"/>')
-        P.append(f'<line x1="{rx-30}" y1="{ry-28}" x2="{rx+30}" y2="{ry-28}" stroke="{key}" stroke-width="3"/>')
+        P.append(f'<rect x="{rx-48}" y="{ry-42}" width="96" height="30" rx="8" fill="#F3C24E"/>')  # andon (floats, no post)
+        P.append(f'<rect x="{rx-48}" y="{ry-42}" width="96" height="30" rx="8" fill="none" stroke="{key}" stroke-width="4"/>')
     if g.get("splitter"):
         P.append(f'<path d="M {nose-40} {belly+2} L {nose+120} {belly+2} L {nose+120} {belly+15} L {nose-48} {belly+17} Z" fill="{dark(body,0.55)}"/>')
     if g.get("wing"):
@@ -230,12 +258,15 @@ def panel_rally(car, uid):
     P.append(f'<g clip-path="url(#sky{uid})">{country_motif(car.get("country",""), bg, gy)}</g>')  # subtle origin marker
     P.append(f'<rect x="0" y="{gy+18}" width="{PW}" height="{IMG_H-gy-18}" fill="{ground}"/>')
     P.append(f'<rect x="0" y="{gy}" width="{PW}" height="18" fill="{acc}"/>')
-    body,d,gl=car_flat(car,spot,ink,glass=dark(spot,0.42),cel=True)
+    lvl=car.get("abstract",1)
+    body,d,gl=car_flat(car,spot,ink,glass=dark(spot,0.42),cel=True,lvl=lvl)
     sc=1.14*car.get("cscale",1.0)
     ty=gy-GY*sc; tx=600-500*sc
+    ow=6.5 if lvl<4 else 5.0
     P.append(f'<ellipse cx="600" cy="{gy}" rx="{430*sc:.0f}" ry="20" fill="#000" fill-opacity="0.16"/>')
-    P.append(f'<g transform="translate({tx:.1f},{ty:.1f}) scale({sc:.4f})">{body}'
-             f'<path d="{d}" fill="none" stroke="{ink}" stroke-width="6.5" stroke-linejoin="round"/></g>')
+    # cars face RIGHT: mirror the car group horizontally within its 1000-wide box
+    P.append(f'<g transform="translate({tx+1000*sc:.1f},{ty:.1f}) scale({-sc:.4f},{sc:.4f})">{body}'
+             f'<path d="{d}" fill="none" stroke="{ink}" stroke-width="{ow}" stroke-linejoin="round"/></g>')
     # drivetrain tag
     dt=car.get("drivetrain","AWD").upper()
     P.append(T(94, 78, dt, 30, "Grot", ink, weight=900, ls=3))
