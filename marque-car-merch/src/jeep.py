@@ -66,7 +66,7 @@ CARS_J = [
  _car(3,"j_grandche","GRAND CHEROKEE","WK2 · 2011–2021", dt="4WD", cscale=1.03),
  _car(4,"j_cherokee","CHEROKEE XJ","1984–2001", dt="4WD", cscale=1.02),
  _car(5,"j_gladiator","GLADIATOR","JT PICKUP · 2020–", dt="4WD", cscale=1.07),
- _car(6,"j_wagoneer","WAGONEER SJ","1963–1991", dt="4WD", cscale=1.04),
+ _car(6,"j_wagoneer","WAGONEER SJ","1963–1991", dt="4WD", cscale=1.04, sky="#97A07E"),
  _car(7,"j_renegade","RENEGADE","TRAILHAWK · 2015–", dt="4WD", cscale=0.94),
  _car(8,"j_compass","COMPASS","2017–", dt="4WD", cscale=1.0),
  _car(9,"j_comanche","COMANCHE MJ","1986–1992", dt="4WD", cscale=1.03),

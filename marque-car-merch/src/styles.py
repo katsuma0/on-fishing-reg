@@ -68,10 +68,11 @@ VT = {
  "j_gladiator":"truck","j_wagoneer":"suv","j_renegade":"suv","j_compass":"suv",
  "j_comanche":"truck","j_grandwag":"suv","j_willys":"suv","j_trackhawk":"suv",
 }
-RIM="#A6ACB2"        # uniform alloy-grey rim on every car
-# tyre "fatness" per type: fraction of the wheel that is grey RIM, rest is black
-# tyre. Kept in a TIGHT band so no tyre ever thins out to just a line.
-TIRE={"sport":0.60,"coupe":0.58,"sedan":0.54,"ev":0.56,"suv":0.48,"truck":0.42}
+RIM="#7E848C"        # uniform alloy graphite-grey rim (solid — reads against light sky)
+# tyre "fatness" per type: fraction that is grey RIM, rest is black tyre. A very
+# TIGHT band so tyres barely differ, and even the lowest super-sports keep a solid
+# black tyre (never a thin line).
+TIRE={"sport":0.56,"coupe":0.55,"sedan":0.53,"ev":0.54,"suv":0.50,"truck":0.47}
 DT_TELL="hub"        # drivetrain read: "hub" (tiny accent pin, driven only) | "none"
 
 def draw_wheel(cx, cy, wr, rim, key, vt, driven, accent, cel=False, tell=None):
@@ -109,15 +110,21 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<clipPath id="cc{uid}"><path d="{d}"/></clipPath>')
     P.append(f'<path d="{d}" fill="{body}"/>')
     if cel:
-        # ABSTRACT: one clean lower-body shadow plane — no deep rocker band
-        sh=f"M {nose-14} {belly+14} L {tail+14} {belly+14} L {tail+14} {belt+30} L {nose-14} {belt+12} Z"
-        P.append(f'<g clip-path="url(#cc{uid})"><path d="{sh}" fill="{dark(body,0.22)}"/></g>')
-    P.append(f'<path d="{gl}" fill="{glass}"/>')
+        # TWO-TONE body + bottom, all from the body colour: a darker lower plane
+        # (below the beltline) and a darker rocker strip along the very bottom.
+        lo=dark(body,0.15); bot=dark(body,0.31)
+        P.append(f'<g clip-path="url(#cc{uid})">'
+                 f'<rect x="{nose-16}" y="{belt+8}" width="{tail-nose+34}" height="{belly-belt+46}" fill="{lo}"/>'
+                 f'<rect x="{nose-16}" y="{belly-8}" width="{tail-nose+34}" height="44" fill="{bot}"/></g>')
     if cel:
-        # ABSTRACT: flat glass + the single windshield gloss + a clean thin outline.
-        # (reflection stripe and hood/roof highlight bands removed — sleeker, more abstract)
+        # windshield: TWO tones of a LIGHTER shade of the body colour (no gloss dot)
+        gA=light(body,0.60); gB=light(body,0.40); mid=(rf_y+belt)/2+8
+        P.append(f'<clipPath id="gg{uid}"><path d="{gl}"/></clipPath>')
+        P.append(f'<path d="{gl}" fill="{gA}"/>')
+        P.append(f'<g clip-path="url(#gg{uid})"><rect x="{cowl-24}" y="{mid:.0f}" width="{tail}" height="{belly}" fill="{gB}"/></g>')
         P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="3.5"/>')
-        P.append(f'<circle cx="{rf_x+20}" cy="{rf_y+24}" r="9" fill="#fff" fill-opacity="0.8"/>')
+    else:
+        P.append(f'<path d="{gl}" fill="{glass}"/>')
     if g.get("white_roof"):
         rp=f"M {rf_x} {rf_y} L {rr_x} {rr_y} L {rr_x} {rr_y+26} L {rf_x} {rf_y+26} Z"
         P.append(f'<path d="{rp}" fill="#ECE8DD"/>')

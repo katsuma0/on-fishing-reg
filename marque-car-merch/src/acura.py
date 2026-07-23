@@ -65,7 +65,7 @@ CARS_A = [
  _car(2,"a_integs","INTEGRA TYPE S","DE5 · 2024–", dt="FWD"),
  _car(3,"a_rsx","RSX TYPE-S","DC5 · 2002–2006", dt="FWD"),
  _car(4,"a_tltyps","TL TYPE-S","UA7 · 2007–2008", dt="FWD"),
- _car(5,"a_tsx","TSX","CL9 · 2004–2008", dt="FWD"),
+ _car(5,"a_tsx","TSX","CL9 · 2004–2008", dt="FWD", sky="#7E93A6"),
  _car(6,"a_legend","LEGEND","COUPE · 1990–1995", dt="FWD"),
  _car(7,"a_rl","RL","SH-AWD · 2005–2012", dt="AWD"),
  _car(8,"a_ilx","ILX","2013–2022", dt="FWD", cscale=0.96),

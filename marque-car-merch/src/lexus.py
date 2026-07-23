@@ -62,7 +62,7 @@ def _car(no, key, model, meta, dt="RWD", sky=None, cscale=None):
 
 CARS_L = [
  _car(1,"lx_lc","LC 500","GRAND TOURER · 2017–", dt="RWD"),
- _car(2,"lx_lfa","LFA","V10 SUPERCAR · 2010–2012", dt="RWD"),
+ _car(2,"lx_lfa","LFA","V10 SUPERCAR · 2010–2012", dt="RWD", sky="#8792A0"),
  _car(3,"lx_isf","IS F","V8 SPORT SEDAN · 2007–2014", dt="RWD"),
  _car(4,"lx_rcf","RC F","V8 COUPE · 2014–", dt="RWD"),
  _car(5,"lx_gsf","GS F","V8 SPORT SEDAN · 2015–2020", dt="RWD"),
