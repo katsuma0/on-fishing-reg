@@ -110,18 +110,20 @@ def car_flat(car, body, key, glass="#2A333B", cel=False):
         P.append(f'<clipPath id="cc{uid}"><path d="{d}"/></clipPath>')
     P.append(f'<path d="{d}" fill="{body}"/>')
     if cel:
-        # TWO-TONE body + bottom, all from the body colour: a darker lower plane
-        # (below the beltline) and a darker rocker strip along the very bottom.
-        lo=dark(body,0.15); bot=dark(body,0.31)
-        P.append(f'<g clip-path="url(#cc{uid})">'
-                 f'<rect x="{nose-16}" y="{belt+8}" width="{tail-nose+34}" height="{belly-belt+46}" fill="{lo}"/>'
-                 f'<rect x="{nose-16}" y="{belly-8}" width="{tail-nose+34}" height="44" fill="{bot}"/></g>')
+        # TWO-TONE body + bottom — a RAKED lower plane (more abstract than a flat
+        # band) plus a darker rocker strip along the very bottom.
+        lo=dark(body,0.16); bot=dark(body,0.32)
+        loply=f"M {nose-16} {belt+34} L {tail+18} {belt-4} L {tail+18} {belly+50} L {nose-16} {belly+50} Z"
+        P.append(f'<g clip-path="url(#cc{uid})"><path d="{loply}" fill="{lo}"/>'
+                 f'<rect x="{nose-16}" y="{belly-6}" width="{tail-nose+34}" height="42" fill="{bot}"/></g>')
     if cel:
-        # windshield: TWO tones of a LIGHTER shade of the body colour (no gloss dot)
-        gA=light(body,0.60); gB=light(body,0.40); mid=(rf_y+belt)/2+8
+        # windshield: two tones of a LIGHTER shade of the body colour, split so the
+        # brighter tone is the FRONT windshield pane itself (no gloss dot).
+        gA=light(body,0.60); gB=light(body,0.42)
         P.append(f'<clipPath id="gg{uid}"><path d="{gl}"/></clipPath>')
-        P.append(f'<path d="{gl}" fill="{gA}"/>')
-        P.append(f'<g clip-path="url(#gg{uid})"><rect x="{cowl-24}" y="{mid:.0f}" width="{tail}" height="{belly}" fill="{gB}"/></g>')
+        P.append(f'<path d="{gl}" fill="{gB}"/>')                                    # side + rear glass
+        wind=f"M {cowl} {hood_y} L {rf_x} {rf_y} L {cowl} {belt} Z"                   # front windshield pane
+        P.append(f'<g clip-path="url(#gg{uid})"><path d="{wind}" fill="{gA}"/></g>')
         P.append(f'<path d="{gl}" fill="none" stroke="{key}" stroke-width="3.5"/>')
     else:
         P.append(f'<path d="{gl}" fill="{glass}"/>')
